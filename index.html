@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HAIYI YU — Interior Design</title>
+  <title>HAIYI YU — Index</title>
   <meta name="description" content="于海怡 HAIYI YU 的室内设计作品集">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,18 +12,140 @@
 </head>
 <body>
 
-  <div class="landing">
-    <div class="landing-bg">
-      <img src="images/projects/03-dialogue/img-017-051.jpg" alt="">
+  <canvas id="stripeCanvas" class="stripe-bg"></canvas>
+
+  <main class="about-page">
+    <div class="about-card">
+
+      <!-- NYT-style masthead -->
+      <div class="about-masthead">
+        <p class="about-date" id="aboutDate"></p>
+        <div class="about-divider"></div>
+        <p class="about-location">Beijing, China</p>
+      </div>
+
+      <div class="about-divider about-divider--thick"></div>
+
+      <h1 class="about-card-name">HAIYI YU</h1>
+
+      <div class="about-divider about-divider--thin"></div>
+
+      <div class="about-card-image">
+        <img src="images/projects/02-interlude/%232.jpg" alt="HAIYI YU">
+      </div>
+
+      <div class="about-divider about-divider--thin"></div>
+
+      <div class="about-card-bio">
+        <p>于海怡，室内设计师。RMIT 室内设计专业训练，实践探索室内空间作为叙事的载体——通过碎片、记忆与材料再利用讲述故事的空间。</p>
+        <p>从实验性装置到适应性再利用方案，每个项目都反映了对叙事表达与材料诚实的兴趣。在墨尔本与北京之间工作，致力于将文化语境与实验方法相结合。</p>
+        <p>目前将实践延伸至 AIGC 与计算创意领域——探索 AI 生成式工具与空间设计、视觉叙事的交叉。</p>
+      </div>
+
+      <div class="about-divider about-divider--thin"></div>
+
+      <a href="projects.html" class="about-card-enter">Enter</a>
     </div>
+  </main>
 
-    <div class="landing-content">
-      <h1 class="landing-name">HAIYI YU</h1>
-      <p class="landing-subtitle">Interior Design Portfolio</p>
-    </div>
+  <script>
+    // Today's date in Chinese format
+    (function () {
+      var now = new Date();
+      var days = ['日', '一', '二', '三', '四', '五', '六'];
+      var dateStr =
+        now.getFullYear() + '年' +
+        (now.getMonth() + 1) + '月' +
+        now.getDate() + '日' +
+        ' 星期' + days[now.getDay()];
+      document.getElementById('aboutDate').textContent = dateStr;
+    })();
 
-    <a href="projects.html" class="landing-enter">Enter</a>
-  </div>
+    // === Interactive Glass Stripe Background ===
+    (function () {
+      var canvas = document.getElementById('stripeCanvas');
+      var ctx = canvas.getContext('2d');
+      var mouseX = window.innerWidth / 2;
+      var mouseY = window.innerHeight / 2;
+      var targetX = mouseX;
+      var targetY = mouseY;
 
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      document.addEventListener('mousemove', function (e) {
+        targetX = e.clientX;
+        targetY = e.clientY;
+      });
+
+      document.addEventListener('touchmove', function (e) {
+        targetX = e.touches[0].clientX;
+        targetY = e.touches[0].clientY;
+      }, { passive: true });
+
+      function draw() {
+        mouseX += (targetX - mouseX) * 0.08;
+        mouseY += (targetY - mouseY) * 0.08;
+
+        var w = canvas.width;
+        var h = canvas.height;
+
+        ctx.clearRect(0, 0, w, h);
+
+        // Transparent base — almost clear
+        ctx.fillStyle = 'rgba(248,244,238,0.6)';
+        ctx.fillRect(0, 0, w, h);
+
+        // Glass vertical stripes with stronger wave
+        var stripeCount = 24;
+        var stripeWidth = w / stripeCount;
+
+        for (var i = 0; i < stripeCount; i++) {
+          var baseX = i * stripeWidth + stripeWidth / 2;
+          var waveStrength = (mouseX - w / 2) / (w / 2) * 50;
+          var offset = Math.sin(i * 0.4 + mouseX * 0.003) * waveStrength;
+          var shimmer = Math.abs(Math.sin(i * 0.35 + mouseY * 0.002 + mouseX * 0.001));
+          var alpha = 0.02 + shimmer * 0.08;
+
+          ctx.fillStyle = 'rgba(180,195,210,' + alpha.toFixed(3) + ')';
+          ctx.fillRect(
+            baseX - stripeWidth * 0.4 + offset,
+            0,
+            stripeWidth * 0.4,
+            h
+          );
+        }
+
+        // Horizontal wave lines — more dynamic
+        for (var j = 0; j < 10; j++) {
+          var lineY = j * (h / 9);
+          var shift = Math.sin(j * 1.5 + mouseX * 0.004) * (mouseY - h / 2) * 0.05;
+          ctx.strokeStyle = 'rgba(150,175,195,0.05)';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(0, lineY + shift);
+          for (var x = 0; x < w; x += 15) {
+            var yOff = Math.sin(x * 0.006 + j + mouseX * 0.003) * 8 + shift;
+            ctx.lineTo(x, lineY + yOff);
+          }
+          ctx.stroke();
+        }
+
+        // Mouse-following highlight
+        var glowGrad = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 200);
+        glowGrad.addColorStop(0, 'rgba(210,225,240,0.06)');
+        glowGrad.addColorStop(1, 'rgba(210,225,240,0)');
+        ctx.fillStyle = glowGrad;
+        ctx.fillRect(0, 0, w, h);
+
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+  </script>
 </body>
 </html>
