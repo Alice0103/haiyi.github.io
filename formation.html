@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>FORMATION — Pattern to Spatial Depth · Haiyi Yu</title>
+<meta name="description" content="Formation — from pattern to spatial depth. AI-generated morph partitions and a cantilevered swivel chair through digital fabrication.">
+<meta name="theme-color" content="#eef0f2">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css?v=6">
+<style>
+/* ============ FORMATION — parametric studio ============ */
+:root{
+  --ink:#1d1f26; --muted:#7c828e; --line:rgba(29,31,38,.14);
+  --accent:#2456ff; --grid-c:rgba(36,86,255,.14);
+}
+body{background:#eef0f2;color:var(--ink)}
+.menu-overlay{background:#eef0f2;color:var(--ink)}
+.menu-overlay .menu-item{border-color:var(--line)}
+.site-nav .nav-brand .brand-stamp{filter:invert(1)}
+.site-nav .nav-proj{color:var(--muted)}
+.site-nav .nav-menu-btn{border-color:var(--line)}
+.site-nav.scrolled{background:rgba(238,240,242,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+
+/* blueprint grid backdrop */
+.grid-bg{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    repeating-linear-gradient(0deg,var(--grid-c) 0 1px,transparent 1px 44px),
+    repeating-linear-gradient(90deg,var(--grid-c) 0 1px,transparent 1px 44px);
+}
+#flow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.5}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;z-index:1;min-height:100svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:calc(var(--nav-h) + 26px) clamp(16px,4vw,60px) 60px;overflow:hidden;
+}
+.hero .p-kicker{
+  font-family:var(--font-tech);font-size:clamp(16px,1.8vw,22px);letter-spacing:.3em;text-transform:uppercase;
+  color:var(--accent);display:flex;align-items:center;gap:14px;justify-content:center;
+}
+.hero .p-kicker::before,.hero .p-kicker::after{content:"▮▮"}
+.hero h1{
+  font-family:var(--font-display);text-transform:uppercase;font-size:clamp(60px,12.5vw,200px);line-height:.9;
+  margin:6px 0 2px;letter-spacing:.01em;
+}
+.hero h1 .stroke{color:transparent;-webkit-text-stroke:2px var(--ink)}
+.hero .p-sub{font-family:var(--font-serif);font-style:italic;font-size:clamp(18px,2.4vw,28px);color:var(--muted);margin-bottom:clamp(26px,5vh,44px)}
+
+.hero-img-hold{
+  position:relative;width:min(620px,92vw);
+}
+.hero-img-hold img{
+  width:100%;border-radius:14px;box-shadow:0 30px 90px rgba(29,31,38,.3),0 0 0 8px rgba(255,255,255,.55);
+  filter:contrast(1.03);
+}
+.hero-img-hold .gear{
+  position:absolute;width:clamp(64px,8vw,110px);z-index:2;
+  filter:drop-shadow(0 8px 18px rgba(29,31,38,.25));
+}
+.hero-img-hold .gear svg{animation:gear-spin 6s linear infinite}
+.hero-img-hold .gear.g-l{left:-8%;top:12%}
+.hero-img-hold .gear.g-r{right:-7%;bottom:10%;width:clamp(48px,6vw,86px)}
+.hero-img-hold .gear.g-r svg{animation-direction:reverse;animation-duration:4.5s}
+@keyframes gear-spin{to{transform:rotate(360deg)}}
+
+/* param dials */
+.params{
+  display:flex;gap:clamp(14px,3vw,34px);margin-top:clamp(28px,5vh,50px);flex-wrap:wrap;justify-content:center;
+}
+.param{
+  display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;
+  padding:12px 18px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.55);
+  transition:border-color .3s,transform .3s,box-shadow .3s;
+}
+.param:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 12px 30px rgba(29,31,38,.12)}
+.param svg{width:74px;height:74px}
+.param .needle{transform-origin:50% 78%;transition:transform 1.2s var(--ease-soft)}
+.param .p-name{font-family:var(--font-tech);font-size:17px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink)}
+.param .p-val{font-family:var(--font-tech);font-size:15px;color:var(--accent)}
+
+/* ---------- sections ---------- */
+.sect{padding:clamp(70px,10vw,130px) 0;border-top:1px solid var(--line);position:relative;z-index:1}
+.sect .s-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(24px,4vw,70px)}
+.sect .s-num{font-family:var(--font-display);font-size:clamp(64px,8vw,130px);line-height:1;color:transparent;
+  -webkit-text-stroke:2px var(--accent);text-transform:uppercase}
+.sect h2{font-family:var(--font-display);text-transform:uppercase;font-size:clamp(30px,4.4vw,62px);line-height:1;margin-bottom:22px}
+.sect h2 em{font-style:normal;color:var(--accent)}
+.sect p{font-size:clamp(15px,1.5vw,17px);line-height:1.95;color:#565b66;max-width:660px}
+.sect p+p{margin-top:14px}
+.sect p b{color:var(--ink);font-weight:600}
+@media (max-width:820px){.sect .s-grid{grid-template-columns:1fr}}
+
+.side-fig{
+  margin-top:34px;cursor:zoom-in;
+  background:#fff;padding:10px;border-radius:12px;
+  border:1px solid var(--line);box-shadow:0 16px 46px rgba(29,31,38,.2);
+  transition:transform .6s var(--ease-out),box-shadow .6s;
+}
+.side-fig:hover{transform:translateY(-6px);box-shadow:0 26px 70px rgba(29,31,38,.3)}
+.side-fig img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover;border-radius:6px}
+.side-fig figcaption{
+  margin-top:8px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding:0 4px;
+}
+
+/* process chain */
+.chain{margin-top:44px;display:flex;flex-direction:column;gap:0}
+.chain .ch-step{
+  display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:18px;
+  padding:16px 20px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.5);
+  transition:transform .4s var(--ease-out),border-color .3s,background .3s;
+}
+.chain .ch-step:hover{transform:translateX(10px);border-color:var(--accent);background:rgba(255,255,255,.8)}
+.chain .ch-step .idx{font-family:var(--font-tech);font-size:22px;color:var(--accent)}
+.chain .ch-step .nm{font-family:var(--font-tech);font-size:clamp(16px,1.8vw,20px);letter-spacing:.14em;text-transform:uppercase}
+.chain .ch-step .ds{font-size:13px;color:var(--muted);max-width:400px;text-align:right}
+.chain .ch-link{width:2px;height:22px;background:var(--line);margin-left:28px}
+
+/* gallery */
+.gal{margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,3vw,28px)}
+.gal .g-item{
+  border-radius:12px;overflow:hidden;position:relative;
+  box-shadow:0 16px 50px rgba(29,31,38,.22);
+  border:1px solid var(--line);background:#fff;
+  transition:transform .6s var(--ease-out),box-shadow .6s;
+}
+.gal .g-item:hover{transform:translateY(-6px);box-shadow:0 26px 70px rgba(29,31,38,.3)}
+.gal .g-item img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;transition:transform .9s var(--ease-out)}
+.gal .g-item:hover img{transform:scale(1.04)}
+.gal .g-item figcaption{
+  position:absolute;left:12px;bottom:10px;font-family:var(--font-tech);font-size:15px;letter-spacing:.16em;
+  text-transform:uppercase;color:#fff;background:rgba(29,31,38,.62);padding:4px 14px;border-radius:20px;
+}
+.gal .g-wide{grid-column:1/-1}
+@media (max-width:760px){.gal{grid-template-columns:1fr}}
+
+/* veneer structure — layer focus */
+.veneer-hold{margin-top:44px;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,4vw,50px);align-items:center}
+.veneer-frame{
+  position:relative;aspect-ratio:3/4;border-radius:12px;overflow:hidden;cursor:zoom-in;
+  box-shadow:0 16px 50px rgba(29,31,38,.22);background:#e9ebee;
+}
+.veneer-frame img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% var(--obj,0%);
+  transition:object-position 1s var(--ease-out),transform .9s var(--ease-out);
+}
+.veneer-frame img:active{transform:scale(1.03)}
+.veneer-frame .v-tag{
+  position:absolute;left:12px;bottom:10px;z-index:2;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:#fff;background:rgba(29,31,38,.65);padding:5px 14px;border-radius:20px;
+}
+.veneer-frame::after{
+  content:"";position:absolute;left:0;right:0;height:33.33%;pointer-events:none;
+  background:rgba(36,86,255,.22);mix-blend-mode:screen;
+  top:var(--band,0%);transition:top .9s var(--ease-out);
+  opacity:var(--band-op,0);
+}
+.layer-btns{display:flex;flex-direction:column;gap:10px}
+.layer-btns .layer{
+  text-align:left;border:1px solid var(--line);border-left:5px solid #cfd3da;border-radius:10px;
+  padding:14px 18px;background:rgba(255,255,255,.5);transition:transform .4s,background .3s,border-color .3s;
+}
+.layer-btns .layer:hover{transform:translateX(-6px);background:rgba(255,255,255,.85)}
+.layer-btns .layer.on{border-left-color:var(--accent);background:rgba(36,86,255,.07);box-shadow:inset 0 0 0 1px var(--accent)}
+.layer-btns .layer b{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.layer-btns .layer p{font-size:14px;margin-top:6px;color:#565b66}
+@media (max-width:900px){.veneer-hold{grid-template-columns:1fr}}
+/* chair mechanism */
+.mech{
+  margin-top:44px;display:grid;grid-template-columns:1fr auto;gap:clamp(20px,4vw,50px);align-items:center;
+}
+.mech .gears-hold{
+  position:relative;width:clamp(220px,26vw,340px);aspect-ratio:1;flex:0 0 auto;
+}
+.mech .gears-hold svg{position:absolute;width:62%;filter:drop-shadow(0 10px 22px rgba(29,31,38,.25))}
+.mech .gears-hold .g1{left:0;top:6%;animation:gear-spin 7s linear infinite}
+.mech .gears-hold .g2{left:38%;top:30%;animation:gear-spin 5s linear infinite reverse}
+.mech .gears-hold .g3{left:6%;top:52%;width:44%;animation:gear-spin 6s linear infinite}
+.mech .layers{display:flex;flex-direction:column;gap:12px}
+.mech .layer{
+  border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;
+  padding:14px 18px;background:rgba(255,255,255,.5);transition:transform .4s,background .3s;
+}
+.mech .layer:hover{transform:translateX(-8px);background:rgba(255,255,255,.85)}
+.mech .layer b{font-family:var(--font-tech);font-size:17px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.mech .layer p{font-size:14px;margin-top:6px}
+@media (max-width:900px){.mech{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="grid-bg" aria-hidden="true"></div>
+<canvas id="flow" aria-hidden="true"></canvas>
+
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><img src="assets/img/stamp.png" alt=""></div>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-nav" id="siteNav">
+  <div class="nav-left">
+    <a class="nav-back" href="index.html" aria-label="Back to home">←</a>
+    <a class="nav-brand" href="index.html">
+      <img class="brand-stamp" src="assets/img/stamp.png" alt="Haiyi Yu stamp">
+      <span data-en="&lt;b&gt;Haiyi Yu&lt;/b&gt; — Folio" data-zh="&lt;b&gt;于海怡&lt;/b&gt; — 作品集"><b>Haiyi Yu</b> — Folio</span>
+    </a>
+  </div>
+  <span class="nav-proj">05 — Formation</span>  <div class="nav-right">
+
+  <button class="nav-lang" id="langBtn" aria-label="Switch language / 切换语言">中</button>
+  <button class="nav-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
+    <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="btn-label">Menu</span>
+  </button>
+  </div>
+</header>
+
+<nav class="menu-overlay" id="site-menu" aria-label="Site menu">
+  <div class="menu-list">
+    <a class="menu-item" href="index.html" data-en="&lt;span class=&quot;m-num&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.08s&quot;&gt;Home&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Start&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.08s&quot;&gt;主页&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;开始&lt;/span&gt;"><span class="m-num">00</span><span class="m-title" style="transition-delay:.08s">Home</span><span class="m-tag">Start</span></a>
+    <a class="menu-item" href="intersection.html" data-en="&lt;span class=&quot;m-num&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.12s&quot;&gt;Intersection&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.12s&quot;&gt;Intersection&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">01</span><span class="m-title" style="transition-delay:.12s">Intersection</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="interlude.html" data-en="&lt;span class=&quot;m-num&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.16s&quot;&gt;Interlude&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.16s&quot;&gt;Interlude&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">02</span><span class="m-title" style="transition-delay:.16s">Interlude</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="endless-life.html" data-en="&lt;span class=&quot;m-num&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.20s&quot;&gt;Endless Life&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Adaptive Reuse&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.20s&quot;&gt;Endless Life&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;改造再利用&lt;/span&gt;"><span class="m-num">03</span><span class="m-title" style="transition-delay:.20s">Endless Life</span><span class="m-tag">Adaptive Reuse</span></a>
+    <a class="menu-item" href="perception.html" data-en="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.24s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Graphic&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.24s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;平面&lt;/span&gt;"><span class="m-num">04</span><span class="m-title" style="transition-delay:.24s">Perception</span><span class="m-tag">Graphic</span></a>
+    <a class="menu-item" href="formation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.28s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;3D · Fabrication&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.28s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;3D · 制造&lt;/span&gt;"><span class="m-num">05</span><span class="m-title" style="transition-delay:.28s">Formation</span><span class="m-tag">3D · Fabrication</span></a>
+    <a class="menu-item" href="speculation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.32s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Future Library&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.32s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;未来图书馆&lt;/span&gt;"><span class="m-num">06</span><span class="m-title" style="transition-delay:.32s" data-en="Speculation" data-zh="Speculation">Speculation</span><span class="m-tag">Future Library</span></a>
+    <a class="menu-item" href="other-works.html" data-en="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;&gt;Other Works&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Point Cloud · Music&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;&gt;其他作品&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;点云 · 音乐&lt;/span&gt;"><span class="m-num">07</span><span class="m-title" style="transition-delay:.36s">Other Works</span><span class="m-tag">Point Cloud · Music</span></a>
+    <a class="menu-item" href="about.html" data-en="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.40s&quot;&gt;About&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Contact&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.40s&quot;&gt;关于&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;联系&lt;/span&gt;"><span class="m-num">08</span><span class="m-title" style="transition-delay:.40s">About</span><span class="m-tag">Contact</span></a>
+  </div>
+  <div class="menu-foot">
+    <span>Melbourne / Beijing</span>
+    <span>hieee0103@outlook.com</span>
+    <span>@yu.interior_</span>
+  </div>
+</nav>
+
+<main aria-label="Formation project">
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-label="Formation hero">
+  <p class="p-kicker" data-en="Project 05 — Digital Fabrication" data-zh="项目 05 — 数字化制造">Project 05 — Digital Fabrication</p>
+  <h1>Form<span class="stroke">ation</span></h1>
+  <p class="p-sub" data-en="From pattern to spatial depth" data-zh="从图案到空间深度">From pattern to spatial depth</p>
+
+  <div class="hero-img-hold">
+    <img src="assets/img/form-hero.jpg" alt="Formation — future partition built from scanned morph patterns">
+    <div class="gear g-l" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#2456ff" stroke-width="7" stroke-dasharray="9.5 7"/><circle cx="50" cy="50" r="24" fill="none" stroke="#2456ff" stroke-width="3"/><circle cx="50" cy="50" r="8" fill="none" stroke="#2456ff" stroke-width="3"/><g stroke="#2456ff" stroke-width="3"><line x1="50" y1="26" x2="50" y2="42"/><line x1="50" y1="58" x2="50" y2="74"/><line x1="26" y1="50" x2="42" y2="50"/><line x1="58" y1="50" x2="74" y2="50"/></g></svg>
+    </div>
+    <div class="gear g-r" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#2456ff" stroke-width="7" stroke-dasharray="9.5 7"/><circle cx="50" cy="50" r="24" fill="none" stroke="#2456ff" stroke-width="3"/><circle cx="50" cy="50" r="8" fill="none" stroke="#2456ff" stroke-width="3"/></svg>
+    </div>
+  </div>
+
+  <!-- parameter dials -->
+  <div class="params" role="group" aria-label="Design parameters — click to retune">
+    <div class="param" data-param="DEPTH">
+      <svg viewBox="0 0 80 80" aria-hidden="true">
+        <circle cx="40" cy="40" r="34" fill="none" stroke="#1d1f26" stroke-width="1.5" opacity=".3"/>
+        <path d="M40 52 A16 16 0 0 1 24 36" fill="none" stroke="#2456ff" stroke-width="2"/>
+        <g class="needle"><line x1="40" y1="62" x2="40" y2="30" stroke="#1d1f26" stroke-width="3" stroke-linecap="round"/></g>
+        <circle cx="40" cy="62" r="6" fill="#2456ff"/>
+      </svg>
+      <span class="p-name" data-en="Depth" data-zh="深度">Depth</span><span class="p-val">62%</span>
+    </div>
+    <div class="param" data-param="SHADOW">
+      <svg viewBox="0 0 80 80" aria-hidden="true">
+        <circle cx="40" cy="40" r="34" fill="none" stroke="#1d1f26" stroke-width="1.5" opacity=".3"/>
+        <path d="M40 52 A16 16 0 0 1 24 36" fill="none" stroke="#2456ff" stroke-width="2"/>
+        <g class="needle"><line x1="40" y1="62" x2="40" y2="30" stroke="#1d1f26" stroke-width="3" stroke-linecap="round"/></g>
+        <circle cx="40" cy="62" r="6" fill="#2456ff"/>
+      </svg>
+      <span class="p-name" data-en="Shadow" data-zh="光影">Shadow</span><span class="p-val">41%</span>
+    </div>
+    <div class="param" data-param="RHYTHM">
+      <svg viewBox="0 0 80 80" aria-hidden="true">
+        <circle cx="40" cy="40" r="34" fill="none" stroke="#1d1f26" stroke-width="1.5" opacity=".3"/>
+        <path d="M40 52 A16 16 0 0 1 24 36" fill="none" stroke="#2456ff" stroke-width="2"/>
+        <g class="needle"><line x1="40" y1="62" x2="40" y2="30" stroke="#1d1f26" stroke-width="3" stroke-linecap="round"/></g>
+        <circle cx="40" cy="62" r="6" fill="#2456ff"/>
+      </svg>
+      <span class="p-name" data-en="Rhythm" data-zh="节奏">Rhythm</span><span class="p-val">77%</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 PARTITION ============ -->
+<section class="sect" aria-label="Future partition">
+  <div class="container">
+    <div class="s-grid">
+      <div>
+        <div class="s-num reveal" aria-hidden="true">01</div>
+        <figure class="side-fig reveal">
+          <img src="assets/img/form-site.jpg" alt="Site investigation" loading="lazy">
+          <figcaption><span data-en="Site investigation" data-zh="场地调研">Site investigation</span><span style="color:var(--accent)" data-en="click to enlarge" data-zh="点击放大">click to enlarge</span></figcaption>
+        </figure>
+        <figure class="side-fig reveal">
+          <img src="assets/img/form-poster.png" alt="Design process" loading="lazy">
+          <figcaption><span data-en="Design process" data-zh="设计过程">Design process</span><span style="color:var(--accent)" data-en="click to enlarge" data-zh="点击放大">click to enlarge</span></figcaption>
+        </figure>
+      </div>
+      <div>
+        <h2 class="reveal" data-en="Future &lt;em&gt;partition&lt;/em&gt;" data-zh="未来&lt;em&gt;隔断&lt;/em&gt;">Future <em>partition</em></h2>
+        <p class="reveal" data-en="A project exploring how scanned natural forms and AI-generated morph patterns can be transformed into three-dimensional partitions. Through iterative layering and aggregation, the work shifts from 2.5D surfaces to volumetric assemblies. I contributed by designing the morph patterns and programming workflows, enabling the partitions to combine spatial rhythm, depth, and shadow." data-zh="该项目探索如何将扫描的自然形态与 AI 生成的变形图案转化为三维隔断。通过迭代分层与聚合，作品从 2.5D 表面发展为立体组合。我负责设计变形图案与编写工作流，使隔断融合空间节奏、深度与光影。">A project exploring how scanned natural forms and AI-generated morph patterns can be transformed into three-dimensional partitions. Through iterative layering and aggregation, the work shifts from 2.5D surfaces to volumetric assemblies. I contributed by designing the morph patterns and programming workflows, enabling the partitions to combine spatial rhythm, depth, and shadow.</p>
+
+        <div class="chain">
+          <div class="ch-step reveal"><span class="idx">01</span><span class="nm">Site investigation</span><span class="ds" data-en="Field work &amp;amp; observation" data-zh="实地考察与观察">Field work &amp; observation</span></div>
+          <div class="ch-link" aria-hidden="true"></div>
+          <div class="ch-step reveal"><span class="idx">02</span><span class="nm" data-en="Narrative" data-zh="叙事">Narrative</span><span class="ds" data-en="Midjourney morph patterns" data-zh="Midjourney 变形图案">Midjourney morph patterns</span></div>
+          <div class="ch-link" aria-hidden="true"></div>
+          <div class="ch-step reveal"><span class="idx">03</span><span class="nm" data-en="Programming" data-zh="编程">Programming</span><span class="ds" data-en="Grasshopper — morph / aggregation / wasp" data-zh="Grasshopper — 变形 / 聚合 / wasp">Grasshopper — morph / aggregation / wasp</span></div>
+          <div class="ch-link" aria-hidden="true"></div>
+          <div class="ch-step reveal"><span class="idx">04</span><span class="nm" data-en="3D scanning" data-zh="3D 扫描">3D scanning</span><span class="ds" data-en="Natural form capture" data-zh="自然形态采集">Natural form capture</span></div>
+          <div class="ch-link" aria-hidden="true"></div>
+          <div class="ch-step reveal"><span class="idx">05</span><span class="nm" data-en="ISF test" data-zh="ISF 测试">ISF test</span><span class="ds" data-en="Incremental sheet forming" data-zh="增量板材成形">Incremental sheet forming</span></div>
+          <div class="ch-link" aria-hidden="true"></div>
+          <div class="ch-step reveal"><span class="idx">06</span><span class="nm" data-en="Physical model" data-zh="实体模型">Physical model</span><span class="ds" data-en="Welding &amp;amp; assembly" data-zh="焊接与装配">Welding &amp; assembly</span></div>
+          <div class="ch-link" aria-hidden="true"></div>
+          <div class="ch-step reveal"><span class="idx">07</span><span class="nm" data-en="Documentation &amp;amp; render" data-zh="记录与渲染">Documentation &amp; render</span><span class="ds" data-en="Final imagery" data-zh="最终图像">Final imagery</span></div>
+        </div>
+
+        <div class="gal">
+          <figure class="g-item reveal"><img src="assets/img/form-1.jpg" alt="Digital model" loading="lazy"><figcaption data-en="Digital model" data-zh="数字模型">Digital model</figcaption></figure>
+          <figure class="g-item reveal reveal-d1"><img src="assets/img/form-2.jpg" alt="Process — narrative pattern" loading="lazy"><figcaption data-en="Process — narrative pattern" data-zh="过程 — 叙事图案">Process — narrative pattern</figcaption></figure>
+          <figure class="g-item reveal"><img src="assets/img/form-3.jpg" alt="ISF test panel" loading="lazy"><figcaption data-en="ISF test panel" data-zh="ISF 测试面板">ISF test panel</figcaption></figure>
+          <figure class="g-item reveal reveal-d1"><img src="assets/img/form-4.jpg" alt="Process — aggregation study" loading="lazy"><figcaption data-en="Process — aggregation study" data-zh="过程 — 聚合研究">Process — aggregation study</figcaption></figure>
+          <figure class="g-item g-wide reveal"><img src="assets/img/form-5.jpg" alt="Physical model of the partition" loading="lazy"><figcaption>Physical model</figcaption></figure>
+          <figure class="g-item g-wide reveal"><img src="assets/img/form-6.jpg" alt="Final render of the partition" loading="lazy"><figcaption data-en="Final render — formation 01" data-zh="最终渲染 — 构成 01">Final render — formation 01</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 CHAIR ============ -->
+<section class="sect" aria-label="Cantilevered swivel chair">
+  <div class="container">
+    <div class="s-grid">
+      <div class="s-num reveal" aria-hidden="true">02</div>
+      <div>
+        <h2 class="reveal" data-en="Cantilevered&lt;br&gt;&lt;em&gt;swivel chair&lt;/em&gt;" data-zh="悬臂式&lt;br&gt;&lt;em&gt;旋转椅&lt;/em&gt;">Cantilevered<br><em>swivel chair</em></h2>
+        <p class="reveal" data-en="This project explores a cantilevered swivel chair driven by a gear-based rotation mechanism, realised through the combined use of bent veneer lamination and digital fabrication. Veneer is not treated as a surface finish but as a &lt;b&gt;structural material&lt;/b&gt; that actively participates in load-bearing and motion control." data-zh="该项目探索一把由齿轮旋转机构驱动的悬臂式旋转椅，通过弯曲胶合板层压与数字化制造的结合实现。胶合板不再被当作表面饰面，而是作为&lt;b&gt;结构材料&lt;/b&gt;积极参与承重与运动控制。">This project explores a cantilevered swivel chair driven by a gear-based rotation mechanism, realised through the combined use of bent veneer lamination and digital fabrication. Veneer is not treated as a surface finish but as a <b>structural material</b> that actively participates in load-bearing and motion control.</p>
+
+        <div class="veneer-hold reveal">
+          <div class="veneer-frame" id="veneerFrame">
+            <img src="assets/img/form-8.jpg" alt="Chair profile — click a layer to focus its part" loading="lazy">
+            <span class="v-tag" id="vTag">The chair — full structure</span>
+          </div>
+          <div class="layer-btns" id="layerBtns" role="group" aria-label="Chair layers — click to focus">
+            <button class="layer" data-band="upper"><b data-en="Upper layer" data-zh="上层">Upper layer</b><p data-en="When a person rotates, the central gear drives the surrounding gears to turn." data-zh="当人旋转时，中央齿轮带动周围齿轮转动。">When a person rotates, the central gear drives the surrounding gears to turn.</p></button>
+            <button class="layer" data-band="middle"><b data-en="Middle layer" data-zh="中层">Middle layer</b><p data-en="The gears drive the veneer to rotate, and a rotatable connector between the two veneer layers fixes their position and links the upper and lower structures." data-zh="齿轮带动胶合板旋转，两层胶合板之间的可旋转连接件固定其位置，并连接上下结构。">The gears drive the veneer to rotate, and a rotatable connector between the two veneer layers fixes their position and links the upper and lower structures.</p></button>
+            <button class="layer" data-band="lower"><b data-en="Lower layer" data-zh="下层">Lower layer</b><p data-en="The gear structure separates the veneer from the base surface." data-zh="齿轮结构将胶合板与底座表面分离。">The gear structure separates the veneer from the base surface.</p></button>
+          </div>
+        </div>
+
+        <div class="mech reveal">
+          <div class="gears-hold" aria-hidden="true">
+            <svg class="g1" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#2456ff" stroke-width="7" stroke-dasharray="9.5 7"/><circle cx="50" cy="50" r="24" fill="none" stroke="#2456ff" stroke-width="3"/><circle cx="50" cy="50" r="8" fill="none" stroke="#2456ff" stroke-width="3"/><g stroke="#2456ff" stroke-width="3"><line x1="50" y1="26" x2="50" y2="42"/><line x1="50" y1="58" x2="50" y2="74"/><line x1="26" y1="50" x2="42" y2="50"/><line x1="58" y1="50" x2="74" y2="50"/></g></svg>
+            <svg class="g2" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#1d1f26" stroke-width="7" stroke-dasharray="9.5 7"/><circle cx="50" cy="50" r="24" fill="none" stroke="#1d1f26" stroke-width="3"/><circle cx="50" cy="50" r="8" fill="none" stroke="#1d1f26" stroke-width="3"/></svg>
+            <svg class="g3" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#2456ff" stroke-width="7" stroke-dasharray="9.5 7"/><circle cx="50" cy="50" r="24" fill="none" stroke="#2456ff" stroke-width="3"/><circle cx="50" cy="50" r="8" fill="none" stroke="#2456ff" stroke-width="3"/></svg>
+          </div>
+
+        </div>
+
+        <div class="gal">
+          <figure class="g-item reveal"><img src="assets/img/form-chair.jpg" alt="Cantilevered swivel chair" loading="lazy"><figcaption data-en="The chair" data-zh="旋转椅">The chair</figcaption></figure>
+          <figure class="g-item reveal reveal-d1"><img src="assets/img/form-7.jpg" alt="3D printed gears" loading="lazy"><figcaption data-en="3D printed gears" data-zh="3D 打印齿轮">3D printed gears</figcaption></figure>
+          <figure class="g-item reveal"><img src="assets/img/form-12.jpg" alt="Veneer as the bearing structure" loading="lazy"><figcaption data-en="Veneer as bearing structure" data-zh="胶合板承重结构">Veneer as bearing structure</figcaption></figure>
+          <figure class="g-item reveal reveal-d1"><img src="assets/img/form-9.jpg" alt="Dual use of bent lamination and digital fabrication" loading="lazy"><figcaption data-en="Dual use — bent lamination" data-zh="双重用途 — 弯曲层压">Dual use — bent lamination</figcaption></figure>
+          <figure class="g-item reveal"><img src="assets/img/form-10.jpg" alt="Mechanism detail" loading="lazy"><figcaption data-en="Mechanism" data-zh="机械结构">Mechanism</figcaption></figure>
+          <figure class="g-item reveal reveal-d1"><img src="assets/img/form-11.jpg" alt="Load bearing" loading="lazy"><figcaption data-en="Load bearing" data-zh="承重">Load bearing</figcaption></figure>
+          <figure class="g-item reveal"><img src="assets/img/form-13.jpg" alt="The cantilevered swivel chair — full view" loading="lazy"><figcaption data-en="The chair — full view" data-zh="座椅 — 全貌">The chair — full view</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEXT ============ -->
+<a class="next-project" href="speculation.html" aria-label="Next project: Speculation">
+  <span class="np-label" data-en="Next project — 06" data-zh="下一个项目 — 06">Next project — 06</span>
+  <span class="np-title">Speculation</span>
+  <span class="np-arrow">↗</span>
+</a>
+
+</main>
+
+<footer class="site-foot">
+  <div class="foot-stamp-row">
+    <img class="foot-stamp" src="assets/img/stamp.png" alt="Haiyi Yu stamp mark">
+    <p class="foot-mantra">stay curious. stay focused.<br>stay professional. <em>still in progress.</em></p>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Haiyi Yu — Design Works 2023–2025</span>
+    <span>Melbourne / Beijing</span>
+    <span>RMIT Interior Design</span>
+  </div>
+</footer>
+
+<script>
+/* ============ shared: nav / cursor / reveal ============ */
+const body=document.body, menuBtn=document.querySelector('.nav-menu-btn'), menuLabel=menuBtn.querySelector('.btn-label');
+function setMenu(open){
+  body.classList.toggle('menu-open',open);
+  menuBtn.setAttribute('aria-expanded',open);
+  menuLabel.textContent=open?'Close':'Menu';
+}
+menuBtn.addEventListener('click',()=>setMenu(!body.classList.contains('menu-open')));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&body.classList.contains('menu-open')){setMenu(false);menuBtn.focus();} });
+addEventListener('scroll',()=>{ document.getElementById('siteNav').classList.toggle('scrolled',scrollY>60); },{passive:true});
+
+const dot=document.querySelector('.cursor-dot'), ring=document.querySelector('.cursor-ring');
+if(matchMedia('(pointer:fine)').matches){
+  let cx=innerWidth/2, cy=innerHeight/2, rx=cx, ry=cy;
+  addEventListener('pointermove',e=>{ cx=e.clientX; cy=e.clientY;
+    dot.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+    const t=e.target.closest('a,button,[data-cursor]');
+    body.classList.toggle('cursor-link',!!t);
+    body.classList.toggle('cursor-stamp',!!e.target.closest('[data-cursor="stamp"]'));
+  });
+  (function ringLoop(){
+    rx+=(cx-rx)*.22; ry+=(cy-ry)*.22;
+    ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+    requestAnimationFrame(ringLoop);
+  })();
+}
+
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ============ veneer layer focus ============ */
+(()=>{
+  const frame=document.getElementById('veneerFrame');
+  if(!frame) return;
+  const img=frame.querySelector('img');
+  const tag=document.getElementById('vTag');
+  const btns=[...document.querySelectorAll('#layerBtns .layer')];
+  const bandsEn={upper:{obj:'0%',band:'0%',label:'Chair — upper layer'},
+                 middle:{obj:'50%',band:'33.33%',label:'Chair — middle layer'},
+                 lower:{obj:'100%',band:'66.66%',label:'Chair — lower layer'}};
+  const bandsZh={upper:{obj:'0%',band:'0%',label:'座椅 — 上层'},
+                 middle:{obj:'50%',band:'33.33%',label:'座椅 — 中层'},
+                 lower:{obj:'100%',band:'66.66%',label:'座椅 — 下层'}};
+  const bands=()=>window.i18nLang==='zh'?bandsZh:bandsEn;
+  let current=null;
+  btns.forEach(b=>b.addEventListener('click',()=>{
+    const same=current===b.dataset.band;
+    btns.forEach(x=>x.classList.remove('on'));
+    if(same){ current=null;
+      img.style.objectPosition='50% 50%'; frame.style.setProperty('--band','0%');
+      frame.style.setProperty('--band-op','0'); tag.textContent=window.i18nLang==='zh'?'座椅 — 完整结构':'The chair — full structure';
+      return; }
+    current=b.dataset.band;
+    b.classList.add('on');
+    const cfg=bands()[current];
+    img.style.objectPosition=`50% ${cfg.obj}`;
+    frame.style.setProperty('--band',cfg.band);
+    frame.style.setProperty('--band-op','.8');
+    tag.textContent=cfg.label;
+  }));
+})();
+
+/* ============ lightbox ============ */
+(()=>{
+  const lb=document.createElement('div');
+  lb.className='lightbox'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-label','Image viewer');
+  lb.innerHTML='<div class="lb-frame"><img alt=""><div class="lb-cap"><span class="lb-txt"></span><span class="lb-idx"></span></div></div>'
+    +'<button class="lb-close" aria-label="Close">✕</button>'
+    +'<button class="lb-prev lb-nav" aria-label="Previous image">‹</button>'
+    +'<button class="lb-next lb-nav" aria-label="Next image">›</button>';
+  document.body.appendChild(lb);
+  let items=[], idx=0;
+  const show=(i)=>{ idx=(i+items.length)%items.length;
+    lb.querySelector('img').src=items[idx].src;
+    lb.querySelector('img').alt=items[idx].alt||'';
+    lb.querySelector('.lb-txt').textContent=items[idx].closest('figure')?.querySelector('figcaption')?.textContent
+      || items[idx].closest('.veneer-frame')?.querySelector('.v-tag')?.textContent
+      || items[idx].closest('.side-fig')?.querySelector('figcaption')?.textContent || '';
+    lb.querySelector('.lb-idx').textContent=(idx+1)+' / '+items.length; };
+  const open=()=>{ lb.classList.add('open'); document.body.style.overflow='hidden'; };
+  const close=()=>{ lb.classList.remove('open'); document.body.style.overflow=''; };
+  lb.querySelector('.lb-close').addEventListener('click',close);
+  lb.querySelector('.lb-prev').addEventListener('click',()=>show(idx-1));
+  lb.querySelector('.lb-next').addEventListener('click',()=>show(idx+1));
+  lb.addEventListener('click',e=>{ if(e.target===lb) close(); });
+  document.addEventListener('keydown',e=>{ if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') close();
+    if(e.key==='ArrowLeft') show(idx-1);
+    if(e.key==='ArrowRight') show(idx+1); });
+  items=[...document.querySelectorAll('.gal .g-item img, .veneer-frame img, .side-fig img')];
+  items.forEach(im=>{
+    im.closest('.g-item, .veneer-frame, .side-fig').addEventListener('click',e=>{
+      e.preventDefault(); show(items.indexOf(im)); open();
+    });
+  });
+})();
+
+/* ============ generative flow field ============ */
+(()=>{
+  const cv=document.getElementById('flow'), ctx=cv.getContext('2d');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){
+    const dpr=Math.min(devicePixelRatio||1,1.5);
+    cv.width=innerWidth*dpr; cv.height=innerHeight*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  size(); addEventListener('resize',size);
+  const N=56, SEG=54, STEP=11;
+  let t=0;
+  function ang(x,y){
+    return Math.sin(x*.0042+t*.4)+Math.cos(y*.0051-t*.3)+Math.sin((x+y)*.0016+t*.22);
+  }
+  function draw(){
+    const w=innerWidth,h=innerHeight;
+    ctx.clearRect(0,0,w,h);
+    ctx.lineWidth=1.1;
+    for(let i=0;i<N;i++){
+      let x=Math.random()*w, y=Math.random()*h;
+      ctx.strokeStyle=`rgba(36,86,255,${.05+Math.random()*.14})`;
+      ctx.beginPath(); ctx.moveTo(x,y);
+      for(let s=0;s<SEG;s++){
+        const a=ang(x,y)*1.7;
+        x+=Math.cos(a)*STEP; y+=Math.sin(a)*STEP;
+        ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    }
+    if(!reduced){ t+=.006; requestAnimationFrame(draw); }
+  }
+  if(reduced){ draw(); } else {
+    let frame=0;
+    (function throttled(){
+      frame++;
+      if(frame%3===0) draw();
+      requestAnimationFrame(throttled);
+    })();
+  }
+})();
+
+/* ============ param dials — click to retune ============ */
+(()=>{
+  document.querySelectorAll('.param').forEach(p=>{
+    const needle=p.querySelector('.needle'), val=p.querySelector('.p-val');
+    const set=(v)=>{ needle.style.transform=`rotate(${-90+v*180}deg)`; val.textContent=Math.round(v*100)+'%'; };
+    /* idle wobble */
+    const wob=(base)=>{ if(p.matches(':hover')) return; set(Math.max(0,Math.min(1,base+Math.sin(Date.now()/900)*.06))); requestAnimationFrame(()=>wob(base)); };
+    p.addEventListener('pointerenter',()=>{});
+    p.addEventListener('click',()=>{ set(Math.random()); });
+    wob(parseFloat(val.textContent)/100);
+  });
+})();
+</script>
+<script src="assets/js/i18n.js?v=2"></script>
+</body>
+</html>

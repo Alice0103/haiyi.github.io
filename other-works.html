@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>OTHER WORKS — Point Cloud · Lenovo · Music · Haiyi Yu</title>
+<meta name="description" content="Other works by Haiyi Yu — an interactive point cloud studio, Amazon product design for Lenovo, and original music on NetEase Cloud Music.">
+<meta name="theme-color" content="#33241b">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css?v=6">
+<style>
+/* ============ OTHER WORKS — the attic studio ============ */
+:root{
+  --ink:#33241b; --muted:#9c8577; --line:rgba(51,36,29,.16);
+  --accent:#c9a24b; --wood:#3b2b1f; --paper2:#f6efe4;
+}
+body{
+  background:
+    radial-gradient(ellipse 90% 50% at 50% 0%,rgba(255,240,214,.7),transparent 60%),
+    linear-gradient(180deg,#f6efe4,#efe5d2);
+  color:var(--ink);
+}
+.menu-overlay{background:var(--paper2);color:var(--ink)}
+.menu-overlay .menu-item{border-color:var(--line)}
+.site-nav .nav-brand .brand-stamp{filter:invert(1)}
+.site-nav .nav-proj{color:var(--muted)}
+.site-nav .nav-menu-btn{border-color:var(--line)}
+.site-nav.scrolled{background:rgba(246,239,228,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:92svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:calc(var(--nav-h) + 24px) clamp(16px,4vw,60px) 60px;overflow:hidden;
+}
+.hero .window{
+  position:absolute;right:8%;top:18%;width:clamp(120px,14vw,200px);aspect-ratio:3/4;pointer-events:none;
+  border:8px solid var(--wood);border-radius:6px;box-shadow:0 20px 50px rgba(51,36,29,.35),inset 0 0 30px rgba(255,240,210,.35);
+  background:linear-gradient(180deg,#dfe6ea,#c4d0d6);
+  transform:rotate(3deg);
+}
+.hero .window::before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;width:6px;background:var(--wood);transform:translateX(-50%);
+}
+.hero .window::after{
+  content:"";position:absolute;top:50%;left:0;right:0;height:6px;background:var(--wood);transform:translateY(-50%);
+}
+.hero .dust{position:absolute;border-radius:50%;filter:blur(2px);pointer-events:none;
+  background:radial-gradient(circle,rgba(255,236,200,.9),rgba(255,236,200,0) 70%);
+  animation:dust-rise linear infinite}
+@keyframes dust-rise{
+  0%{transform:translateY(0);opacity:0}12%{opacity:.8}88%{opacity:.4}
+  100%{transform:translateY(-88vh);opacity:0}}
+.hero .p-kicker{
+  position:relative;z-index:2;font-size:clamp(12px,1.6vw,17px);letter-spacing:.36em;text-transform:uppercase;
+  color:var(--accent);display:flex;align-items:center;gap:16px;justify-content:center;
+}
+.hero .p-kicker::before,.hero .p-kicker::after{content:"—";opacity:.6}
+.hero h1{
+  position:relative;z-index:2;font-family:var(--font-display);text-transform:uppercase;
+  font-size:clamp(56px,11vw,180px);line-height:.92;margin:10px 0 8px;
+  text-shadow:0 3px 0 rgba(0,0,0,.18);
+}
+.hero h1 .stroke{color:transparent;-webkit-text-stroke:2px var(--ink)}
+.hero .p-sub{
+  position:relative;z-index:2;font-style:italic;font-size:clamp(16px,2.2vw,26px);color:var(--muted);margin-bottom:clamp(24px,4vh,40px);
+}
+.hero .hero-chips{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.hero .hero-chip{
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding:9px 20px;border-radius:30px;
+  border:1px solid var(--line);background:rgba(255,255,255,.5);backdrop-filter:blur(6px);transition:transform .3s,border-color .3s;
+}
+.hero .hero-chip:hover{transform:translateY(-3px);border-color:var(--accent)}
+
+/* ---------- sections ---------- */
+.sect{padding:clamp(60px,9vw,110px) clamp(18px,5vw,70px);border-top:1px solid var(--line);position:relative;overflow:hidden}
+.sect .s-inner{max-width:1160px;margin:0 auto}
+.sect .s-head{display:flex;align-items:baseline;gap:22px;margin-bottom:clamp(26px,4vw,44px)}
+.sect .s-head .mono-label{color:var(--accent)}
+.sect .s-head h2{font-family:var(--font-display);text-transform:uppercase;font-size:clamp(32px,4.8vw,68px);line-height:1}
+.sect .s-head h2 em{font-style:normal;color:var(--accent)}
+.sect p{font-size:clamp(14px,1.5vw,16px);line-height:1.9;color:#6d5848;max-width:680px}
+
+/* ---------- point cloud ---------- */
+.pc-hold{
+  margin-top:36px;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);
+  gap:clamp(20px,4vw,50px);align-items:stretch;
+}
+.pc-viewer{
+  position:relative;border-radius:14px;overflow:hidden;min-height:420px;
+  background:#10140f;box-shadow:0 24px 70px rgba(51,36,29,.35),0 0 0 8px rgba(255,255,255,.5);
+}
+.pc-viewer canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.pc-viewer .pc-fallback{
+  position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+}
+.pc-viewer .pc-fallback img{width:100%;height:100%;object-fit:cover}
+.pc-viewer.show-fallback .pc-fallback{display:flex}
+.pc-viewer .pc-hint{
+  position:absolute;left:14px;bottom:12px;z-index:3;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:#fdf6ea;background:rgba(20,15,8,.6);padding:6px 16px;border-radius:22px;pointer-events:none;
+}
+.pc-viewer .pc-loading{
+  position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;
+  color:#c9b088;font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+}
+.pc-viewer .pc-loading .spinner{
+  width:34px;height:34px;border-radius:50%;border:2px solid rgba(201,176,136,.25);border-top-color:#c9b088;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pc-side{display:flex;flex-direction:column;gap:16px}
+.pc-side .pc-card{
+  padding:20px 22px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.5);
+  transition:transform .4s,border-color .3s;
+}
+.pc-side .pc-card:hover{transform:translateY(-4px);border-color:var(--accent)}
+.pc-side .pc-card b{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.pc-side .pc-card p{font-size:13.5px;margin-top:8px;max-width:none}
+.pc-side .pc-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px}
+.pc-side .btn{border-color:var(--line);color:var(--ink)}
+.pc-side .btn:hover{background:var(--ink);color:var(--paper2)}
+.pc-side .btn.solid{background:var(--accent);border-color:var(--accent);color:#2e2416}
+.pc-side .btn.solid:hover{background:#e2bb63}
+@media (max-width:900px){.pc-hold{grid-template-columns:1fr}.pc-viewer{min-height:320px}}
+.pc-render{
+  margin-top:clamp(26px,4vw,44px);cursor:zoom-in;
+  background:#fff;padding:clamp(8px,1.2vw,14px);border-radius:8px;
+  border:1px solid var(--line);box-shadow:0 20px 60px rgba(51,36,29,.25);
+  transition:transform .6s var(--ease-out),box-shadow .6s;
+}
+.pc-render:hover{transform:translateY(-6px);box-shadow:0 30px 80px rgba(51,36,29,.32)}
+.pc-render img{width:100%;display:block;border-radius:4px;max-height:64vh;object-fit:cover}
+.pc-render figcaption{
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  margin-top:10px;padding:0 4px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+}
+.pc-render figcaption b{color:var(--accent)}
+
+/* ---------- lenovo gallery ---------- */
+.lenovo-grid{margin-top:36px;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.4vw,26px)}
+.l-card{position:relative;border-radius:12px;overflow:hidden;cursor:zoom-in;
+  box-shadow:0 16px 44px rgba(51,36,29,.22);background:#fff;border:1px solid var(--line);
+  transition:transform .6s var(--ease-out),box-shadow .6s;
+}
+.l-card:hover{transform:translateY(-6px);box-shadow:0 26px 70px rgba(51,36,29,.32)}
+.l-card img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover;transition:transform .9s var(--ease-out)}
+.l-card:hover img{transform:scale(1.05)}
+.l-card .l-cap{
+  position:absolute;left:12px;bottom:10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:#fff;background:rgba(51,36,29,.62);padding:5px 14px;border-radius:20px;
+}
+/* tall A+ strips — hover to scroll */
+.l-strips{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,30px)}
+.l-strip{
+  position:relative;height:420px;border-radius:12px;overflow:hidden;cursor:zoom-in;
+  border:1px solid var(--line);background:#fff;box-shadow:0 16px 44px rgba(51,36,29,.22);
+}
+.l-strip img{position:absolute;left:0;top:0;width:100%;will-change:transform}
+.l-strip .strip-hint{
+  position:absolute;right:12px;bottom:10px;z-index:2;pointer-events:none;
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#fff;
+  background:rgba(51,36,29,.62);padding:5px 14px;border-radius:20px;
+}
+.l-strip .l-cap{
+  position:absolute;left:12px;bottom:10px;z-index:2;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:#fff;background:rgba(51,36,29,.62);padding:5px 14px;border-radius:20px;
+}
+@media (max-width:900px){.lenovo-grid{grid-template-columns:1fr 1fr}.l-strips{grid-template-columns:1fr}.mailer-row{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.lenovo-grid{grid-template-columns:1fr}.mailer-row{grid-template-columns:1fr}}
+.mailer-row{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.4vw,26px);align-items:stretch}
+
+/* ---------- music room ---------- */
+.music-room{
+  padding:clamp(60px,9vw,110px) clamp(18px,5vw,70px);
+  border-top:1px solid var(--line);position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#efe5d2,#e6d9c0);
+}
+.music-room .mr-inner{max-width:1160px;margin:0 auto}
+.music-room .s-head{display:flex;align-items:baseline;gap:22px;margin-bottom:clamp(26px,4vw,44px)}
+.music-room .s-head .mono-label{color:var(--accent)}
+.music-room .s-head h2{font-family:var(--font-display);text-transform:uppercase;font-size:clamp(32px,4.8vw,68px);line-height:1}
+.music-room .s-head h2 em{font-style:normal;color:var(--accent)}
+/* featured track */
+.feat{
+  display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:clamp(22px,4vw,50px);align-items:center;
+  padding:clamp(22px,3.4vw,36px);border:1px solid var(--line);border-radius:20px;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(8px);
+  box-shadow:0 20px 60px rgba(51,36,29,.18);
+}
+.feat .vinyl-wrap{position:relative;width:clamp(180px,20vw,260px);aspect-ratio:1;flex:0 0 auto}
+.feat .vinyl{
+  position:absolute;inset:0;border-radius:50%;
+  background:repeating-radial-gradient(circle,#1a1712 0 3px,#0d0b08 3px 6px);
+  box-shadow:0 16px 40px rgba(20,15,8,.5),inset 0 0 0 3px #241c12;
+  animation:vinyl-spin 7s linear infinite;
+}
+.feat .vinyl .label{
+  position:absolute;left:50%;top:50%;width:34%;aspect-ratio:1;border-radius:50%;overflow:hidden;
+  transform:translate(-50%,-50%);background:#e6d9bd;box-shadow:0 0 0 2px #8f6f35;
+}
+.feat .vinyl .label img{width:100%;height:100%;object-fit:cover}
+.feat .vinyl-wrap .arm{
+  position:absolute;top:2%;right:6%;width:38%;height:3px;border-radius:2px;
+  background:linear-gradient(90deg,#c9a24b,#8f6f35);transform-origin:right center;transform:rotate(26deg);
+}
+.feat .vinyl-wrap .arm::after{content:"";position:absolute;right:0;top:-4px;width:11px;height:11px;border-radius:50%;background:#8f6f35}
+.feat .f-body .f-flag{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent)}
+.feat .f-body h3{font-family:var(--font-display);text-transform:uppercase;font-size:clamp(34px,4.4vw,60px);line-height:1;margin:8px 0 6px}
+.feat .f-body .f-artist{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.feat .f-body .f-player{min-height:66px}
+.feat .f-body .f-player iframe{display:block;border:0}
+.feat .f-body .f-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+.feat .f-body .f-links a{
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);
+  border:1px solid var(--line);border-radius:30px;padding:9px 20px;background:rgba(255,255,255,.6);
+  transition:border-color .3s,color .3s,transform .3s;
+}
+.feat .f-body .f-links a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+@media (max-width:760px){.feat{grid-template-columns:1fr}}
+@keyframes vinyl-spin{to{transform:rotate(360deg)}}
+
+/* vinyl shelf */
+.shelf-title{margin:clamp(40px,6vw,60px) 0 22px;display:flex;align-items:baseline;gap:16px}
+.shelf-title h3{font-family:var(--font-display);text-transform:uppercase;font-size:clamp(26px,3.6vw,46px);line-height:1}
+.shelf-title span{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:clamp(16px,2.6vw,28px)}
+.rec{position:relative;cursor:pointer;text-align:center}
+.rec .rec-disc{position:relative;aspect-ratio:1;border-radius:50%;
+  background:repeating-radial-gradient(circle,#1a1712 0 3px,#0d0b08 3px 6px);
+  box-shadow:0 14px 34px rgba(20,15,8,.45),inset 0 0 0 2px #241c12;
+  transition:transform .6s var(--ease-out),box-shadow .4s;
+}
+.rec .rec-disc .label{
+  position:absolute;left:50%;top:50%;width:36%;aspect-ratio:1;border-radius:50%;overflow:hidden;
+  transform:translate(-50%,-50%);background:#e6d9bd;box-shadow:0 0 0 2px #8f6f35;
+  filter:sepia(.25);
+}
+.rec .rec-disc .label img{width:100%;height:100%;object-fit:cover}
+.rec:hover .rec-disc{transform:translateY(-8px) scale(1.03);box-shadow:0 22px 50px rgba(20,15,8,.55)}
+.rec.playing .rec-disc{animation:vinyl-spin 5s linear infinite}
+.rec.playing .rec-disc{box-shadow:0 22px 50px rgba(20,15,8,.55),0 0 34px rgba(201,162,75,.35)}
+.rec .rec-eq{display:none;justify-content:center;gap:3px;height:16px;margin-top:8px}
+.rec.playing .rec-eq{display:flex}
+.rec .rec-eq i{width:3px;height:100%;background:var(--accent);animation:eq-bounce .8s ease-in-out infinite alternate}
+.rec .rec-eq i:nth-child(2){animation-delay:.2s}.rec .rec-eq i:nth-child(3){animation-delay:.4s}
+.rec .rec-eq i:nth-child(4){animation-delay:.1s}
+@keyframes eq-bounce{to{height:30%}}
+.rec .rec-name{margin-top:10px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.rec .rec-album{font-size:11px;color:var(--muted);margin-top:2px}
+.rec-player{margin-top:12px;min-height:66px}
+.rec-player iframe{display:block;border:0}
+.artist-link{
+  margin-top:clamp(30px,5vw,50px);text-align:center;
+}
+.artist-link a{
+  display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink);border:1px solid var(--line);border-radius:40px;padding:14px 30px;background:rgba(255,255,255,.55);
+  transition:border-color .3s,color .3s,transform .3s;
+}
+.artist-link a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><img src="assets/img/stamp.png" alt=""></div>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-nav" id="siteNav">
+  <div class="nav-left">
+    <a class="nav-back" href="index.html" aria-label="Back to home">←</a>
+    <a class="nav-brand" href="index.html">
+      <img class="brand-stamp" src="assets/img/stamp.png" alt="Haiyi Yu stamp">
+      <span data-en="&lt;b&gt;Haiyi Yu&lt;/b&gt; — Folio" data-zh="&lt;b&gt;于海怡&lt;/b&gt; — 作品集"><b>Haiyi Yu</b> — Folio</span>
+    </a>
+  </div>
+  <span class="nav-proj">07 — Other Works</span>  <div class="nav-right">
+
+  <button class="nav-lang" id="langBtn" aria-label="Switch language / 切换语言">中</button>
+  <button class="nav-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
+    <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="btn-label">Menu</span>
+  </button>
+  </div>
+</header>
+
+<nav class="menu-overlay" id="site-menu" aria-label="Site menu">
+  <div class="menu-list">
+    <a class="menu-item" href="index.html" data-en="&lt;span class=&quot;m-num&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.08s&quot;&gt;Home&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Start&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.08s&quot;&gt;主页&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;开始&lt;/span&gt;"><span class="m-num">00</span><span class="m-title" style="transition-delay:.08s">Home</span><span class="m-tag">Start</span></a>
+    <a class="menu-item" href="intersection.html" data-en="&lt;span class=&quot;m-num&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.12s&quot;&gt;Intersection&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.12s&quot;&gt;Intersection&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">01</span><span class="m-title" style="transition-delay:.12s">Intersection</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="interlude.html" data-en="&lt;span class=&quot;m-num&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.16s&quot;&gt;Interlude&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.16s&quot;&gt;Interlude&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">02</span><span class="m-title" style="transition-delay:.16s">Interlude</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="endless-life.html" data-en="&lt;span class=&quot;m-num&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.20s&quot;&gt;Endless Life&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Adaptive Reuse&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.20s&quot;&gt;Endless Life&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;改造再利用&lt;/span&gt;"><span class="m-num">03</span><span class="m-title" style="transition-delay:.20s">Endless Life</span><span class="m-tag">Adaptive Reuse</span></a>
+    <a class="menu-item" href="perception.html" data-en="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.24s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Graphic&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.24s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;平面&lt;/span&gt;"><span class="m-num">04</span><span class="m-title" style="transition-delay:.24s">Perception</span><span class="m-tag">Graphic</span></a>
+    <a class="menu-item" href="formation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.28s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;3D · Fabrication&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.28s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;3D · 制造&lt;/span&gt;"><span class="m-num">05</span><span class="m-title" style="transition-delay:.28s">Formation</span><span class="m-tag">3D · Fabrication</span></a>
+    <a class="menu-item" href="speculation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.32s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Future Library&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.32s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;未来图书馆&lt;/span&gt;"><span class="m-num">06</span><span class="m-title" style="transition-delay:.32s">Speculation</span><span class="m-tag">Future Library</span></a>
+    <a class="menu-item" href="other-works.html" data-en="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;&gt;Other Works&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Point Cloud · Music&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;&gt;其他作品&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;点云 · 音乐&lt;/span&gt;"><span class="m-num">07</span><span class="m-title" style="transition-delay:.36s">Other Works</span><span class="m-tag">Point Cloud · Music</span></a>
+    <a class="menu-item" href="about.html" data-en="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.40s&quot;&gt;About&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Contact&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.40s&quot;&gt;关于&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;联系&lt;/span&gt;"><span class="m-num">08</span><span class="m-title" style="transition-delay:.40s">About</span><span class="m-tag">Contact</span></a>
+  </div>
+  <div class="menu-foot">
+    <span>Melbourne / Beijing</span>
+    <span>hieee0103@outlook.com</span>
+    <span>@yu.interior_</span>
+  </div>
+</nav>
+
+<main aria-label="Other works">
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-label="Other works hero">
+  <div class="window" aria-hidden="true"></div>
+  <p class="p-kicker" data-en="The attic — beyond the six projects" data-zh="阁楼 — 六个项目之外">The attic — beyond the six projects</p>
+  <h1>Other<br><span class="stroke">Works</span></h1>
+  <p class="p-sub" data-en="Point clouds, products &amp;amp; music — the experiments between projects" data-zh="点云、产品与音乐 — 项目之间的实验">Point clouds, products &amp; music — the experiments between projects</p>
+  <div class="hero-chips">
+    <a class="hero-chip" href="#pointcloud" data-en="◈ Point Cloud" data-zh="◈ 点云">◈ Point Cloud</a>
+    <a class="hero-chip" href="#lenovo" data-en="▣ Lenovo · Amazon" data-zh="▣ 联想 · 亚马逊">▣ Lenovo · Amazon</a>
+    <a class="hero-chip" href="#music" data-en="♪ Music — HIEee" data-zh="♪ 音乐 — HIEee">♪ Music — HIEee</a>
+  </div>
+</section>
+
+<!-- ============ POINT CLOUD ============ -->
+<section class="sect" id="pointcloud" aria-label="Point cloud studio">
+  <div class="s-inner">
+    <div class="s-head reveal">
+      <span class="mono-label" data-en="01 — Point Cloud" data-zh="01 — 点云">01 — Point Cloud</span>
+      <h2 data-en="Cyberpunk &lt;em&gt;Studio&lt;/em&gt;" data-zh="赛博朋克&lt;em&gt;工作室&lt;/em&gt;">Cyberpunk <em>Studio</em></h2>
+    </div>
+    <p class="reveal" data-en="A scanned world, rebuilt as pure light. Drag to orbit, scroll to zoom — the raw .ply is yours to download." data-zh="一个被扫描的世界，以纯粹的光重建。拖拽旋转，滚轮缩放——原始 .ply 文件可供下载。">A scanned world, rebuilt as pure light. Drag to orbit, scroll to zoom — the raw .ply is yours to download.</p>
+
+    <div class="pc-hold reveal">
+      <div class="pc-viewer" id="pcViewer">
+        <div class="pc-loading" id="pcLoading">
+          <span class="spinner" aria-hidden="true"></span>
+          <span data-en="Scanning the room ..." data-zh="正在扫描房间 ...">Scanning the room ...</span>
+        </div>
+        <div class="pc-fallback" aria-hidden="true">
+          <img src="assets/img/other-cyberpunk.jpg" alt="Cyberpunk studio point cloud render">
+        </div>
+        <span class="pc-hint" data-en="Drag to orbit · scroll to zoom" data-zh="拖拽旋转 · 滚轮缩放">Drag to orbit · scroll to zoom</span>
+      </div>
+      <div class="pc-side">
+        <div class="pc-card">
+          <b data-en="About the scan" data-zh="关于扫描">About the scan</b>
+          <p data-en="A cyberpunk studio captured as a point cloud — every surface dissolved into coordinates, then rebuilt as a navigable memory of a space that never existed." data-zh="一个被点云捕捉的赛博朋克工作室——每一面都化为坐标，再重建成一段可漫游的记忆：一个从未存在的空间。">A cyberpunk studio captured as a point cloud — every surface dissolved into coordinates, then rebuilt as a navigable memory of a space that never existed.</p>
+        </div>
+        <div class="pc-card">
+          <b data-en="The file" data-zh="文件">The file</b>
+          <p data-en="cyberpunk_studio.ply · 5.4 MB · point cloud format, opens in CloudCompare, MeshLab, Blender, or any PLY viewer." data-zh="cyberpunk_studio.ply · 5.4 MB · 点云格式，可用 CloudCompare、MeshLab、Blender 或任意 PLY 查看器打开。">cyberpunk_studio.ply · 5.4 MB · point cloud format, opens in CloudCompare, MeshLab, Blender, or any PLY viewer.</p>
+        </div>
+        <div class="pc-btns">
+          <a class="btn solid" href="assets/files/cyberpunk_studio.ply" download data-en="Download .ply ↓" data-zh="下载 .ply ↓">Download .ply ↓</a>
+          <a class="btn" href="assets/img/other-cyberpunk.jpg" target="_blank" data-en="Open render ↗" data-zh="查看渲染图 ↗">Open render ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- the render — same page as the model -->
+    <figure class="pc-render reveal">
+      <img src="assets/img/other-cyberpunk.jpg" alt="Cyberpunk studio — point cloud render, creative experiment" loading="lazy">
+      <figcaption data-en="Creative experiment — the studio, rendered from the point cloud &lt;b&gt;· click to enlarge&lt;/b&gt;" data-zh="创意实验 — 从点云渲染的工作室 &lt;b&gt;· 点击放大&lt;/b&gt;">Creative experiment — the studio, rendered from the point cloud <b>· click to enlarge</b></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ LENOVO ============ -->
+<section class="sect" id="lenovo" aria-label="Lenovo Amazon product graphic design">
+  <div class="s-inner">
+    <div class="s-head reveal">
+      <span class="mono-label" data-en="02 — Lenovo · Amazon" data-zh="02 — 联想 · 亚马逊">02 — Lenovo · Amazon</span>
+      <h2 data-en="Product &lt;em&gt;Graphic&lt;/em&gt; Design" data-zh="产品&lt;em&gt;平面&lt;/em&gt;设计">Product <em>Graphic</em> Design</h2>
+    </div>
+    <p class="reveal" data-en="At Lenovo Beijing HQ I designed the product graphics for the Amazon storefront — turning the specifications of the Options &amp;amp; Accessories portfolio into visual assets, from photography coordination to the final layouts, now live on Lenovo's official Amazon pages." data-zh="在联想北京总部，我为亚马逊店铺设计产品平面视觉——将选件与配件产品线的规格转化为视觉资产，从拍摄协调到最终排版，现已上线联想官方亚马逊页面。">At Lenovo Beijing HQ I designed the product graphics for the Amazon storefront — turning the specifications of the Options &amp; Accessories portfolio into visual assets, from photography coordination to the final layouts, now live on Lenovo's official Amazon pages.</p>
+
+    <!-- Amazon A+ -->
+    <p class="mono-label reveal" style="margin:34px 0 12px;color:var(--accent)" data-en="Amazon A+ content" data-zh="亚马逊 A+ 内容">Amazon A+ content</p>
+    <div class="l-strips" style="grid-template-columns:min(640px,100%);justify-content:center">
+      <figure class="l-strip reveal">
+        <img src="assets/img/lenovo-headphone-aplus.jpg" alt="Lenovo Headphone YOGA PC Edition — Amazon A+ content strip" loading="lazy">
+        <figcaption class="l-cap" data-en="Headphone — A+ strip" data-zh="耳机 — A+ 长图">Headphone — A+ strip</figcaption>
+      </figure>
+    </div>
+    <div class="lenovo-grid">
+      <figure class="l-card reveal">
+        <img src="assets/img/lenovo-keyboard.jpg" alt="Lenovo 900 multi-device low-profile mechanical keyboard — Amazon A+" loading="lazy">
+        <figcaption class="l-cap" data-en="900 Keyboard — A+" data-zh="900 键盘 — A+">900 Keyboard — A+</figcaption>
+      </figure>
+      <figure class="l-card reveal reveal-d1">
+        <img src="assets/img/lenovo-headphone-scene.jpg" alt="Lenovo Headphone YOGA PC Edition scene — Amazon A+" loading="lazy">
+        <figcaption class="l-cap" data-en="Headphone YOGA — A+" data-zh="YOGA 耳机 — A+">Headphone YOGA — A+</figcaption>
+      </figure>
+      <figure class="l-card reveal reveal-d2">
+        <img src="assets/img/lenovo-banner.jpg" alt="Lenovo accessories banner — Amazon A+" loading="lazy">
+        <figcaption class="l-cap" data-en="Storefront banner — A+" data-zh="店铺横幅 — A+">Storefront banner — A+</figcaption>
+      </figure>
+      <figure class="l-card reveal">
+        <img src="assets/img/lenovo-tote-backpack.jpg" alt="Lenovo tote backpack — Amazon A+" loading="lazy">
+        <figcaption class="l-cap" data-en="Tote Backpack — A+" data-zh="Tote 双肩包 — A+">Tote Backpack — A+</figcaption>
+      </figure>
+    </div>
+
+    <!-- Monthly design mailer -->
+    <p class="mono-label reveal" style="margin:44px 0 12px;color:var(--accent)" data-en="Monthly design mailer" data-zh="月度产品设计邮件">Monthly design mailer</p>
+    <div class="mailer-row">
+      <figure class="l-card reveal">
+        <img src="assets/img/lenovo-email.jpg" alt="Lenovo Seashell Family — monthly product design mailer" loading="lazy">
+        <figcaption class="l-cap" data-en="Lenovo Seashell Family — Design Mailer" data-zh="联想 Seashell 系列 — 设计邮件">Lenovo Seashell Family — Design Mailer</figcaption>
+      </figure>
+      <figure class="l-strip reveal reveal-d1" style="height:420px">
+        <img src="assets/img/lenovo-tote-aplus.jpg" alt="Lenovo tote backpack — monthly design mailer strip" loading="lazy">
+        <figcaption class="l-cap" data-en="Tote Backpack — mailer strip" data-zh="Tote 双肩包 — 邮件长图">Tote Backpack — mailer strip</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MUSIC ============ -->
+<section class="music-room" id="music" aria-label="Music room">
+  <div class="mr-inner">
+    <div class="s-head reveal">
+      <span class="mono-label" data-en="03 — Music" data-zh="03 — 音乐">03 — Music</span>
+      <h2 data-en="The &lt;em&gt;Listening&lt;/em&gt; Room" data-zh="&lt;em&gt;聆听&lt;/em&gt;室">The <em>Listening</em> Room</h2>
+    </div>
+    <p class="reveal" style="margin-bottom:36px;color:#6d5848" data-en="Original music under the name &lt;b&gt;HIEee&lt;/b&gt;, streaming on NetEase Cloud Music. Put a record on." data-zh="以 &lt;b&gt;HIEee&lt;/b&gt; 之名发布的原创音乐，收录于网易云音乐。放上一张唱片吧。">Original music under the name <b>HIEee</b>, streaming on NetEase Cloud Music. Put a record on.</p>
+
+    <!-- featured: Insomnia -->
+    <div class="feat reveal">
+      <div class="vinyl-wrap" aria-hidden="true">
+        <div class="vinyl"><div class="label"><img src="assets/img/covers/insomnia.jpg" alt=""></div></div>
+        <div class="arm"></div>
+      </div>
+      <div class="f-body">
+        <p class="f-flag" data-en="Featured track" data-zh="主打单曲">Featured track</p>
+        <h3 data-en="Insomnia" data-zh="Insomnia">Insomnia</h3>
+        <p class="f-artist" data-en="HIEee — single · 2025" data-zh="HIEee — 单曲 · 2025">HIEee — single · 2025</p>
+        <div class="f-player" id="featPlayer"></div>
+        <div class="f-links">
+          <a href="https://music.163.com/#/song?id=2039546370" target="_blank" rel="noopener" data-en="Open in NetEase ↗" data-zh="在网易云打开 ↗">Open in NetEase ↗</a>
+          <a href="https://music.163.com/#/artist?id=36695416" target="_blank" rel="noopener" data-en="Artist page ↗" data-zh="歌手主页 ↗">Artist page ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- vinyl shelf -->
+    <div class="shelf-title reveal">
+      <h3 data-en="More records" data-zh="更多唱片">More records</h3>
+      <span data-en="click a record to play" data-zh="点击唱片播放">click a record to play</span>
+    </div>
+    <div class="shelf" id="shelf">
+      <div class="rec" data-id="1905180459" data-name="失焦 · Shijiao">
+        <div class="rec-disc"><div class="label"><img src="assets/img/covers/shijiao.jpg" alt=""></div></div>
+        <div class="rec-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <p class="rec-name">失焦</p><p class="rec-album" data-en="Shijiao · single" data-zh="失焦 · 单曲">Shijiao · single</p>
+        <div class="rec-player"></div>
+      </div>
+      <div class="rec" data-id="2009039060" data-name="Goodnight and Goodbye">
+        <div class="rec-disc"><div class="label"><img src="assets/img/covers/goodnight.jpg" alt=""></div></div>
+        <div class="rec-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <p class="rec-name">Goodnight and Goodbye</p><p class="rec-album" data-en="Single" data-zh="单曲">Single</p>
+        <div class="rec-player"></div>
+      </div>
+      <div class="rec" data-id="2123000598" data-name="Pass me by">
+        <div class="rec-disc"><div class="label"><img src="assets/img/covers/passmeby.jpg" alt=""></div></div>
+        <div class="rec-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <p class="rec-name">Pass me by</p><p class="rec-album">Single</p>
+        <div class="rec-player"></div>
+      </div>
+      <div class="rec" data-id="3387798309" data-name="On Our Own">
+        <div class="rec-disc"><div class="label"><img src="assets/img/covers/onourown.jpg" alt=""></div></div>
+        <div class="rec-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <p class="rec-name">On Our Own</p><p class="rec-album">Single</p>
+        <div class="rec-player"></div>
+      </div>
+      <div class="rec" data-id="2683325077" data-name="重生 · Reborn">
+        <div class="rec-disc"><div class="label"><img src="assets/img/covers/reborn.jpg" alt=""></div></div>
+        <div class="rec-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <p class="rec-name">重生</p><p class="rec-album" data-en="REBORN" data-zh="REBORN">REBORN</p>
+        <div class="rec-player"></div>
+      </div>
+      <div class="rec" data-id="1974258954" data-name="火花 · Spark">
+        <div class="rec-disc"><div class="label"><img src="assets/img/covers/huohua.jpg" alt=""></div></div>
+        <div class="rec-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <p class="rec-name">火花</p><p class="rec-album" data-en="Spark · single" data-zh="火花 · 单曲">Spark · single</p>
+        <div class="rec-player"></div>
+      </div>
+      <div class="rec" data-id="1869732001" data-name="Lucky">
+        <div class="rec-disc"><div class="label"><img src="assets/img/covers/lucky.jpg" alt=""></div></div>
+        <div class="rec-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <p class="rec-name">Lucky</p><p class="rec-album" data-en="贰拾作" data-zh="贰拾作">贰拾作</p>
+        <div class="rec-player"></div>
+      </div>
+      <div class="rec" data-id="2706770946" data-name="月光 · Moonlight">
+        <div class="rec-disc"><div class="label"><img src="assets/img/covers/moonlight.jpg" alt=""></div></div>
+        <div class="rec-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <p class="rec-name">月光</p><p class="rec-album" data-en="Moonlight · single" data-zh="月光 · 单曲">Moonlight · single</p>
+        <div class="rec-player"></div>
+      </div>
+    </div>
+
+    <div class="artist-link reveal">
+      <a href="https://music.163.com/#/artist?id=36695416" target="_blank" rel="noopener" data-en="Full artist page — HIEee on NetEase Cloud Music ↗" data-zh="完整歌手主页 — 网易云音乐 HIEee ↗">Full artist page — HIEee on NetEase Cloud Music ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEXT ============ -->
+<a class="next-project" href="about.html" aria-label="Next: About Haiyi Yu">
+  <span class="np-label" data-en="Next — 08" data-zh="下一站 — 08">Next — 08</span>
+  <span class="np-title" data-en="About &amp;amp; Contact" data-zh="关于与联系">About &amp; Contact</span>
+  <span class="np-arrow">↗</span>
+</a>
+
+</main>
+
+<footer class="site-foot">
+  <div class="foot-stamp-row">
+    <img class="foot-stamp" src="assets/img/stamp.png" alt="Haiyi Yu stamp mark">
+    <p class="foot-mantra">stay curious. stay focused.<br>stay professional. <em>still in progress.</em></p>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Haiyi Yu — Design Works 2023–2025</span>
+    <span>Melbourne / Beijing</span>
+    <span>RMIT Interior Design</span>
+  </div>
+</footer>
+
+<script>
+/* ============ shared: nav / cursor / reveal ============ */
+const body=document.body, menuBtn=document.querySelector('.nav-menu-btn'), menuLabel=menuBtn.querySelector('.btn-label');
+function setMenu(open){
+  body.classList.toggle('menu-open',open);
+  menuBtn.setAttribute('aria-expanded',open);
+  menuLabel.textContent=open?'Close':'Menu';
+}
+menuBtn.addEventListener('click',()=>setMenu(!body.classList.contains('menu-open')));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&body.classList.contains('menu-open')){setMenu(false);menuBtn.focus();} });
+addEventListener('scroll',()=>{ document.getElementById('siteNav').classList.toggle('scrolled',scrollY>60); },{passive:true});
+
+const dot=document.querySelector('.cursor-dot'), ring=document.querySelector('.cursor-ring');
+if(matchMedia('(pointer:fine)').matches){
+  let cx=innerWidth/2, cy=innerHeight/2, rx=cx, ry=cy;
+  addEventListener('pointermove',e=>{ cx=e.clientX; cy=e.clientY;
+    dot.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+    const t=e.target.closest('a,button,[data-cursor]');
+    body.classList.toggle('cursor-link',!!t);
+    body.classList.toggle('cursor-stamp',!!e.target.closest('[data-cursor="stamp"]'));
+  });
+  (function ringLoop(){
+    rx+=(cx-rx)*.22; ry+=(cy-ry)*.22;
+    ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+    requestAnimationFrame(ringLoop);
+  })();
+}
+
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ============ dust motes in hero ============ */
+(()=>{
+  const hero=document.querySelector('.hero');
+  for(let i=0;i<18;i++){
+    const d=document.createElement('span');
+    d.className='dust';
+    const s=2+Math.random()*4;
+    d.style.width=s+'px'; d.style.height=s+'px';
+    d.style.left=Math.random()*100+'%';
+    d.style.bottom='-2%';
+    d.style.animationDuration=(14+Math.random()*22)+'s';
+    d.style.animationDelay=(-Math.random()*24)+'s';
+    hero.appendChild(d);
+  }
+})();
+
+/* ============ lightbox ============ */
+(()=>{
+  const lb=document.createElement('div');
+  lb.className='lightbox'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-label','Image viewer');
+  lb.innerHTML='<div class="lb-frame"><img alt=""><div class="lb-cap"><span class="lb-txt"></span><span class="lb-idx"></span></div></div>'
+    +'<button class="lb-close" aria-label="Close">✕</button>'
+    +'<button class="lb-prev lb-nav" aria-label="Previous image">‹</button>'
+    +'<button class="lb-next lb-nav" aria-label="Next image">›</button>';
+  document.body.appendChild(lb);
+  let items=[], idx=0;
+  const show=(i)=>{ idx=(i+items.length)%items.length;
+    lb.querySelector('img').src=items[idx].src;
+    lb.querySelector('img').alt=items[idx].alt||'';
+    lb.querySelector('.lb-txt').textContent=items[idx].closest('figure')?.querySelector('figcaption')?.textContent||'';
+    lb.querySelector('.lb-idx').textContent=(idx+1)+' / '+items.length; };
+  const open=()=>{ lb.classList.add('open'); document.body.style.overflow='hidden'; };
+  const close=()=>{ lb.classList.remove('open'); document.body.style.overflow=''; };
+  lb.querySelector('.lb-close').addEventListener('click',close);
+  lb.querySelector('.lb-prev').addEventListener('click',()=>show(idx-1));
+  lb.querySelector('.lb-next').addEventListener('click',()=>show(idx+1));
+  lb.addEventListener('click',e=>{ if(e.target===lb) close(); });
+  document.addEventListener('keydown',e=>{ if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') close();
+    if(e.key==='ArrowLeft') show(idx-1);
+    if(e.key==='ArrowRight') show(idx+1); });
+  items=[...document.querySelectorAll('.l-card img, .l-strip img, .pc-render img')];
+  items.forEach(im=>{
+    im.closest('.l-card, .l-strip, .pc-render').addEventListener('click',e=>{
+      e.preventDefault(); show(items.indexOf(im)); open();
+    });
+  });
+})();
+
+/* ============ 3D point cloud viewer (three.js, graceful fallback) ============ */
+(()=>{
+  const viewer=document.getElementById('pcViewer');
+  const loading=document.getElementById('pcLoading');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fallback(){
+    viewer.classList.add('show-fallback');
+    if(loading) loading.style.display='none';
+  }
+  function boot(){
+    const canvas=document.createElement('canvas');
+    viewer.insertBefore(canvas, viewer.querySelector('.pc-fallback'));
+    const renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
+    renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.8));
+    const scene=new THREE.Scene();
+    scene.background=new THREE.Color(0x10140f);
+    scene.fog=new THREE.FogExp2(0x10140f,0.0016);
+    const camera=new THREE.PerspectiveCamera(55,1,.1,2000);
+    camera.position.set(90,40,120);
+    const controls=new THREE.OrbitControls(camera,canvas);
+    controls.enableDamping=true; controls.dampingFactor=.08;
+    controls.autoRotate=!reduced; controls.autoRotateSpeed=.6;
+    controls.minDistance=15; controls.maxDistance=500;
+    const loader=new THREE.PLYLoader();
+    loader.load('assets/files/cyberpunk_studio.ply',(geometry)=>{
+      geometry.computeVertexNormals();
+      const hasColor=geometry.attributes.color;
+      let material;
+      if(hasColor){
+        material=new THREE.PointsMaterial({size:1.1,vertexColors:true});
+      }else{
+        material=new THREE.PointsMaterial({size:1.2,color:0x8fc7ff});
+      }
+      const points=new THREE.Points(geometry,material);
+      /* center & scale */
+      geometry.computeBoundingBox();
+      const bb=geometry.boundingBox;
+      const cx=(bb.min.x+bb.max.x)/2, cy=(bb.min.y+bb.max.y)/2, cz=(bb.min.z+bb.max.z)/2;
+      const size=Math.max(bb.max.x-bb.min.x,bb.max.y-bb.min.y,bb.max.z-bb.min.z)||1;
+      points.position.set(-cx,-cy,-cz);
+      const scale=90/size;
+      points.scale.setScalar(scale);
+      scene.add(points);
+      controls.target.set(0,0,0);
+      if(loading) loading.style.display='none';
+    },undefined,()=>{ fallback(); });
+    function resize(){
+      const w=viewer.clientWidth, h=viewer.clientHeight;
+      renderer.setSize(w,h,false);
+      camera.aspect=w/h; camera.updateProjectionMatrix();
+    }
+    resize(); addEventListener('resize',resize);
+    (function animate(){
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene,camera);
+    })();
+  }
+  function tryBoot(){
+    if(window.THREE && THREE.PLYLoader && THREE.OrbitControls){ boot(); }
+    else fallback();
+  }
+  /* wait for CDN scripts */
+  let tries=0;
+  const timer=setInterval(()=>{
+    tries++;
+    if(window.THREE && THREE.PLYLoader && THREE.OrbitControls){
+      clearInterval(timer); boot(); return;
+    }
+    if(tries>30){ clearInterval(timer); fallback(); }
+  },200);
+})();
+
+/* ============ music players (lazy NetEase outchain) ============ */
+(()=>{
+  function playerHTML(id){
+    return '<iframe width="100%" height="66" scrolling="no" frameborder="no" '
+      +'src="https://music.163.com/outchain/player?type=2&id='+id+'&auto=0&height=66" '
+      +'loading="lazy" title="NetEase Cloud Music player"></iframe>';
+  }
+  /* featured */
+  const featBox=document.getElementById('featPlayer');
+  const featLoaded=()=>{ if(!featBox.innerHTML) featBox.innerHTML=playerHTML(2039546370); };
+  if('IntersectionObserver' in window){
+    const fo=new IntersectionObserver(es=>{ es.forEach(en=>{ if(en.isIntersecting){ featLoaded(); fo.disconnect(); } }); });
+    fo.observe(featBox);
+  } else featLoaded();
+
+  /* shelf records */
+  const recs=[...document.querySelectorAll('.rec')];
+  recs.forEach(r=>{
+    r.addEventListener('click',()=>{
+      const playing=r.classList.contains('playing');
+      recs.forEach(x=>{ x.classList.remove('playing'); x.querySelector('.rec-player').innerHTML=''; });
+      if(playing) return;
+      r.classList.add('playing');
+      const box=r.querySelector('.rec-player');
+      box.innerHTML=playerHTML(r.dataset.id);
+      r.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+  });
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/PLYLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="assets/js/i18n.js?v=2"></script>
+</body>
+</html>

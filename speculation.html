@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SPECULATION — Future Library CoLab · Haiyi Yu</title>
+<meta name="description" content="Speculation — knowledge circulation in a future library. CoLab: immersive, interactive, collaborative knowledge transformation at RMIT.">
+<meta name="theme-color" content="#eef4ff">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css?v=6">
+<style>
+/* ============ SPECULATION — knowledge loop ============ */
+:root{
+  --ink:#12233f; --muted:#6d8098; --line:rgba(18,35,63,.14);
+  --accent:#0f6bff; --glow:rgba(15,107,255,.35);
+}
+body{
+  background:
+    radial-gradient(ellipse 80% 45% at 50% 0%,rgba(160,200,255,.5),transparent 60%),
+    linear-gradient(180deg,#f4f8ff,#eef4ff);
+  color:var(--ink);
+}
+.menu-overlay{background:#eef4ff;color:var(--ink)}
+.menu-overlay .menu-item{border-color:var(--line)}
+.site-nav .nav-brand .brand-stamp{filter:invert(1)}
+.site-nav .nav-proj{color:var(--muted)}
+.site-nav .nav-menu-btn{border-color:var(--line)}
+.site-nav.scrolled{background:rgba(238,244,255,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+
+/* orb cursor trail */
+#trail{position:fixed;inset:0;pointer-events:none;z-index:2900}
+@media (pointer:coarse){#trail{display:none}}
+
+/* ---------- journey rail ---------- */
+.rail{
+  position:fixed;right:clamp(10px,2vw,26px);top:50%;transform:translateY(-50%);z-index:800;
+  display:flex;flex-direction:column;align-items:flex-end;gap:16px;
+}
+.rail .r-link{
+  display:flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.2em;
+  color:var(--muted);transition:color .3s;
+}
+.rail .r-link .dot{
+  width:12px;height:12px;border-radius:50%;border:2px solid var(--muted);transition:all .35s;
+}
+.rail .r-link.active{color:var(--accent)}
+.rail .r-link.active .dot{background:var(--accent);border-color:var(--accent);
+  box-shadow:0 0 16px var(--glow),0 0 4px var(--glow)}
+.rail .r-link:hover{color:var(--ink)}
+@media (max-width:900px){.rail{display:none}}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:calc(var(--nav-h) + 26px) clamp(16px,4vw,60px) 60px;overflow:hidden;
+}
+.hero .orb{
+  position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;
+  animation:orb-float 10s ease-in-out infinite alternate;
+}
+.hero .o1{width:42vw;height:42vw;left:-12%;top:4%;background:rgba(120,170,255,.5)}
+.hero .o2{width:36vw;height:36vw;right:-10%;bottom:2%;background:rgba(255,170,220,.35);animation-delay:-4s}
+@keyframes orb-float{to{transform:translate(6vw,-4vh)}}
+.hero .p-kicker{
+  position:relative;z-index:2;
+  font-size:clamp(11px,1.4vw,15px);letter-spacing:.4em;text-transform:uppercase;
+  color:var(--accent);display:flex;align-items:center;gap:16px;justify-content:center;
+  text-shadow:0 0 18px var(--glow);
+}
+.hero .p-kicker::before,.hero .p-kicker::after{content:"◉"}
+.hero h1{
+  position:relative;z-index:2;
+  font-family:var(--font-display);text-transform:uppercase;font-size:clamp(56px,12vw,190px);line-height:.9;margin:6px 0 2px;
+}
+.hero h1 .stroke{color:transparent;-webkit-text-stroke:2px var(--ink)}
+.hero .p-sub{
+  position:relative;z-index:2;
+  font-style:italic;font-size:clamp(18px,2.4vw,28px);color:var(--muted);margin-bottom:clamp(22px,4vh,38px);
+}
+.hero .kw{
+  position:relative;z-index:2;
+  font-size:clamp(15px,1.8vw,22px);letter-spacing:.3em;text-transform:uppercase;
+  color:#fff;background:var(--accent);padding:10px 26px;border-radius:40px;
+  box-shadow:0 0 40px var(--glow),0 10px 30px rgba(15,107,255,.25);
+  animation:kw-breathe 3s ease-in-out infinite;
+}
+@keyframes kw-breathe{50%{box-shadow:0 0 70px var(--glow),0 10px 30px rgba(15,107,255,.3)}}
+
+/* loop diagram */
+.loop-diagram{margin-top:clamp(34px,6vh,60px);position:relative;z-index:2;width:min(340px,74vw)}
+.loop-diagram svg{width:100%}
+.loop-diagram .flow{
+  stroke-dasharray:6 8;animation:dash-flow 1.6s linear infinite;
+}
+@keyframes dash-flow{to{stroke-dashoffset:-14}}
+
+/* ---------- phases ---------- */
+.phase{
+  min-height:100svh;display:flex;align-items:center;
+  padding:calc(var(--nav-h) + 40px) clamp(18px,6vw,90px) 60px;
+  position:relative;border-top:1px solid var(--line);
+}
+.phase .ph-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,80px);align-items:center;width:100%}
+.phase .ph-num{
+  font-family:var(--font-display);font-size:clamp(70px,10vw,170px);line-height:.9;color:transparent;
+  -webkit-text-stroke:2px var(--accent);opacity:.9;
+}
+.phase .ph-kicker{font-size:clamp(13px,1.5vw,17px);letter-spacing:.3em;text-transform:uppercase;color:var(--accent)}
+.phase h2{font-family:var(--font-display);text-transform:uppercase;font-size:clamp(32px,4.6vw,66px);line-height:1;margin:10px 0 20px}
+.phase h2 em{font-style:normal;color:var(--accent)}
+.phase p{font-size:clamp(15px,1.5vw,17px);line-height:1.95;color:#4d6179;max-width:600px}
+.phase p+p{margin-top:14px}
+.phase p b{color:var(--ink);font-weight:600}
+.phase .kw-line{
+  margin-top:24px;font-size:clamp(14px,1.7vw,20px);letter-spacing:.3em;text-transform:uppercase;
+  color:var(--ink);
+}
+.phase .kw-line .kw{
+  display:inline-block;margin:4px 6px 4px 0;padding:4px 16px;border-radius:24px;background:rgba(255,255,255,.7);
+  border:1px solid var(--line);opacity:.25;filter:blur(.5px);
+  transition:opacity .9s ease,filter .9s ease,color .5s,text-shadow .5s;
+}
+.phase.in-view .kw-line .kw{opacity:1;filter:none;color:var(--accent);text-shadow:0 0 22px var(--glow)}
+.phase.in-view .kw-line .kw:nth-child(2){transition-delay:.3s}
+.phase.in-view .kw-line .kw:nth-child(3){transition-delay:.6s}
+.phase.in-view .kw-line .kw:nth-child(4){transition-delay:.9s}
+
+/* gallery */
+.gal{margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,3vw,28px)}
+.gal .g-item{
+  border-radius:14px;overflow:hidden;position:relative;cursor:zoom-in;
+  box-shadow:0 16px 50px rgba(18,35,63,.2);background:#fff;
+  transition:transform .6s var(--ease-out),box-shadow .6s;
+}
+.gal .g-item:hover{transform:translateY(-6px);box-shadow:0 26px 70px rgba(18,35,63,.3)}
+.gal .g-item img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;transition:transform .9s var(--ease-out)}
+.gal .g-item:hover img{transform:scale(1.04)}
+.gal .g-item figcaption{
+  position:absolute;left:12px;bottom:10px;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:#fff;background:rgba(18,35,63,.62);padding:4px 14px;border-radius:20px;
+}
+.gal .g-wide{grid-column:1/-1}
+.logic-btn{
+  position:relative;z-index:3;margin-top:14px;display:inline-flex;align-items:center;gap:10px;
+  font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  color:#fff;background:var(--accent);
+  padding:14px 30px;border-radius:40px;
+  box-shadow:0 0 30px var(--glow),0 10px 26px rgba(15,107,255,.25);
+  transition:transform .3s var(--ease-out),box-shadow .3s;
+}
+.logic-btn:hover{transform:translateY(-3px);box-shadow:0 0 46px var(--glow),0 16px 34px rgba(15,107,255,.3)}
+@media (max-width:900px){
+  .phase .ph-grid{grid-template-columns:1fr}
+}
+@media (max-width:760px){.gal{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<canvas id="trail" aria-hidden="true"></canvas>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><img src="assets/img/stamp.png" alt=""></div>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-nav" id="siteNav">
+  <div class="nav-left">
+    <a class="nav-back" href="index.html" aria-label="Back to home">←</a>
+    <a class="nav-brand" href="index.html">
+      <img class="brand-stamp" src="assets/img/stamp.png" alt="Haiyi Yu stamp">
+      <span data-en="<b>Haiyi Yu</b> — Folio" data-zh="<b>于海怡</b> — 作品集"><b>Haiyi Yu</b> — Folio</span>
+    </a>
+  </div>
+  <span class="nav-proj" data-en="06 — Speculation" data-zh="06 — Speculation">06 — Speculation</span>  <div class="nav-right">
+
+  <button class="nav-lang" id="langBtn" aria-label="Switch language / 切换语言">中</button>
+  <button class="nav-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
+    <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="btn-label">Menu</span>
+  </button>
+  </div>
+</header>
+
+<nav class="menu-overlay" id="site-menu" aria-label="Site menu">
+  <div class="menu-list">
+    <a class="menu-item" href="index.html" data-en="<span class=&quot;m-num&quot;>00</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.08s&quot;>Home</span><span class=&quot;m-tag&quot;>Start</span>" data-zh="<span class=&quot;m-num&quot;>00</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.08s&quot;>主页</span><span class=&quot;m-tag&quot;>开始</span>"><span class="m-num">00</span><span class="m-title" style="transition-delay:.08s">Home</span><span class="m-tag">Start</span></a>
+    <a class="menu-item" href="intersection.html" data-en="<span class=&quot;m-num&quot;>01</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.12s&quot;>Intersection</span><span class=&quot;m-tag&quot;>Spatial</span>" data-zh="<span class=&quot;m-num&quot;>01</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.12s&quot;>Intersection</span><span class=&quot;m-tag&quot;>空间</span>"><span class="m-num">01</span><span class="m-title" style="transition-delay:.12s">Intersection</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="interlude.html" data-en="<span class=&quot;m-num&quot;>02</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.16s&quot;>Interlude</span><span class=&quot;m-tag&quot;>Spatial</span>" data-zh="<span class=&quot;m-num&quot;>02</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.16s&quot;>Interlude</span><span class=&quot;m-tag&quot;>空间</span>"><span class="m-num">02</span><span class="m-title" style="transition-delay:.16s">Interlude</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="endless-life.html" data-en="<span class=&quot;m-num&quot;>03</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.20s&quot;>Endless Life</span><span class=&quot;m-tag&quot;>Adaptive Reuse</span>" data-zh="<span class=&quot;m-num&quot;>03</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.20s&quot;>Endless Life</span><span class=&quot;m-tag&quot;>改造再利用</span>"><span class="m-num">03</span><span class="m-title" style="transition-delay:.20s">Endless Life</span><span class="m-tag">Adaptive Reuse</span></a>
+    <a class="menu-item" href="perception.html" data-en="<span class=&quot;m-num&quot;>04</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.24s&quot;>Perception</span><span class=&quot;m-tag&quot;>Graphic</span>" data-zh="<span class=&quot;m-num&quot;>04</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.24s&quot;>Perception</span><span class=&quot;m-tag&quot;>平面</span>"><span class="m-num">04</span><span class="m-title" style="transition-delay:.24s">Perception</span><span class="m-tag">Graphic</span></a>
+    <a class="menu-item" href="formation.html" data-en="<span class=&quot;m-num&quot;>05</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.28s&quot;>Formation</span><span class=&quot;m-tag&quot;>3D · Fabrication</span>" data-zh="<span class=&quot;m-num&quot;>05</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.28s&quot;>Formation</span><span class=&quot;m-tag&quot;>3D · 制造</span>"><span class="m-num">05</span><span class="m-title" style="transition-delay:.28s">Formation</span><span class="m-tag">3D · Fabrication</span></a>
+    <a class="menu-item" href="speculation.html" data-en="<span class=&quot;m-num&quot;>06</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.32s&quot;>Speculation</span><span class=&quot;m-tag&quot;>Future Library</span>" data-zh="<span class=&quot;m-num&quot;>06</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.32s&quot;>Speculation</span><span class=&quot;m-tag&quot;>未来图书馆</span>"><span class="m-num">06</span><span class="m-title" style="transition-delay:.32s">Speculation</span><span class="m-tag">Future Library</span></a>
+    <a class="menu-item" href="other-works.html" data-en="<span class=&quot;m-num&quot;>07</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;>Other Works</span><span class=&quot;m-tag&quot;>Point Cloud · Music</span>" data-zh="<span class=&quot;m-num&quot;>07</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;>其他作品</span><span class=&quot;m-tag&quot;>点云 · 音乐</span>"><span class="m-num">07</span><span class="m-title" style="transition-delay:.36s">Other Works</span><span class="m-tag">Point Cloud · Music</span></a>
+    <a class="menu-item" href="about.html" data-en="<span class=&quot;m-num&quot;>08</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.40s&quot;>About</span><span class=&quot;m-tag&quot;>Contact</span>" data-zh="<span class=&quot;m-num&quot;>08</span><span class=&quot;m-title&quot; style=&quot;transition-delay:.40s&quot;>关于</span><span class=&quot;m-tag&quot;>联系</span>"><span class="m-num">08</span><span class="m-title" style="transition-delay:.40s">About</span><span class="m-tag">Contact</span></a>
+  </div>
+  <div class="menu-foot">
+    <span data-en="Melbourne / Beijing" data-zh="墨尔本 / 北京">Melbourne / Beijing</span>
+    <span>hieee0103@outlook.com</span>
+    <span>@yu.interior_</span>
+  </div>
+</nav>
+
+<!-- journey rail -->
+<nav class="rail" aria-label="Journey phases">
+  <a class="r-link active" href="#p1" data-rail="p1"><span data-en="INVITE" data-zh="邀请">INVITE</span><span class="dot"></span></a>
+  <a class="r-link" href="#p2" data-rail="p2"><span data-en="INPUT" data-zh="输入">INPUT</span><span class="dot"></span></a>
+  <a class="r-link" href="#p3" data-rail="p3"><span data-en="TRANSFER" data-zh="传递">TRANSFER</span><span class="dot"></span></a>
+  <a class="r-link" href="#p4" data-rail="p4"><span data-en="OUTPUT AS INPUT" data-zh="输出即输入">OUTPUT AS INPUT</span><span class="dot"></span></a>
+</nav>
+
+<main aria-label="Speculation project">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="p1" aria-label="Speculation hero — invite phase">
+  <span class="orb o1" aria-hidden="true"></span>
+  <span class="orb o2" aria-hidden="true"></span>
+  <p class="p-kicker" data-en="Project 06 — Future Library · RMIT CoLab" data-zh="项目 06 — 未来图书馆 · RMIT CoLab">Project 06 — Future Library · RMIT CoLab</p>
+  <h1>Specu<span class="stroke">lation</span></h1>
+  <p class="p-sub" data-en="Knowledge circulation in a future library" data-zh="未来图书馆中的知识循环">Knowledge circulation in a future library</p>
+  <span class="kw" data-en="Invite — Input — Transfer — Output as Input" data-zh="邀请 — 输入 — 传递 — 输出即输入">Invite — Input — Transfer — Output as Input</span>
+
+  <div class="loop-diagram" aria-hidden="true">
+    <svg viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="72" fill="none" stroke="#0f6bff" stroke-width="1.5" opacity=".4"/>
+      <circle class="flow" cx="100" cy="100" r="72" fill="none" stroke="#0f6bff" stroke-width="2.5"/>
+      <g fill="#fff" stroke="#0f6bff" stroke-width="2">
+        <circle cx="100" cy="28" r="9"/><circle cx="172" cy="100" r="9"/>
+        <circle cx="100" cy="172" r="9"/><circle cx="28" cy="100" r="9"/>
+      </g>
+      <g font-family="Archivo, sans-serif" font-size="11" fill="#12233f" text-anchor="middle">
+        <text x="100" y="33" data-en="INVITE" data-zh="邀请">INVITE</text>
+        <text x="172" y="105" data-en="INPUT" data-zh="输入">INPUT</text>
+        <text x="100" y="177" data-en="TRANSFER" data-zh="传递">TRANSFER</text>
+        <text x="28" y="105" data-en="OUTPUT" data-zh="输出">OUTPUT</text>
+      </g>
+      <text x="100" y="103" font-family="Archivo, sans-serif" font-size="14" fill="#0f6bff" text-anchor="middle">CoLab</text>
+    </svg>
+  </div>
+  <button class="logic-btn" id="logicBtn" data-en="▸ Click to explore the spatial design logic" data-zh="▸ 点击查看空间设计逻辑">▸ Click to explore the spatial design logic</button>
+  <img id="logicImg" src="assets/img/spec-8.jpg" alt="The spatial design logic" data-cap-en="The spatial design logic" data-cap-zh="空间设计逻辑" style="display:none">
+</section>
+
+<!-- ============ PHASE 1 — INVITE ============ -->
+<section class="phase" id="p2" aria-label="Phase two — input">
+  <div class="ph-grid">
+    <div class="ph-num reveal" aria-hidden="true">02</div>
+    <div class="ph-txt">
+      <p class="ph-kicker reveal" data-en="Phase 01 — Invite" data-zh="阶段 01 — 邀请">Phase 01 — Invite</p>
+      <h2 class="reveal" data-en="A platform for <em>transformation</em>" data-zh="一个<em>转化</em>平台">A platform for <em>transformation</em></h2>
+      <p class="reveal" data-en="This project reimagines the future library as a platform for immersive, interactive, and collaborative knowledge transformation. Aimed at RMIT Fashion and Textiles students, the design unfolds through four phases: Invite, Input, Transfer, and Output as Input." data-zh="本项目将未来图书馆重新构想为沉浸式、互动式、协作式知识转化平台。面向 RMIT 时尚与纺织品专业学生，设计围绕四个阶段展开：邀请、输入、传递与输出即输入。">This project reimagines the future library as a platform for immersive, interactive, and collaborative knowledge transformation. Aimed at RMIT Fashion and Textiles students, the design unfolds through four phases: Invite, Input, Transfer, and Output as Input.</p>
+      <p class="reveal" data-en="In the CoLab zone, users co-style virtual garments on shared mannequins, turning individual insight into collective creativity. A responsive discussion room supports reflection and archiving. Together, these elements form a regenerative loop — where input becomes output and output sparks new inquiry — making the library <b>an evolving ecosystem of curiosity and imagination</b>." data-zh="在 CoLab 区，用户在共享人台上共同搭配虚拟服装，将个人见解转化为集体创意。响应式讨论室支持反思与存档。这些元素共同构成再生循环——输入变为输出，输出激发新的探索——使图书馆成为<b>好奇心与想象力的生态系统</b>。">In the CoLab zone, users co-style virtual garments on shared mannequins, turning individual insight into collective creativity. A responsive discussion room supports reflection and archiving. Together, these elements form a regenerative loop — where input becomes output and output sparks new inquiry — making the library <b>an evolving ecosystem of curiosity and imagination</b>.</p>
+      <div class="kw-line reveal" aria-hidden="true">
+        <span class="kw" data-en="curiosity" data-zh="好奇心">curiosity</span><span class="kw" data-en="imagination" data-zh="想象力">imagination</span><span class="kw" data-en="regeneration" data-zh="再生">regeneration</span><span class="kw" data-en="ecosystem" data-zh="生态系统">ecosystem</span>
+      </div>
+      <div class="gal" style="margin-top:30px">
+        <figure class="g-item reveal"><img src="assets/img/spec-hero.jpg" alt="CoLab overview" loading="lazy"><figcaption data-en="CoLab zone" data-zh="CoLab 区">CoLab zone</figcaption></figure>
+        <figure class="g-item reveal reveal-d1"><img src="assets/img/spec-1.jpg" alt="Discussion room" loading="lazy"><figcaption data-en="Discussion room" data-zh="讨论室">Discussion room</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PHASE 2 — INPUT ============ -->
+<section class="phase" id="p3" aria-label="Phase three — transfer">
+  <div class="ph-grid">
+    <div class="ph-num reveal" aria-hidden="true">03</div>
+    <div class="ph-txt">
+      <p class="ph-kicker reveal" data-en="Phase 02 — Input" data-zh="阶段 02 — 输入">Phase 02 — Input</p>
+      <h2 class="reveal" data-en="Respond to a <em>keyword</em>" data-zh="回应一个<em>关键词</em>">Respond to a <em>keyword</em></h2>
+      <p class="reveal" data-en="Here, you can respond to a keyword previously illuminated by the Interactive Wall. This keyword might be a question, a theme, or a material — serving as a creative anchor." data-zh="在这里，你可以回应互动墙先前点亮的关键词。这个词可能是一个问题、一个主题或一种材料——成为创作的锚点。">Here, you can respond to a keyword previously illuminated by the Interactive Wall. This keyword might be a question, a theme, or a material — serving as a creative anchor.</p>
+      <p class="reveal" data-en="Your response, once uploaded, contributes to a growing Visual Knowledge Archive." data-zh="你的回应一经上传，就会汇入不断生长的视觉知识档案。">Your response, once uploaded, contributes to a growing Visual Knowledge Archive.</p>
+      <div class="kw-line reveal" aria-hidden="true">
+        <span class="kw" data-en="question" data-zh="问题">question</span><span class="kw" data-en="theme" data-zh="主题">theme</span><span class="kw" data-en="material" data-zh="材料">material</span><span class="kw" data-en="anchor" data-zh="锚点">anchor</span>
+      </div>
+      <div class="gal" style="margin-top:30px">
+        <figure class="g-item g-wide reveal"><img src="assets/img/spec-2.jpg" alt="Proposed floorplan" loading="lazy"><figcaption data-en="Proposed floorplan" data-zh="平面方案">Proposed floorplan</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PHASE 3 — TRANSFER ============ -->
+<section class="phase" id="p4" aria-label="Phase four — output as input">
+  <div class="ph-grid">
+    <div class="ph-num reveal" aria-hidden="true">04</div>
+    <div class="ph-txt">
+      <p class="ph-kicker reveal" data-en="Phase 03 — Transfer" data-zh="阶段 03 — 传递">Phase 03 — Transfer</p>
+      <h2 class="reveal" data-en="The <em>discussion room</em>" data-zh="<em>讨论室</em>">The <em>discussion room</em></h2>
+      <p class="reveal" data-en="This is a flexible space. When separated, it suits small group discussion. When merged, the walls transform into information displays." data-zh="这是一个灵活的空间。分开时适合小组讨论；合并时，墙体转化为信息显示屏。">This is a flexible space. When separated, it suits small group discussion. When merged, the walls transform into information displays.</p>
+      <p class="reveal" data-en="Furniture in this area supports multiple postures — standing, sitting, squatting — making the body part of the thinking process. Each desk contains a drawing board, and once uploaded, your work is visualized in real time on a VR mannequin. You can co-style a design with nearby users — creating collaboratively on different mannequins." data-zh="该区域的家具支持多种姿态——站立、坐姿、蹲姿——让身体成为思考过程的一部分。每张书桌配有绘图板，作品上传后即可在 VR 人台上实时可视化。你可以与邻近用户共同搭配设计——在不同人台上协作创作。">Furniture in this area supports multiple postures — standing, sitting, squatting — making the body part of the thinking process. Each desk contains a drawing board, and once uploaded, your work is visualized in real time on a VR mannequin. You can co-style a design with nearby users — creating collaboratively on different mannequins.</p>
+      <div class="kw-line reveal" aria-hidden="true">
+        <span class="kw" data-en="flexible" data-zh="灵活">flexible</span><span class="kw" data-en="posture" data-zh="姿态">posture</span><span class="kw" data-en="real-time" data-zh="实时">real-time</span><span class="kw" data-en="co-style" data-zh="共同搭配">co-style</span>
+      </div>
+      <div class="gal" style="margin-top:30px">
+        <figure class="g-item reveal"><img src="assets/img/spec-3.jpg" alt="CoLab zone" loading="lazy"><figcaption data-en="CoLab zone" data-zh="CoLab 区">CoLab zone</figcaption></figure>
+        <figure class="g-item reveal reveal-d1"><img src="assets/img/spec-4.jpg" alt="VR space" loading="lazy"><figcaption data-en="VR space" data-zh="VR 空间">VR space</figcaption></figure>
+        <figure class="g-item reveal"><img src="assets/img/spec-6.jpg" alt="Flexible walls — displays" loading="lazy"><figcaption data-en="Flexible walls — displays" data-zh="灵活墙体 — 显示模式">Flexible walls — displays</figcaption></figure>
+        <figure class="g-item reveal reveal-d1"><img src="assets/img/spec-7.jpg" alt="Detail — the studio" loading="lazy"><figcaption data-en="Detail — the studio" data-zh="细节 — 工作室">Detail — the studio</figcaption></figure>
+        <figure class="g-item g-wide reveal"><img src="assets/img/spec-5.jpg" alt="Section view" loading="lazy"><figcaption data-en="Section view" data-zh="剖面视图">Section view</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PHASE 4 — OUTPUT AS INPUT ============ -->
+<section class="phase" id="p4b" aria-label="Output as input — the loop closes">
+  <div class="ph-grid">
+    <div class="ph-num reveal" aria-hidden="true">↻</div>
+    <div class="ph-txt">
+      <p class="ph-kicker reveal" data-en="Phase 04 — Output as Input" data-zh="阶段 04 — 输出即输入">Phase 04 — Output as Input</p>
+      <h2 class="reveal" data-en="The loop <em>closes</em>" data-zh="循环<em>闭合</em>">The loop <em>closes</em></h2>
+      <p class="reveal" data-en="Every response, once uploaded, contributes to a growing Visual Knowledge Archive — and the archive itself becomes the next invitation. Input becomes output, and output sparks new inquiry." data-zh="每一次上传的回应都会汇入不断生长的视觉知识档案——档案本身又成为下一次邀请。输入成为输出，输出激发新的探索。">Every response, once uploaded, contributes to a growing Visual Knowledge Archive — and the archive itself becomes the next invitation. Input becomes output, and output sparks new inquiry.</p>
+      <div class="kw-line reveal" aria-hidden="true">
+        <span class="kw" data-en="archive" data-zh="档案">archive</span><span class="kw" data-en="output" data-zh="输出">output</span><span class="kw" data-en="new inquiry" data-zh="新的探索">new inquiry</span><span class="kw">∞</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEXT ============ -->
+<a class="next-project" href="other-works.html" aria-label="Next project: Other Works">
+  <span class="np-label" data-en="Next project — 07" data-zh="下一个项目 — 07">Next project — 07</span>
+  <span class="np-title" data-en="Other Works" data-zh="其他作品">Other Works</span>
+  <span class="np-arrow">↗</span>
+</a>
+
+</main>
+
+<footer class="site-foot">
+  <div class="foot-stamp-row">
+    <img class="foot-stamp" src="assets/img/stamp.png" alt="Haiyi Yu stamp mark">
+    <p class="foot-mantra" data-en="stay curious. stay focused.<br>stay professional. <em>still in progress.</em>" data-zh="保持好奇。保持专注。<br>保持专业。<em>仍在进行中。</em>">stay curious. stay focused.<br>stay professional. <em>still in progress.</em></p>
+  </div>
+  <div class="foot-bottom">
+    <span data-en="© 2026 Haiyi Yu — Design Works 2023–2025" data-zh="© 2026 于海怡 — 设计作品 2023–2025">© 2026 Haiyi Yu — Design Works 2023–2025</span>
+    <span data-en="Melbourne / Beijing" data-zh="墨尔本 / 北京">Melbourne / Beijing</span>
+    <span data-en="RMIT Interior Design" data-zh="RMIT 室内设计">RMIT Interior Design</span>
+  </div>
+</footer>
+
+<script>
+/* ============ shared: nav / cursor / reveal ============ */
+const body=document.body, menuBtn=document.querySelector('.nav-menu-btn'), menuLabel=menuBtn.querySelector('.btn-label');
+function setMenu(open){
+  body.classList.toggle('menu-open',open);
+  menuBtn.setAttribute('aria-expanded',open);
+  menuLabel.textContent=window.i18nLang==='zh' ? (open?'关闭':'菜单') : (open?'Close':'Menu');
+}
+menuBtn.addEventListener('click',()=>setMenu(!body.classList.contains('menu-open')));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&body.classList.contains('menu-open')){setMenu(false);menuBtn.focus();} });
+addEventListener('scroll',()=>{ document.getElementById('siteNav').classList.toggle('scrolled',scrollY>60); },{passive:true});
+
+const dot=document.querySelector('.cursor-dot'), ring=document.querySelector('.cursor-ring');
+if(matchMedia('(pointer:fine)').matches){
+  let cx=innerWidth/2, cy=innerHeight/2, rx=cx, ry=cy;
+  addEventListener('pointermove',e=>{ cx=e.clientX; cy=e.clientY;
+    dot.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+    const t=e.target.closest('a,button,[data-cursor]');
+    body.classList.toggle('cursor-link',!!t);
+    body.classList.toggle('cursor-stamp',!!e.target.closest('[data-cursor="stamp"]'));
+  });
+  (function ringLoop(){
+    rx+=(cx-rx)*.22; ry+=(cy-ry)*.22;
+    ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+    requestAnimationFrame(ringLoop);
+  })();
+}
+
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ============ lightbox ============ */
+(()=>{
+  const lb=document.createElement('div');
+  lb.className='lightbox'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-label','Image viewer');
+  lb.innerHTML='<div class="lb-frame"><img alt=""><div class="lb-cap"><span class="lb-txt"></span><span class="lb-idx"></span></div></div>'
+    +'<button class="lb-close" aria-label="Close">✕</button>'
+    +'<button class="lb-prev lb-nav" aria-label="Previous image">‹</button>'
+    +'<button class="lb-next lb-nav" aria-label="Next image">›</button>';
+  document.body.appendChild(lb);
+  let items=[], idx=0;
+  const show=(i)=>{ idx=(i+items.length)%items.length;
+    lb.querySelector('img').src=items[idx].src;
+    lb.querySelector('img').alt=items[idx].alt||'';
+    lb.querySelector('.lb-txt').textContent=items[idx].closest('figure')?.querySelector('figcaption')?.textContent
+      || (window.i18nLang==='zh' ? items[idx].dataset.capZh : items[idx].dataset.capEn)
+      || '';
+    lb.querySelector('.lb-idx').textContent=(idx+1)+' / '+items.length; };
+  const open=()=>{ lb.classList.add('open'); document.body.style.overflow='hidden'; };
+  const close=()=>{ lb.classList.remove('open'); document.body.style.overflow=''; };
+  window.openLightboxAt=(i)=>{ show(i); open(); };
+  lb.querySelector('.lb-close').addEventListener('click',close);
+  lb.querySelector('.lb-prev').addEventListener('click',()=>show(idx-1));
+  lb.querySelector('.lb-next').addEventListener('click',()=>show(idx+1));
+  lb.addEventListener('click',e=>{ if(e.target===lb) close(); });
+  lb.addEventListener('open-at', e=>{ show(e.detail); open(); });
+  document.addEventListener('keydown',e=>{ if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') close();
+    if(e.key==='ArrowLeft') show(idx-1);
+    if(e.key==='ArrowRight') show(idx+1); });
+  items=[...document.querySelectorAll('.gal .g-item img, #logicImg')];
+  items.forEach((im,i)=>{
+    const host=im.closest('.g-item');
+    if(host) host.addEventListener('click',()=>{ show(i); open(); });
+  });
+})();
+
+/* ============ design-logic reveal button ============ */
+(()=>{
+  const btn=document.getElementById('logicBtn');
+  const img=document.getElementById('logicImg');
+  if(btn&&img){
+    btn.addEventListener('click',()=>{
+      const items=[...document.querySelectorAll('.gal .g-item img, #logicImg')];
+      const i=items.indexOf(img);
+      if(window.openLightboxAt && i>-1){ window.openLightboxAt(i); }
+    });
+  }
+})();
+
+/* ============ journey rail + phase highlight ============ */
+(()=>{
+  const railLinks=[...document.querySelectorAll('.r-link')];
+  const phaseObs=new IntersectionObserver(es=>{
+    es.forEach(en=>{
+      if(en.isIntersecting){
+        const id=en.target.id;
+        railLinks.forEach(l=>l.classList.toggle('active',l.dataset.rail===id));
+      }
+    });
+  },{threshold:.45});
+  railLinks.forEach(l=>{
+    const target=document.getElementById(l.dataset.rail);
+    if(target) phaseObs.observe(target);
+  });
+  const kwObs=new IntersectionObserver(es=>es.forEach(en=>{
+    if(en.isIntersecting){ en.target.classList.add('in-view'); kwObs.unobserve(en.target); }
+  }),{threshold:.35});
+  document.querySelectorAll('.phase').forEach(p=>kwObs.observe(p));
+})();
+
+/* ============ orb cursor trail ============ */
+(()=>{
+  if(!matchMedia('(pointer:fine)').matches) return;
+  const cv=document.getElementById('trail'), ctx=cv.getContext('2d');
+  function size(){
+    const dpr=Math.min(devicePixelRatio||1,1.5);
+    cv.width=innerWidth*dpr; cv.height=innerHeight*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  size(); addEventListener('resize',size);
+  const parts=[];
+  let mx=-99,my=-99;
+  addEventListener('pointermove',e=>{ mx=e.clientX; my=e.clientY; });
+  function tick(){
+    ctx.clearRect(0,0,innerWidth,innerHeight);
+    if(mx>-9){
+      parts.push({x:mx+(Math.random()*10-5),y:my+(Math.random()*10-5),
+        vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5-0.25,
+        life:1,r:1.5+Math.random()*2.5});
+    }
+    for(let i=parts.length-1;i>=0;i--){
+      const p=parts[i];
+      p.x+=p.vx; p.y+=p.vy; p.life-=.02;
+      if(p.life<=0){ parts.splice(i,1); continue; }
+      ctx.beginPath();
+      ctx.fillStyle=`rgba(15,107,255,${(p.life*.35).toFixed(3)})`;
+      ctx.arc(p.x,p.y,p.r*p.life,0,Math.PI*2); ctx.fill();
+    }
+    if(parts.length>120) parts.splice(0,parts.length-120);
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+</script>
+<script src="assets/js/i18n.js?v=2"></script>
+</body>
+</html>

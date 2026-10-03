@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>PERCEPTION — Graphic Collage · Haiyi Yu</title>
+<meta name="description" content="Perception — between the evolving city landscapes. A Blade Runner-inspired collage series reimagining Melbourne as a future city.">
+<meta name="theme-color" content="#05070d">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css?v=6">
+<style>
+/* ============ PERCEPTION — holographic city viewer ============ */
+:root{
+  --bg:#05070d; --ink:#e8f0fa; --muted:#7d8ba1;
+  --line:rgba(127,180,255,.18); --acc:#5ea2ff; --acc-2:#7fd4ff;
+  --glass:rgba(12,20,34,.62);
+}
+body{background:var(--bg);color:var(--ink)}
+.menu-overlay{background:var(--bg);color:var(--ink)}
+.menu-overlay .menu-item{border-color:var(--line)}
+.site-nav .nav-brand .brand-stamp{filter:none}
+.cursor-ring img{filter:none}
+.cursor-ring{border-color:rgba(232,240,250,.55)}
+.site-nav .nav-proj{color:var(--muted)}
+.site-nav .nav-menu-btn{border-color:var(--line);color:var(--ink)}
+.site-nav .nav-menu-btn:hover{background:rgba(127,180,255,.08);border-color:var(--acc)}
+.site-nav.scrolled{background:rgba(5,7,13,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.site-foot{border-color:var(--line)}
+.site-foot .foot-stamp{filter:none}
+.site-foot .foot-mantra{color:var(--ink)}
+.site-foot .foot-bottom{color:var(--muted)}
+
+/* ---------- particles + grid ---------- */
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.8}
+.pg-grid{
+  position:fixed;left:-60%;right:-60%;bottom:-6%;height:44%;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(94,162,255,.16) 1.5px,transparent 1.5px),
+    linear-gradient(90deg,rgba(94,162,255,.16) 1.5px,transparent 1.5px);
+  background-size:46px 46px;
+  transform:perspective(380px) rotateX(63deg);
+  -webkit-mask-image:linear-gradient(transparent 0%,#000 55%);
+  mask-image:linear-gradient(transparent 0%,#000 55%);
+  animation:grid-flow 3.6s linear infinite;
+}
+@keyframes grid-flow{to{background-position-y:46px}}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100svh;overflow:hidden;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:calc(var(--nav-h) + 20px) clamp(16px,4vw,60px) 60px;
+}
+.hero .halo{
+  position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);pointer-events:none;
+  width:min(900px,120vw);height:min(560px,72vw);border-radius:50%;
+  background:radial-gradient(ellipse,rgba(94,162,255,.13),transparent 62%);
+  filter:blur(8px);
+}
+.hero .p-kicker{
+  position:relative;z-index:3;
+  font-size:clamp(11px,1.4vw,15px);letter-spacing:.4em;text-transform:uppercase;color:var(--acc);
+  display:flex;align-items:center;gap:16px;justify-content:center;
+}
+.hero .p-kicker::before,.hero .p-kicker::after{content:"▮";font-size:.7em;opacity:.8}
+.hero h1{
+  position:relative;z-index:3;
+  font-family:var(--font-display);text-transform:uppercase;line-height:.92;
+  font-size:clamp(56px,11vw,170px);letter-spacing:.015em;margin:10px 0 6px;
+  background:linear-gradient(180deg,#ffffff 0%,#cfe4ff 55%,#7fb8ff 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 34px rgba(94,162,255,.35));
+}
+.hero .p-sub{
+  position:relative;z-index:3;
+  font-style:italic;font-size:clamp(16px,2.2vw,24px);color:var(--muted);
+  margin-bottom:clamp(26px,5vh,44px);
+}
+
+/* ---------- holographic viewer ---------- */
+.holo{position:relative;z-index:3;width:min(760px,94vw)}
+.holo-panel{
+  position:relative;border-radius:18px;padding:clamp(10px,1.4vw,16px);
+  background:var(--glass);backdrop-filter:blur(18px);
+  border:1px solid var(--line);
+  box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 60px rgba(94,162,255,.08),inset 0 0 40px rgba(94,162,255,.04);
+}
+/* corner brackets */
+.brk{position:absolute;width:22px;height:22px;border:2px solid var(--acc);opacity:.9;z-index:5;pointer-events:none}
+.brk.tl{left:-7px;top:-7px;border-right:0;border-bottom:0;border-radius:4px 0 0 0}
+.brk.tr{right:-7px;top:-7px;border-left:0;border-bottom:0;border-radius:0 4px 0 0}
+.brk.bl{left:-7px;bottom:-7px;border-right:0;border-top:0;border-radius:0 0 0 4px}
+.brk.br{right:-7px;bottom:-7px;border-left:0;border-top:0;border-radius:0 0 4px 0}
+.holo-screen{
+  position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;
+  background:#04060b;
+  box-shadow:inset 0 0 60px rgba(0,0,0,.7);
+}
+.holo-screen img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .25s ease;
+  filter:saturate(1.06) contrast(1.08) brightness(1.02) hue-rotate(-6deg);
+}
+.holo-screen img.on{opacity:1}
+/* holo scanlines + flicker */
+.holo-screen::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(127,212,255,.045) 0 1px,transparent 1px 3px);
+}
+.holo-screen .sweep{
+  position:absolute;left:0;right:0;top:-22%;height:22%;z-index:4;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(127,212,255,.16),transparent);
+  opacity:0;
+}
+.holo-screen.switching .sweep{opacity:1;animation:sweep-down .55s ease-out forwards}
+@keyframes sweep-down{to{transform:translateY(560%)}}
+.holo-screen.flicker{animation:holo-flicker .18s steps(2) 2}
+@keyframes holo-flicker{50%{opacity:.82;filter:brightness(1.4)}}
+/* data readout strip */
+.holo-data{
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:clamp(8px,1.2vw,12px) 4px 0;
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+}
+.holo-data .hd-idx{color:var(--acc-2);text-shadow:0 0 12px rgba(127,212,255,.5)}
+.holo-data .hd-live{display:flex;align-items:center;gap:8px;color:var(--acc)}
+.holo-data .hd-live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--acc);
+  box-shadow:0 0 10px var(--acc);animation:hint-pulse 2s ease-in-out infinite}
+@keyframes hint-pulse{50%{opacity:.4}}
+/* controls */
+.holo-ctrl{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:clamp(8px,1.2vw,12px)}
+.holo-ctrl .hc-btn{
+  display:flex;align-items:center;gap:10px;
+  font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);
+  border:1px solid var(--line);border-radius:10px;padding:10px 20px;background:rgba(127,180,255,.06);
+  transition:border-color .3s,color .3s,background .3s,transform .15s;
+}
+.holo-ctrl .hc-btn:hover{border-color:var(--acc);color:var(--acc-2);background:rgba(94,162,255,.12)}
+.holo-ctrl .hc-btn:active{transform:translateY(2px)}
+.holo-ctrl .hc-dots{display:flex;gap:8px}
+.holo-ctrl .hc-dots i{width:8px;height:8px;border-radius:50%;background:rgba(127,180,255,.25);transition:all .35s}
+.holo-ctrl .hc-dots i.on{background:var(--acc);box-shadow:0 0 12px var(--acc);transform:scale(1.25)}
+/* pedestal glow */
+.holo-pedestal{
+  position:relative;width:min(340px,60vw);height:34px;margin:-10px auto 0;
+  border-radius:50%;background:radial-gradient(ellipse,rgba(94,162,255,.28),transparent 70%);
+  filter:blur(6px);
+}
+.holo-pedestal::after{
+  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(300px,54vw);height:2px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,rgba(127,212,255,.6),transparent);
+  box-shadow:0 0 18px rgba(127,212,255,.5);
+}
+
+/* ---------- intro ---------- */
+.intro{padding:clamp(70px,10vw,130px) 0;position:relative;overflow:hidden}
+.intro .i-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(24px,4vw,70px);position:relative;z-index:2}
+.intro .i-num{
+  font-family:var(--font-display);font-size:clamp(70px,9vw,150px);line-height:1;color:transparent;
+  -webkit-text-stroke:2px rgba(127,180,255,.4);text-transform:uppercase;
+}
+.intro h2{
+  font-family:var(--font-display);text-transform:uppercase;font-size:clamp(30px,4.4vw,62px);line-height:1.02;
+  margin-bottom:22px;
+}
+.intro h2 em{font-style:normal;color:var(--acc)}
+.intro p{font-size:clamp(15px,1.6vw,18px);line-height:1.9;color:#a9b6c9;max-width:640px}
+.intro p+p{margin-top:16px}
+.intro .terminal{
+  margin-top:28px;font-size:13px;letter-spacing:.14em;line-height:2.1;color:var(--acc-2);
+  border-left:2px solid var(--acc);padding:12px 20px;background:rgba(94,162,255,.05);border-radius:0 10px 10px 0;
+}
+.intro .terminal .cur{display:inline-block;width:.6em;height:1em;background:var(--acc-2);vertical-align:-.15em;animation:cur-blink 1s steps(1) infinite}
+@keyframes cur-blink{50%{opacity:0}}
+@media (max-width:820px){.intro .i-grid{grid-template-columns:1fr}}
+
+/* ---------- studies ---------- */
+.collages{padding:0 0 clamp(70px,9vw,120px)}
+.collages .c-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,56px);align-items:center;margin-bottom:clamp(60px,8vw,110px)}
+.collages .c-row.rev .c-visual{order:2}
+.collages .c-row.rev .c-txt{order:1}
+.c-visual{position:relative;cursor:zoom-in}
+.c-visual .glass{
+  position:relative;border-radius:14px;padding:clamp(8px,1vw,12px);
+  background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--line);
+  box-shadow:0 24px 70px rgba(0,0,0,.55),inset 0 0 30px rgba(94,162,255,.05);
+  transition:transform .7s var(--ease-out),border-color .4s,box-shadow .7s;
+  overflow:hidden;
+}
+.c-visual:hover .glass{transform:translateY(-8px);border-color:rgba(94,162,255,.5);
+  box-shadow:0 34px 90px rgba(0,0,0,.65),0 0 50px rgba(94,162,255,.12),inset 0 0 30px rgba(94,162,255,.07)}
+.c-visual .glass img{width:100%;display:block;border-radius:6px;transition:transform .9s var(--ease-out)}
+.c-visual:hover .glass img{transform:scale(1.03)}
+.c-visual .glass .scan{
+  position:absolute;left:0;right:0;top:-30%;height:30%;pointer-events:none;opacity:0;
+  background:linear-gradient(180deg,transparent,rgba(127,212,255,.2),transparent);
+}
+.c-visual:hover .glass .scan{opacity:1;animation:sweep-down 1.6s linear infinite}
+.c-visual .data-tag{
+  position:absolute;top:-13px;right:-8px;z-index:3;
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--acc-2);
+  background:rgba(12,20,34,.9);border:1px solid var(--line);border-radius:6px;
+  padding:6px 14px;box-shadow:0 8px 24px rgba(0,0,0,.5);
+}
+.c-txt .mono-label{color:var(--acc)}
+.c-txt h3{
+  font-family:var(--font-display);text-transform:uppercase;font-size:clamp(28px,3.6vw,52px);
+  margin:14px 0 16px;
+}
+.c-txt p{color:#a9b6c9;line-height:1.85;font-size:15px}
+@media (max-width:820px){
+  .collages .c-row{grid-template-columns:1fr}
+  .collages .c-row.rev .c-visual{order:1}.collages .c-row.rev .c-txt{order:2}
+}
+
+/* ---------- posters ---------- */
+.posters{
+  padding:clamp(70px,9vw,120px) 0;text-align:center;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,transparent,rgba(94,162,255,.05) 40%,transparent);
+}
+.posters .ps-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,70px);align-items:start;margin-top:clamp(40px,6vw,70px)}
+.ps-item{position:relative;cursor:zoom-in}
+.ps-item .glass{
+  position:relative;border-radius:12px;padding:clamp(8px,1vw,12px);overflow:hidden;
+  background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--line);
+  box-shadow:0 30px 90px rgba(0,0,0,.6);
+  transition:transform .6s var(--ease-out),border-color .4s,box-shadow .6s;
+}
+.ps-item:hover .glass{transform:translateY(-10px);border-color:rgba(94,162,255,.5);box-shadow:0 40px 110px rgba(0,0,0,.7),0 0 60px rgba(94,162,255,.14)}
+.ps-item .glass img{width:100%;display:block;border-radius:6px;transition:transform .8s var(--ease-out)}
+.ps-item:hover .glass img{transform:scale(1.04)}
+.ps-item .glass .scan{
+  position:absolute;left:0;right:0;top:-30%;height:30%;pointer-events:none;opacity:0;
+  background:linear-gradient(180deg,transparent,rgba(127,212,255,.22),transparent);
+}
+.ps-item:hover .glass .scan{opacity:1;animation:sweep-down 1.8s linear infinite}
+.ps-cap{
+  margin-top:16px;font-size:12px;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--muted);
+}
+.ps-cap b{color:var(--acc-2)}
+
+.next-project{border-color:var(--line)}
+@media (max-width:820px){.posters .ps-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<canvas id="particles" aria-hidden="true"></canvas>
+<div class="pg-grid" aria-hidden="true"></div>
+
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><img src="assets/img/stamp.png" alt=""></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-nav" id="siteNav">
+  <div class="nav-left">
+    <a class="nav-back" href="index.html" aria-label="Back to home">←</a>
+    <a class="nav-brand" href="index.html">
+      <img class="brand-stamp" src="assets/img/stamp.png" alt="Haiyi Yu stamp">
+      <span data-en="&lt;b&gt;Haiyi Yu&lt;/b&gt; — Folio" data-zh="&lt;b&gt;于海怡&lt;/b&gt; — 作品集"><b>Haiyi Yu</b> — Folio</span>
+    </a>
+  </div>
+  <span class="nav-proj">04 — Perception</span>  <div class="nav-right">
+
+  <button class="nav-lang" id="langBtn" aria-label="Switch language / 切换语言">中</button>
+  <button class="nav-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
+    <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="btn-label">Menu</span>
+  </button>
+  </div>
+</header>
+
+<nav class="menu-overlay" id="site-menu" aria-label="Site menu">
+  <div class="menu-list">
+    <a class="menu-item" href="index.html" data-en="&lt;span class=&quot;m-num&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.08s&quot;&gt;Home&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Start&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.08s&quot;&gt;主页&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;开始&lt;/span&gt;"><span class="m-num">00</span><span class="m-title" style="transition-delay:.08s">Home</span><span class="m-tag">Start</span></a>
+    <a class="menu-item" href="intersection.html" data-en="&lt;span class=&quot;m-num&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.12s&quot;&gt;Intersection&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.12s&quot;&gt;Intersection&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">01</span><span class="m-title" style="transition-delay:.12s">Intersection</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="interlude.html" data-en="&lt;span class=&quot;m-num&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.16s&quot;&gt;Interlude&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.16s&quot;&gt;Interlude&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">02</span><span class="m-title" style="transition-delay:.16s">Interlude</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="endless-life.html" data-en="&lt;span class=&quot;m-num&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.20s&quot;&gt;Endless Life&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Adaptive Reuse&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.20s&quot;&gt;Endless Life&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;改造再利用&lt;/span&gt;"><span class="m-num">03</span><span class="m-title" style="transition-delay:.20s">Endless Life</span><span class="m-tag">Adaptive Reuse</span></a>
+    <a class="menu-item" href="perception.html" data-en="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.24s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Graphic&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.24s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;平面&lt;/span&gt;"><span class="m-num">04</span><span class="m-title" style="transition-delay:.24s">Perception</span><span class="m-tag">Graphic</span></a>
+    <a class="menu-item" href="formation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.28s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;3D · Fabrication&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.28s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;3D · 制造&lt;/span&gt;"><span class="m-num">05</span><span class="m-title" style="transition-delay:.28s" data-en="Formation" data-zh="Formation">Formation</span><span class="m-tag">3D · Fabrication</span></a>
+    <a class="menu-item" href="speculation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.32s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Future Library&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.32s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;未来图书馆&lt;/span&gt;"><span class="m-num">06</span><span class="m-title" style="transition-delay:.32s">Speculation</span><span class="m-tag">Future Library</span></a>
+    <a class="menu-item" href="other-works.html" data-en="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;&gt;Other Works&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Point Cloud · Music&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;&gt;其他作品&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;点云 · 音乐&lt;/span&gt;"><span class="m-num">07</span><span class="m-title" style="transition-delay:.36s">Other Works</span><span class="m-tag">Point Cloud · Music</span></a>
+    <a class="menu-item" href="about.html" data-en="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.40s&quot;&gt;About&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Contact&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.40s&quot;&gt;关于&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;联系&lt;/span&gt;"><span class="m-num">08</span><span class="m-title" style="transition-delay:.40s">About</span><span class="m-tag">Contact</span></a>
+  </div>
+  <div class="menu-foot">
+    <span>Melbourne / Beijing</span>
+    <span>hieee0103@outlook.com</span>
+    <span>@yu.interior_</span>
+  </div>
+</nav>
+
+<main aria-label="Perception project">
+
+<!-- ============ HERO — holographic viewer ============ -->
+<section class="hero" aria-label="Perception hero">
+  <div class="halo" aria-hidden="true"></div>
+
+  <p class="p-kicker" data-en="Project 04 — Graphic Collage &amp;amp; Poster" data-zh="项目 04 — 平面拼贴与海报">Project 04 — Graphic Collage &amp; Poster</p>
+  <h1>Perception</h1>
+  <p class="p-sub" data-en="Between the evolving city landscapes" data-zh="在不断演变的城市景观之间">Between the evolving city landscapes</p>
+
+  <div class="holo">
+    <div class="holo-panel">
+      <span class="brk tl" aria-hidden="true"></span><span class="brk tr" aria-hidden="true"></span>
+      <span class="brk bl" aria-hidden="true"></span><span class="brk br" aria-hidden="true"></span>
+
+      <div class="holo-screen" id="holoScreen" aria-label="Holographic display of collage works">
+        <img src="assets/img/perc-collage-1.jpg" alt="Collage My Sight — fire altar memorial collage">
+        <img src="assets/img/perc-collage-2.jpg" alt="Collage My Previous Design — flipped residence collage">
+        <img src="assets/img/perc-city-1.jpg" alt="Future Melbourne collage one">
+        <img src="assets/img/perc-city-2.jpg" alt="Future Melbourne collage two">
+        <img src="assets/img/perc-line.jpg" alt="Abstracted floor plan line drawing">
+        <img src="assets/img/perc-poster-1.jpg" alt="Final poster one — reconstructed Melbourne">
+        <img src="assets/img/perc-poster-2.jpg" alt="Final poster two — reconstructed Melbourne">
+        <div class="sweep" aria-hidden="true"></div>
+      </div>
+
+      <div class="holo-data">
+        <span class="hd-idx" id="hdIdx">SCAN 01 / 07</span>
+        <span class="hd-live" id="hdFrame">RENDERING · FRAME 0001</span>
+        <span id="hdMeta">MEL-MAP · FUTURE CITY</span>
+      </div>
+
+      <div class="holo-ctrl">
+        <button class="hc-btn" id="hcPrev" aria-label="Previous image" data-en="◀ Prev" data-zh="◀ 上一张">◀ Prev</button>
+        <div class="hc-dots" id="hcDots" aria-hidden="true"></div>
+        <button class="hc-btn" id="hcNext" aria-label="Next image" data-en="Next ▶" data-zh="下一张 ▶">Next ▶</button>
+      </div>
+    </div>
+    <div class="holo-pedestal" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ============ INTRO ============ -->
+<section class="intro" aria-label="Project introduction">
+  <div class="container">
+    <div class="i-grid">
+      <div class="i-num reveal" aria-hidden="true">01</div>
+      <div>
+        <h2 class="reveal" data-en="A city that &lt;em&gt;dreams&lt;/em&gt; itself" data-zh="一座&lt;em&gt;梦见&lt;/em&gt;自己的城市">A city that <em>dreams</em> itself</h2>
+        <p class="reveal" data-en="Based on a line drawing derived from an abstracted floor plan, I re-collaged imagined urban elements and possible city structures — incorporating digital symbols, cloud data, ruins, and skyscrapers. Drawing inspiration from the style of the film &lt;em&gt;Blade Runner 1982&lt;/em&gt;, I created my own vision of Melbourne as a future city." data-zh="基于一幅由平面图抽象而来的线稿，我重新拼贴了想象中的城市元素与可能的城市结构——融入数字符号、云数据、废墟与摩天大楼。受电影&lt;em&gt;《银翼杀手 1982》&lt;/em&gt;风格的启发，我创造了自己对墨尔本未来城市的想象。">Based on a line drawing derived from an abstracted floor plan, I re-collaged imagined urban elements and possible city structures — incorporating digital symbols, cloud data, ruins, and skyscrapers. Drawing inspiration from the style of the film <em>Blade Runner 1982</em>, I created my own vision of Melbourne as a future city.</p>
+        <p class="reveal" data-en="The collages above are the result of my observations on how space transforms from a fixed form into personal perception. These works inspired me to explore how the city evolves into a fluid, evolving city landscape. The final outcome consists of two posters that reconstruct the worldview of Melbourne, inviting people into a future urban space reimagined by me." data-zh="这些拼贴是我观察&quot;空间如何从固定形式转化为个人感知&quot;的结果。它们启发我探索城市如何演变为流动的、不断生长的城市景观。最终成果是两张海报，重建了墨尔本的世界观，邀请人们进入我重新想象的未来城市空间。">The collages above are the result of my observations on how space transforms from a fixed form into personal perception. These works inspired me to explore how the city evolves into a fluid, evolving city landscape. The final outcome consists of two posters that reconstruct the worldview of Melbourne, inviting people into a future urban space reimagined by me.</p>
+        <div class="terminal reveal" aria-hidden="true">
+          &gt; scanning city fragments ...<br>
+          &gt; memory layers: digital symbols / cloud data / ruins / skyscrapers<br>
+          &gt; rendering a dream of melbourne<span class="cur"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STUDIES ============ -->
+<section class="collages" aria-label="Collage studies">
+  <div class="container">
+
+    <div class="c-row reveal">
+      <div class="c-visual">
+        <span class="data-tag">DATA-01 · SIGHT</span>
+        <div class="glass">
+          <img src="assets/img/perc-collage-1.jpg" alt="Collage My Sight" loading="lazy">
+          <div class="scan" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="c-txt">
+        <p class="mono-label" data-en="Study 01 — Sight" data-zh="研究 01 — 视界">Study 01 — Sight</p>
+        <h3 data-en="My Sight" data-zh="我的视界">My Sight</h3>
+        <p data-en="A fire altar marks the pioneers' sacrifice — fire as life, fire as memory. Through the gate, soldiers shift from black to white, from body to spirit, guided toward the roof's light. At the end, a flag and cross-shaped triangle hold both peace and conflict in one frame." data-zh="一座火祭坛铭记先驱的牺牲——火即生命，火即记忆。穿过大门，士兵由黑转白，从肉体化为灵魂，被引向屋顶的光。画面尽头，旗帜与十字三角将和平与冲突定格在同一帧中。">A fire altar marks the pioneers' sacrifice — fire as life, fire as memory. Through the gate, soldiers shift from black to white, from body to spirit, guided toward the roof's light. At the end, a flag and cross-shaped triangle hold both peace and conflict in one frame.</p>
+      </div>
+    </div>
+
+    <div class="c-row rev reveal">
+      <div class="c-visual">
+        <span class="data-tag">DATA-02 · INVERSION</span>
+        <div class="glass">
+          <img src="assets/img/perc-collage-2.jpg" alt="Collage My Previous Design" loading="lazy">
+          <div class="scan" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="c-txt">
+        <p class="mono-label" data-en="Study 02 — Inversion" data-zh="研究 02 — 倒置">Study 02 — Inversion</p>
+        <h3 data-en="My Previous Design" data-zh="我的过往设计">My Previous Design</h3>
+        <p data-en="A residence born from three originals — Modernist at heart, yet flipped in form. Walls become entrances, thresholds become spaces. Logic inverted, but the feeling remains familiar." data-zh="一座源于三份原作的住宅——内核是现代主义，形式却被翻转。墙成为入口，门槛成为空间。逻辑倒置，感觉却依旧熟悉。">A residence born from three originals — Modernist at heart, yet flipped in form. Walls become entrances, thresholds become spaces. Logic inverted, but the feeling remains familiar.</p>
+      </div>
+    </div>
+
+    <div class="c-row reveal">
+      <div class="c-visual">
+        <span class="data-tag">DATA-03 · SOURCE</span>
+        <div class="glass">
+          <img src="assets/img/perc-line.jpg" alt="Abstracted floor plan line drawing" loading="lazy">
+          <div class="scan" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="c-txt">
+        <p class="mono-label" data-en="Study 03 — Source" data-zh="研究 03 — 源头">Study 03 — Source</p>
+        <h3 data-en="The Line Drawing" data-zh="线稿">The Line Drawing</h3>
+        <p data-en="Everything begins with one abstracted floor plan — a line drawing stripped from its architectural duty and re-read as a map of possible futures. From this single line, the city grows: digital symbols, cloud data, ruins, skyscrapers." data-zh="一切始于一幅抽象的平面图——一张脱离建筑职能的线稿，被重新解读为未来可能性的地图。从这一条线开始，城市生长：数字符号、云数据、废墟、摩天大楼。">Everything begins with one abstracted floor plan — a line drawing stripped from its architectural duty and re-read as a map of possible futures. From this single line, the city grows: digital symbols, cloud data, ruins, skyscrapers.</p>
+      </div>
+    </div>
+
+    <div class="c-row rev reveal">
+      <div class="c-visual">
+        <span class="data-tag">DATA-04 · LANDSCAPE</span>
+        <div class="glass">
+          <img src="assets/img/perc-city-1.jpg" alt="Future Melbourne city collage" loading="lazy">
+          <div class="scan" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="c-txt">
+        <p class="mono-label" data-en="Study 04 — Landscape" data-zh="研究 04 — 景观">Study 04 — Landscape</p>
+        <h3 data-en="Evolving City Landscapes" data-zh="不断演变的城市景观">Evolving City Landscapes</h3>
+        <p data-en="The two collages are the results of observing how space transforms from a fixed form into personal perception — the city becomes a fluid, evolving landscape, reimagined through my own worldview." data-zh="这两幅拼贴是观察&quot;空间如何从固定形式转化为个人感知&quot;的成果——城市成为流动的、不断演变的景观，经由我的世界观重新想象。">The two collages are the results of observing how space transforms from a fixed form into personal perception — the city becomes a fluid, evolving landscape, reimagined through my own worldview.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ POSTERS ============ -->
+<section class="posters" aria-label="Final posters">
+  <div class="container">
+    <div class="sec-head reveal">
+      <h2 class="sh-title" style="color:var(--ink)" data-en="The Posters" data-zh="海报">The Posters</h2>
+      <p class="sh-note" style="color:var(--acc-2)" data-en="final outcome —&lt;br&gt;two worldviews&lt;br&gt;of Melbourne" data-zh="最终成果——&lt;br&gt;墨尔本的&lt;br&gt;两种世界观">final outcome —<br>two worldviews<br>of Melbourne</p>
+    </div>
+    <div class="ps-grid">
+      <div class="ps-item reveal" data-cursor="stamp">
+        <div class="glass">
+          <img src="assets/img/perc-poster-1.jpg" alt="Poster one — future Melbourne worldview" loading="lazy">
+          <div class="scan" aria-hidden="true"></div>
+        </div>
+        <p class="ps-cap" data-en="&lt;b&gt;POSTER 01&lt;/b&gt; — WORLDVIEW A" data-zh="&lt;b&gt;海报 01&lt;/b&gt; — 世界观 A"><b>POSTER 01</b> — WORLDVIEW A</p>
+      </div>
+      <div class="ps-item reveal reveal-d1" data-cursor="stamp">
+        <div class="glass">
+          <img src="assets/img/perc-poster-2.jpg" alt="Poster two — future Melbourne worldview" loading="lazy">
+          <div class="scan" aria-hidden="true"></div>
+        </div>
+        <p class="ps-cap" data-en="&lt;b&gt;POSTER 02&lt;/b&gt; — WORLDVIEW B" data-zh="&lt;b&gt;海报 02&lt;/b&gt; — 世界观 B"><b>POSTER 02</b> — WORLDVIEW B</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEXT ============ -->
+<a class="next-project" href="formation.html" aria-label="Next project: Formation">
+  <span class="np-label" data-en="Next project — 05" data-zh="下一个项目 — 05">Next project — 05</span>
+  <span class="np-title">Formation</span>
+  <span class="np-arrow">↗</span>
+</a>
+
+</main>
+
+<footer class="site-foot">
+  <div class="foot-stamp-row">
+    <img class="foot-stamp" src="assets/img/stamp.png" alt="Haiyi Yu stamp mark">
+    <p class="foot-mantra">stay curious. stay focused.<br>stay professional. <em>still in progress.</em></p>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Haiyi Yu — Design Works 2023–2025</span>
+    <span>Melbourne / Beijing</span>
+    <span>RMIT Interior Design</span>
+  </div>
+</footer>
+
+<script>
+/* ============ shared: nav / cursor / reveal ============ */
+const body=document.body, menuBtn=document.querySelector('.nav-menu-btn'), menuLabel=menuBtn.querySelector('.btn-label');
+function setMenu(open){
+  body.classList.toggle('menu-open',open);
+  menuBtn.setAttribute('aria-expanded',open);
+  menuLabel.textContent=open?'Close':'Menu';
+}
+menuBtn.addEventListener('click',()=>setMenu(!body.classList.contains('menu-open')));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&body.classList.contains('menu-open')){setMenu(false);menuBtn.focus();} });
+addEventListener('scroll',()=>{ document.getElementById('siteNav').classList.toggle('scrolled',scrollY>60); },{passive:true});
+
+const dot=document.querySelector('.cursor-dot'), ring=document.querySelector('.cursor-ring');
+if(matchMedia('(pointer:fine)').matches){
+  let cx=innerWidth/2, cy=innerHeight/2, rx=cx, ry=cy;
+  addEventListener('pointermove',e=>{ cx=e.clientX; cy=e.clientY;
+    dot.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+    const t=e.target.closest('a,button,[data-cursor]');
+    body.classList.toggle('cursor-link',!!t);
+    body.classList.toggle('cursor-stamp',!!e.target.closest('[data-cursor="stamp"]'));
+  });
+  (function ringLoop(){
+    rx+=(cx-rx)*.22; ry+=(cy-ry)*.22;
+    ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+    requestAnimationFrame(ringLoop);
+  })();
+}
+
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ============ holo viewer ============ */
+(()=>{
+  const screen=document.getElementById('holoScreen');
+  const imgs=[...screen.querySelectorAll('img')];
+  const idxEl=document.getElementById('hdIdx');
+  const metaEl=document.getElementById('hdMeta');
+  const dotsBox=document.getElementById('hcDots');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const metasEn=[
+    'COLLAGE MY SIGHT', 'MY PREVIOUS DESIGN', 'CITY SCAN — A', 'CITY SCAN — B',
+    'THE LINE — SOURCE', 'POSTER 01 — WORLDVIEW A', 'POSTER 02 — WORLDVIEW B',
+  ];
+  const metasZh=[
+    '拼贴 — 我的视界', '拼贴 — 我的过往设计', '城市扫描 — A', '城市扫描 — B',
+    '线稿 — 源头', '海报 01 — 世界观 A', '海报 02 — 世界观 B',
+  ];
+  const metas=()=>window.i18nLang==='zh'?metasZh:metasEn;
+  let ch=0, switching=false, autoTimer;
+  imgs.forEach(()=>{
+    const d=document.createElement('i'); dotsBox.appendChild(d);
+  });
+  const dots=[...dotsBox.children];
+  dots[0].classList.add('on');
+
+  function switchTo(n, manual){
+    if(switching) return; switching=true;
+    screen.classList.add('switching','flicker');
+    const sweep=screen.querySelector('.sweep');
+    sweep.style.transform='translateY(0)';
+    setTimeout(()=>{
+      imgs.forEach((im,i)=>im.classList.toggle('on',i===n));
+      idxEl.textContent='SCAN '+String(n+1).padStart(2,'0')+' / 07';
+      metaEl.textContent=(window.i18nLang==='zh'?'墨尔本地图 · ':'MEL-MAP · ')+metas()[n];
+      dots.forEach((d,i)=>d.classList.toggle('on',i===n));
+      screen.classList.remove('switching','flicker');
+      switching=false;
+    },320);
+    if(manual) restartAuto();
+  }
+  function next(){ ch=(ch+1)%imgs.length; switchTo(ch,true); }
+  function prev(){ ch=(ch-1+imgs.length)%imgs.length; switchTo(ch,true); }
+  function restartAuto(){
+    clearTimeout(autoTimer);
+    autoTimer=setTimeout(()=>{ ch=(ch+1)%imgs.length; switchTo(ch,false); restartAuto(); },5200);
+  }
+  document.getElementById('hcNext').addEventListener('click',next);
+  document.getElementById('hcPrev').addEventListener('click',prev);
+  document.addEventListener('keydown',e=>{
+    if(e.target.closest('input,textarea')) return;
+    if(e.key==='ArrowRight') next();
+    if(e.key==='ArrowLeft') prev();
+  });
+  imgs[0].classList.add('on');
+  idxEl.textContent='SCAN 01 / 07';
+  if(!reduced) restartAuto();
+
+  /* ticking frame counter */
+  let frame=0;
+  setInterval(()=>{
+    frame=(frame+1)%9999;
+    document.getElementById('hdFrame').textContent='RENDERING · FRAME '+String(frame).padStart(4,'0');
+  },120);
+})();
+
+/* ============ data particles ============ */
+(()=>{
+  const cv=document.getElementById('particles'), ctx=cv.getContext('2d');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){
+    const dpr=Math.min(devicePixelRatio||1,1.5);
+    cv.width=innerWidth*dpr; cv.height=innerHeight*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  size(); addEventListener('resize',size);
+  const N=110, pts=[];
+  for(let i=0;i<N;i++) pts.push({
+    x:Math.random()*innerWidth, y:Math.random()*innerHeight,
+    vy:.12+Math.random()*.35, s:.6+Math.random()*1.6,
+    ph:Math.random()*Math.PI*2,
+  });
+  function draw(t){
+    ctx.clearRect(0,0,innerWidth,innerHeight);
+    for(const p of pts){
+      p.y-=p.vy;
+      if(p.y<-8){ p.y=innerHeight+8; p.x=Math.random()*innerWidth; }
+      const a=.25+.35*Math.abs(Math.sin(t*.001+p.ph));
+      ctx.beginPath();
+      ctx.fillStyle=`rgba(127,180,255,${a.toFixed(3)})`;
+      ctx.arc(p.x,p.y,p.s,0,Math.PI*2); ctx.fill();
+    }
+    if(!reduced) requestAnimationFrame(draw);
+  }
+  if(reduced){ draw(0); } else requestAnimationFrame(draw);
+})();
+
+/* ============ lightbox (studies + posters) ============ */
+(()=>{
+  const lb=document.createElement('div');
+  lb.className='lightbox'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-label','Image viewer');
+  lb.innerHTML='<div class="lb-frame"><img alt=""><div class="lb-cap"><span class="lb-txt"></span><span class="lb-idx"></span></div></div>'
+    +'<button class="lb-close" aria-label="Close">✕</button>'
+    +'<button class="lb-prev lb-nav" aria-label="Previous image">‹</button>'
+    +'<button class="lb-next lb-nav" aria-label="Next image">›</button>';
+  document.body.appendChild(lb);
+  let items=[], idx=0;
+  const show=(i)=>{ idx=(i+items.length)%items.length;
+    lb.querySelector('img').src=items[idx].src;
+    lb.querySelector('img').alt=items[idx].alt||'';
+    lb.querySelector('.lb-txt').textContent=items[idx].closest('.c-visual')?.querySelector('.data-tag')?.textContent
+      || items[idx].closest('.ps-item')?.querySelector('.ps-cap')?.textContent || '';
+    lb.querySelector('.lb-idx').textContent=(idx+1)+' / '+items.length; };
+  const open=()=>{ lb.classList.add('open'); document.body.style.overflow='hidden'; };
+  const close=()=>{ lb.classList.remove('open'); document.body.style.overflow=''; };
+  lb.querySelector('.lb-close').addEventListener('click',close);
+  lb.querySelector('.lb-prev').addEventListener('click',()=>show(idx-1));
+  lb.querySelector('.lb-next').addEventListener('click',()=>show(idx+1));
+  lb.addEventListener('click',e=>{ if(e.target===lb) close(); });
+  document.addEventListener('keydown',e=>{ if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') close();
+    if(e.key==='ArrowLeft') show(idx-1);
+    if(e.key==='ArrowRight') show(idx+1); });
+  items=[...document.querySelectorAll('.c-visual .glass img, .ps-item .glass img')];
+  items.forEach((im,i)=>{
+    im.closest('.c-visual, .ps-item').addEventListener('click',()=>{ show(i); open(); });
+  });
+})();
+</script>
+<script src="assets/js/i18n.js?v=2"></script>
+</body>
+</html>

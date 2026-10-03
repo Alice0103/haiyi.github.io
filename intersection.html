@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>INTERSECTION — Izakaya &amp; Bar · Haiyi Yu</title>
+<meta name="description" content="Intersection — across cultures and spaces, between day and night. An izakaya-inspired cafe by day, a neon futuristic bar by night.">
+<meta name="theme-color" content="#f6efe4">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css?v=6">
+<style>
+/* ============ INTERSECTION — between day & night (background only) ============ */
+:root{
+  --bg:#f6efe4; --ink:#2b2140; --muted:#8d84a0;
+  --line:rgba(43,33,64,.16); --accent:#d9773f; --soft:rgba(255,255,255,.55);
+  --sky-a:#fdf6ec; --sky-b:#ffe9d6;
+}
+body{background:var(--bg);color:var(--ink);transition:background .8s ease,color .8s ease}
+.menu-overlay{background:var(--bg);color:var(--ink)}
+.menu-overlay .menu-item{border-color:var(--line)}
+.site-nav .nav-brand .brand-stamp{filter:invert(1)}
+.site-nav .nav-menu-btn{border-color:var(--line)}
+.site-nav.scrolled{background:var(--soft);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.site-nav .nav-proj{color:var(--muted)}
+
+/* stars (fade in at night) */
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0;transition:opacity 1.4s ease}
+.stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;
+  animation:twinkle 3s ease-in-out infinite alternate}
+@keyframes twinkle{to{opacity:.25}}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding:calc(var(--nav-h) + 30px) clamp(16px,5vw,70px) 40px;overflow:hidden;
+  background:linear-gradient(180deg,var(--sky-a),var(--sky-b));
+  transition:background 1.2s ease;
+}
+.hero .sun-moon{
+  position:absolute;right:clamp(5%,8vw,12%);top:calc(var(--nav-h) + 40px);
+  width:clamp(110px,15vw,200px);height:clamp(110px,15vw,200px);border-radius:50%;
+  background:radial-gradient(circle at 50% 45%,#fff7dd 0%,#ffd98e 45%,#f0a35e 100%);
+  box-shadow:0 0 80px rgba(255,190,110,.6),inset 0 0 26px rgba(255,240,200,.9);
+  transition:filter 1.4s ease,box-shadow 1.4s ease;
+}
+.hero.knight .sun-moon{
+  filter:hue-rotate(180deg) saturate(1.5) brightness(1.08);
+  box-shadow:0 0 90px rgba(190,150,255,.5),inset 0 0 26px rgba(210,230,255,.7);
+}
+.hero .cloud{background:radial-gradient(circle,rgba(255,255,255,.65),rgba(255,255,255,0) 65%);transition:opacity 1.4s ease}
+.hero .cl1{left:-6%;top:16%;width:44vw;height:26vw}
+.hero .cl2{right:-8%;bottom:10%;width:46vw;height:28vw}
+.hero .p-kicker{
+  position:relative;z-index:2;
+  font-size:clamp(12px,1.6vw,17px);letter-spacing:.32em;text-transform:uppercase;
+  color:var(--accent);display:flex;align-items:center;gap:14px;transition:color .8s;
+}
+.hero .p-kicker::before{content:"▸▸"}
+.hero h1{
+  position:relative;z-index:2;
+  font-family:var(--font-display);text-transform:uppercase;font-size:clamp(60px,12.5vw,200px);line-height:.9;
+  letter-spacing:.01em;margin:8px 0 4px;
+}
+.hero h1 .half{
+  display:inline-block;
+  background:linear-gradient(90deg,var(--ink) 0 49.4%,transparent 49.6%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  -webkit-text-stroke:1.5px var(--ink);
+}
+.hero .p-sub{position:relative;z-index:2;font-style:italic;font-size:clamp(18px,2.6vw,30px);color:var(--muted);margin-bottom:clamp(28px,5vh,50px)}
+.hero .hero-img{
+  position:relative;z-index:2;width:min(980px,100%);margin-left:auto;margin-right:0;border-radius:20px;overflow:hidden;
+  box-shadow:0 30px 90px rgba(20,12,40,.35);
+}
+.hero .hero-img img{width:100%;display:block}
+.hero .hero-img::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 4px);
+}
+@media (max-width:900px){.hero .hero-img{width:100%}}
+
+/* ---------- time dial (fixed control) ---------- */
+.dial-wrap{
+  position:fixed;right:22px;bottom:22px;z-index:1200;display:flex;flex-direction:column;align-items:center;gap:8px;
+  user-select:none;-webkit-user-select:none;
+}
+.dial{
+  position:relative;width:118px;height:118px;border-radius:50%;
+  background:conic-gradient(from 230deg,var(--bg),var(--muted) 22%,var(--bg) 78%,var(--muted));
+  box-shadow:0 12px 40px rgba(20,12,40,.3),inset 0 0 0 6px var(--soft),inset 0 0 20px rgba(20,12,40,.25);
+  cursor:grab;touch-action:none;transition:box-shadow .8s;
+}
+.dial:active{cursor:grabbing}
+.dial .tick{position:absolute;left:50%;top:4px;width:2px;height:10px;background:var(--ink);transform:translateX(-50%);border-radius:2px}
+.dial .tick:nth-of-type(2){transform:translateX(-50%) rotate(90deg)}
+.dial .tick:nth-of-type(3){transform:translateX(-50%) rotate(180deg)}
+.dial .tick:nth-of-type(4){transform:translateX(-50%) rotate(270deg)}
+.dial .knob{position:absolute;inset:0;will-change:transform}
+.dial .knob::after{
+  content:"";position:absolute;left:50%;top:12px;width:6px;height:34px;border-radius:4px;
+  background:var(--accent);transform:translateX(-50%);box-shadow:0 0 12px var(--accent);
+}
+.dial .center{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;
+  background:var(--bg);box-shadow:inset 0 2px 8px rgba(20,12,40,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;letter-spacing:.08em;color:var(--ink);
+}
+.dial-label{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink)}
+.dial-snap{display:flex;gap:8px}
+.dial-snap button{
+  font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:5px 14px;border-radius:20px;
+  border:1px solid var(--line);color:var(--ink);background:var(--soft);backdrop-filter:blur(8px);
+  transition:background .3s,color .3s,border-color .3s;
+}
+.dial-snap button:hover{border-color:var(--accent);color:var(--accent)}
+@media (max-width:760px){.dial-wrap{right:12px;bottom:12px;transform:scale(.82);transform-origin:bottom right}}
+
+/* ---------- day-to-night slider section ---------- */
+.dtn{
+  padding:clamp(70px,10vw,130px) 0;border-top:1px solid var(--line);position:relative;z-index:1;
+  background:linear-gradient(180deg,var(--sky-a),var(--sky-b));transition:background 1.2s ease;
+}
+.dtn .d-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(24px,4vw,70px);align-items:center}
+.dtn h2{font-family:var(--font-display);text-transform:uppercase;font-size:clamp(30px,4.4vw,62px);line-height:1;margin-bottom:20px}
+.dtn h2 em{font-style:normal;color:var(--accent)}
+.dtn p{font-size:clamp(14px,1.5vw,16px);line-height:1.95;color:var(--muted);max-width:600px}
+.dtn-stage{
+  position:relative;width:min(400px,100%);aspect-ratio:1.03;justify-self:center;
+  background:transparent;
+}
+.dtn-stage img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+  opacity:0;transition:opacity .7s ease;
+}
+.dtn-stage img.on{opacity:1}
+.dtn-stage .dtn-tag{
+  position:absolute;left:calc(100% + 14px);top:10px;z-index:3;white-space:nowrap;
+  font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);
+  background:var(--soft);border:1px solid var(--line);padding:6px 16px;border-radius:22px;
+  backdrop-filter:blur(4px);
+}
+@media (max-width:900px){
+  .dtn-stage .dtn-tag{left:50%;top:calc(100% + 10px);transform:translateX(-50%)}
+}
+.time-rail{margin-top:30px}
+.time-rail .rail-labels{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.time-rail input[type=range]{
+  width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;outline:none;
+  background:linear-gradient(90deg,#ffe3b0,#f0a35e 40%,#6a4a9e 75%,#241b45);
+  cursor:pointer;
+}
+.time-rail input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:30px;height:30px;border-radius:50%;
+  background:radial-gradient(circle at 38% 32%,#fffdf4,#e9d9b0 60%,#b99c5e);
+  box-shadow:0 4px 14px rgba(20,12,40,.4),0 0 0 4px var(--soft);
+  cursor:grab;transition:transform .2s;
+}
+.time-rail input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.12)}
+.time-rail input[type=range]::-moz-range-thumb{
+  width:30px;height:30px;border-radius:50%;border:0;
+  background:radial-gradient(circle at 38% 32%,#fffdf4,#e9d9b0 60%,#b99c5e);
+  box-shadow:0 4px 14px rgba(20,12,40,.4),0 0 0 4px var(--soft);cursor:grab;
+}
+.dtn-play{
+  display:inline-flex;align-items:center;gap:10px;margin-top:18px;
+  font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);
+  border:1px solid var(--line);border-radius:30px;padding:9px 22px;background:var(--soft);
+  transition:border-color .3s,color .3s;
+}
+.dtn-play:hover{border-color:var(--accent);color:var(--accent)}
+.dtn-play::before{content:"▶";font-size:9px}
+.dtn-play.playing::before{content:"❚❚"}
+@media (max-width:900px){.dtn .d-grid{grid-template-columns:1fr}.dtn-stage{width:min(380px,86vw)}}
+
+/* ---------- sections ---------- */
+.sect{padding:clamp(70px,10vw,130px) 0;border-top:1px solid var(--line);position:relative;z-index:1}
+.sect .s-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(24px,4vw,70px)}
+.sect .s-num{font-family:var(--font-display);font-size:clamp(64px,8vw,130px);line-height:1;color:transparent;
+  -webkit-text-stroke:2px var(--ink);text-transform:uppercase;opacity:.85}
+.sect h2{font-family:var(--font-display);text-transform:uppercase;font-size:clamp(30px,4.4vw,60px);line-height:1;margin-bottom:20px}
+.sect h2 em{font-style:normal;color:var(--accent)}
+.sect p{font-size:clamp(15px,1.5vw,17px);line-height:1.9;color:var(--muted);max-width:640px}
+.sect p+p{margin-top:14px}
+.sect p b{color:var(--ink);font-weight:600}
+@media (max-width:820px){.sect .s-grid{grid-template-columns:1fr}}
+
+/* program switchboard */
+.program{margin-top:34px;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--soft)}
+.program .p-row{
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:16px 22px;
+  border-bottom:1px solid var(--line);transition:background .4s;cursor:default;
+}
+.program .p-row:last-child{border-bottom:0}
+.program .p-row:hover{background:rgba(127,127,127,.08)}
+.program .p-row .day{text-align:right;font-size:clamp(13px,1.4vw,16px);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.program .p-row .night{font-size:clamp(13px,1.4vw,16px);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.program .p-row .flip{
+  font-size:15px;color:var(--muted);
+  border:1px solid var(--line);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  transition:transform .8s var(--ease-out),color .6s;
+}
+.program .p-row:hover .flip{transform:rotate(180deg)}
+
+/* gallery */
+.gal{margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,3vw,28px)}
+.gal .g-item{
+  border-radius:16px;overflow:hidden;box-shadow:0 16px 50px rgba(20,12,40,.25);position:relative;
+  cursor:zoom-in;transition:transform .5s var(--ease-out),box-shadow .5s;
+}
+.gal .g-item:hover{transform:translateY(-6px);box-shadow:0 26px 70px rgba(20,12,40,.35)}
+.gal .g-item img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;transition:transform .9s var(--ease-out)}
+.gal .g-item:hover img{transform:scale(1.04)}
+.gal .g-item figcaption{
+  position:absolute;left:14px;bottom:12px;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:#fff;background:rgba(20,12,40,.55);padding:5px 14px;border-radius:20px;
+  backdrop-filter:blur(6px);
+}
+.gal .g-wide{grid-column:1/-1}
+@media (max-width:760px){.gal{grid-template-columns:1fr}}
+
+.next-project{border-color:var(--line)}
+</style>
+</head>
+<body>
+
+<!-- stars -->
+<div class="stars" id="stars" aria-hidden="true"></div>
+
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><img src="assets/img/stamp.png" alt=""></div>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-nav" id="siteNav">
+  <div class="nav-left">
+    <a class="nav-back" href="index.html" aria-label="Back to home">←</a>
+    <a class="nav-brand" href="index.html">
+      <img class="brand-stamp" src="assets/img/stamp.png" alt="Haiyi Yu stamp">
+      <span data-en="&lt;b&gt;Haiyi Yu&lt;/b&gt; — Folio" data-zh="&lt;b&gt;于海怡&lt;/b&gt; — 作品集"><b>Haiyi Yu</b> — Folio</span>
+    </a>
+  </div>
+  <span class="nav-proj">01 — Intersection</span>  <div class="nav-right">
+
+  <button class="nav-lang" id="langBtn" aria-label="Switch language / 切换语言">中</button>
+  <button class="nav-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
+    <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="btn-label">Menu</span>
+  </button>
+  </div>
+</header>
+
+<nav class="menu-overlay" id="site-menu" aria-label="Site menu">
+  <div class="menu-list">
+    <a class="menu-item" href="index.html" data-en="&lt;span class=&quot;m-num&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.08s&quot;&gt;Home&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Start&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.08s&quot;&gt;主页&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;开始&lt;/span&gt;"><span class="m-num">00</span><span class="m-title" style="transition-delay:.08s">Home</span><span class="m-tag">Start</span></a>
+    <a class="menu-item" href="intersection.html" data-en="&lt;span class=&quot;m-num&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.12s&quot;&gt;Intersection&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.12s&quot;&gt;Intersection&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">01</span><span class="m-title" style="transition-delay:.12s">Intersection</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="interlude.html" data-en="&lt;span class=&quot;m-num&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.16s&quot;&gt;Interlude&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.16s&quot;&gt;Interlude&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">02</span><span class="m-title" style="transition-delay:.16s" data-en="Interlude" data-zh="Interlude">Interlude</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="endless-life.html" data-en="&lt;span class=&quot;m-num&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.20s&quot;&gt;Endless Life&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Adaptive Reuse&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.20s&quot;&gt;Endless Life&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;改造再利用&lt;/span&gt;"><span class="m-num">03</span><span class="m-title" style="transition-delay:.20s">Endless Life</span><span class="m-tag">Adaptive Reuse</span></a>
+    <a class="menu-item" href="perception.html" data-en="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.24s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Graphic&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.24s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;平面&lt;/span&gt;"><span class="m-num">04</span><span class="m-title" style="transition-delay:.24s">Perception</span><span class="m-tag">Graphic</span></a>
+    <a class="menu-item" href="formation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.28s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;3D · Fabrication&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.28s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;3D · 制造&lt;/span&gt;"><span class="m-num">05</span><span class="m-title" style="transition-delay:.28s">Formation</span><span class="m-tag">3D · Fabrication</span></a>
+    <a class="menu-item" href="speculation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.32s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Future Library&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.32s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;未来图书馆&lt;/span&gt;"><span class="m-num">06</span><span class="m-title" style="transition-delay:.32s">Speculation</span><span class="m-tag">Future Library</span></a>
+    <a class="menu-item" href="other-works.html" data-en="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;&gt;Other Works&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Point Cloud · Music&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;&gt;其他作品&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;点云 · 音乐&lt;/span&gt;"><span class="m-num">07</span><span class="m-title" style="transition-delay:.36s">Other Works</span><span class="m-tag">Point Cloud · Music</span></a>
+    <a class="menu-item" href="about.html" data-en="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.40s&quot;&gt;About&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Contact&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.40s&quot;&gt;关于&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;联系&lt;/span&gt;"><span class="m-num">08</span><span class="m-title" style="transition-delay:.40s">About</span><span class="m-tag">Contact</span></a>
+  </div>
+  <div class="menu-foot">
+    <span>Melbourne / Beijing</span>
+    <span>hieee0103@outlook.com</span>
+    <span>@yu.interior_</span>
+  </div>
+</nav>
+
+<main aria-label="Intersection project">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero" aria-label="Intersection hero">
+  <span class="sun-moon" aria-hidden="true"></span>
+  <span class="cloud cl1" aria-hidden="true"></span>
+  <span class="cloud cl2" aria-hidden="true"></span>
+
+  <p class="p-kicker" data-en="Project 01 — Izakaya &amp;amp; Bar · Melbourne" data-zh="项目 01 — 居酒屋与酒吧 · 墨尔本">Project 01 — Izakaya &amp; Bar · Melbourne</p>
+  <h1><span class="half">Inter</span>section</h1>
+  <p class="p-sub" data-en="Across cultures &amp;amp; spaces — between day &amp;amp; night" data-zh="跨越文化与空间 — 昼与夜之间">Across cultures &amp; spaces — between day &amp; night</p>
+
+  <div class="hero-img">
+    <img src="assets/img/inter-hero.jpg" alt="Intersection — the izakaya and bar">
+  </div>
+</section>
+
+<!-- ============ CONCEPT ============ -->
+<section class="sect" aria-label="Concept">
+  <div class="container">
+    <div class="s-grid">
+      <div class="s-num reveal" aria-hidden="true">A</div>
+      <div>
+        <h2 class="reveal" data-en="A space of &lt;em&gt;dual identities&lt;/em&gt;" data-zh="具有&lt;em&gt;双重身份&lt;/em&gt;的空间">A space of <em>dual identities</em></h2>
+        <p class="reveal" data-en="My proposal reimagines the diner as a space of dual identities. &lt;b&gt;By day&lt;/b&gt;, it opens as a bright izakaya-inspired cafe, filled with natural light and warm tones. &lt;b&gt;By night&lt;/b&gt;, it transforms into a neon-lit futuristic bar, offering an entirely different atmosphere." data-zh="我的方案将餐厅重新构想为具有双重身份的空间。&lt;b&gt;白天&lt;/b&gt;，它是一间明亮、汲取居酒屋灵感的咖啡馆，充满自然光与温暖色调。&lt;b&gt;夜晚&lt;/b&gt;，它变身为霓虹灯照亮的未来主义酒吧，呈现截然不同的氛围。">My proposal reimagines the diner as a space of dual identities. <b>By day</b>, it opens as a bright izakaya-inspired cafe, filled with natural light and warm tones. <b>By night</b>, it transforms into a neon-lit futuristic bar, offering an entirely different atmosphere.</p>
+        <p class="reveal" data-en="This contrast is designed to attract young adults seeking both relaxation and connection, creating a memorable experience that encourages return visits. Try the time dial in the corner — the atmosphere of this page changes with the hour, while the works stay exactly as they are." data-zh="这种反差旨在吸引既渴望放松又渴望联结的年轻人，创造令人难忘的体验，鼓励他们一再光临。试试角落里的时间旋钮——本页氛围随时间变化，而作品保持原样。">This contrast is designed to attract young adults seeking both relaxation and connection, creating a memorable experience that encourages return visits. Try the time dial in the corner — the atmosphere of this page changes with the hour, while the works stay exactly as they are.</p>
+
+        <div class="program reveal" role="list" aria-label="Day and night program">
+          <div class="p-row" role="listitem">
+            <span class="day" data-en="Izakaya cafe" data-zh="居酒屋咖啡馆">Izakaya cafe</span><span class="flip" aria-hidden="true">↻</span><span class="night" data-en="Neon bar" data-zh="霓虹酒吧">Neon bar</span>
+          </div>
+          <div class="p-row" role="listitem">
+            <span class="day" data-en="Omakase bar" data-zh="板前料理吧">Omakase bar</span><span class="flip" aria-hidden="true">↻</span><span class="night" data-en="Cocktail station" data-zh="鸡尾酒吧台">Cocktail station</span>
+          </div>
+          <div class="p-row" role="listitem">
+            <span class="day" data-en="Bubble tea entry" data-zh="珍珠奶茶入口">Bubble tea entry</span><span class="flip" aria-hidden="true">↻</span><span class="night" data-en="Vibrant night scene" data-zh="活力夜场">Vibrant night scene</span>
+          </div>
+          <div class="p-row" role="listitem">
+            <span class="day" data-en="Curtained booths" data-zh="帷幔卡座">Curtained booths</span><span class="flip" aria-hidden="true">↻</span><span class="night" data-en="Open social bar" data-zh="开放式社交酒吧">Open social bar</span>
+          </div>
+          <div class="p-row" role="listitem">
+            <span class="day" data-en="Natural light" data-zh="自然光">Natural light</span><span class="flip" aria-hidden="true">↻</span><span class="night" data-en="Canopy structures" data-zh="顶篷结构">Canopy structures</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DAY TO NIGHT LIGHTING CHANGES ============ -->
+<section class="dtn" aria-label="Day to night lighting changes">
+  <div class="container">
+    <div class="d-grid">
+      <div>
+        <h2 class="reveal" data-en="Day to night&lt;br&gt;&lt;em&gt;lighting changes&lt;/em&gt;" data-zh="昼夜&lt;br&gt;&lt;em&gt;光影变化&lt;/em&gt;">Day to night<br><em>lighting changes</em></h2>
+        <p class="reveal" data-en="The same view, three hours of the day. Drag the sun along the rail to watch the space travel from morning light to neon night — the original renders, untouched." data-zh="同一视角，一天中的三个时刻。沿轨道拖动太阳，看空间从清晨光线走向霓虹之夜——原图渲染，未经改动。">The same view, three hours of the day. Drag the sun along the rail to watch the space travel from morning light to neon night — the original renders, untouched.</p>
+        <div class="time-rail reveal">
+          <div class="rail-labels"><span id="dtnLabel" data-en="Day" data-zh="白天">Day</span><span data-en="Evening" data-zh="黄昏">Evening</span><span data-en="Night" data-zh="夜晚">Night</span></div>
+          <input type="range" id="timeSlider" min="0" max="100" value="0" step="1"
+                 aria-label="Time of day — day to night lighting changes">
+        </div>
+        <button class="dtn-play reveal" id="dtnPlay" aria-pressed="false" data-en="Play the day" data-zh="播放一天">Play the day</button>
+      </div>
+      <div class="dtn-stage reveal" id="dtnStage">
+        <img src="assets/img/inter-day.png" alt="The space by day" class="on">
+        <img src="assets/img/inter-evening.png" alt="The space in the evening">
+        <img src="assets/img/inter-night.png" alt="The space by night">
+        <span class="dtn-tag" id="dtnTag">Day — natural light</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ENTRY & BOOTHS ============ -->
+<section class="sect" aria-label="Entry and booths">
+  <div class="container">
+    <div class="s-grid">
+      <div class="s-num reveal" aria-hidden="true">B</div>
+      <div>
+        <h2 class="reveal" data-en="Entry &amp;amp; &lt;em&gt;booths&lt;/em&gt;" data-zh="入口与&lt;em&gt;卡座&lt;/em&gt;">Entry &amp; <em>booths</em></h2>
+        <p class="reveal" data-en="A compact bubble tea bar anchors the entry sequence, introducing a casual and welcoming atmosphere while connecting directly to the street. This side faces the booth area, where curtains can be drawn during the day to create a quiet and private atmosphere, ideal for meetings and small gatherings. At night, the space transforms into a more open bar setting, with lighting and canopy structures shaping a vibrant scene." data-zh="一间小巧的珍珠奶茶吧锚定入口序列，营造轻松友好的氛围，同时与街道直接相连。这一侧面向卡座区：白天可拉上帷幔，营造安静私密的气氛，适合会面与小聚；夜晚空间转变为更开放的酒吧场景，灯光与顶篷结构塑造出活力景象。">A compact bubble tea bar anchors the entry sequence, introducing a casual and welcoming atmosphere while connecting directly to the street. This side faces the booth area, where curtains can be drawn during the day to create a quiet and private atmosphere, ideal for meetings and small gatherings. At night, the space transforms into a more open bar setting, with lighting and canopy structures shaping a vibrant scene.</p>
+        <div class="gal">
+          <figure class="g-item reveal">
+            <img src="assets/img/inter-4.jpg" alt="Exploded axonometric drawing of the overall project — tea shop, open kitchen, booths, stage" loading="lazy">
+            <figcaption data-en="Exploded axonometric — overall project" data-zh="爆炸轴测图 — 项目总览">Exploded axonometric — overall project</figcaption>
+          </figure>
+          <figure class="g-item reveal reveal-d1">
+            <img src="assets/img/inter-5.jpg" alt="Bubble tea bar at the entry" loading="lazy">
+            <figcaption data-en="Bubble tea bar — entry" data-zh="珍珠奶茶吧 — 入口">Bubble tea bar — entry</figcaption>
+          </figure>
+          <figure class="g-item reveal">
+            <img src="assets/img/inter-6.jpg" alt="Booth area render" loading="lazy">
+            <figcaption data-en="Booth area" data-zh="卡座区">Booth area</figcaption>
+          </figure>
+          <figure class="g-item reveal reveal-d1">
+            <img src="assets/img/inter-8.jpg" alt="Section drawing" loading="lazy">
+            <figcaption data-en="Section drawing" data-zh="剖面图">Section drawing</figcaption>
+          </figure>
+          <figure class="g-item g-wide reveal">
+            <img src="assets/img/inter-7.jpg" alt="Overall style collage of the restaurant" loading="lazy">
+            <figcaption data-en="Style collage" data-zh="风格拼贴">Style collage</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEXT ============ -->
+<a class="next-project" href="interlude.html" aria-label="Next project: Interlude">
+  <span class="np-label" data-en="Next project — 02" data-zh="下一个项目 — 02">Next project — 02</span>
+  <span class="np-title">Interlude</span>
+  <span class="np-arrow">↗</span>
+</a>
+
+</main>
+
+<footer class="site-foot">
+  <div class="foot-stamp-row">
+    <img class="foot-stamp" src="assets/img/stamp.png" alt="Haiyi Yu stamp mark">
+    <p class="foot-mantra">stay curious. stay focused.<br>stay professional. <em>still in progress.</em></p>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Haiyi Yu — Design Works 2023–2025</span>
+    <span>Melbourne / Beijing</span>
+    <span>RMIT Interior Design</span>
+  </div>
+</footer>
+
+<!-- ============ TIME DIAL ============ -->
+<div class="dial-wrap" role="group" aria-label="Day to night time dial — changes the page background only">
+  <div class="dial-label"><span id="timeLabel" data-en="DAY" data-zh="白天">DAY</span> <span style="color:var(--muted)">/</span> <span id="timeLabelN" style="color:var(--muted)" data-en="NIGHT" data-zh="夜晚">NIGHT</span></div>
+  <div class="dial" id="dial" aria-label="Drag to change time of day">
+    <i class="tick" aria-hidden="true"></i><i class="tick" aria-hidden="true"></i>
+    <i class="tick" aria-hidden="true"></i><i class="tick" aria-hidden="true"></i>
+    <div class="knob" id="knob" aria-hidden="true"></div>
+    <div class="center" id="dialTime">--:--</div>
+  </div>
+  <div class="dial-snap">
+    <button id="snapDay" aria-label="Set day">Day</button>
+    <button id="snapNight" aria-label="Set night">Night</button>
+  </div>
+</div>
+
+<script>
+/* ============ shared: nav / cursor / reveal ============ */
+const body=document.body, menuBtn=document.querySelector('.nav-menu-btn'), menuLabel=menuBtn.querySelector('.btn-label');
+function setMenu(open){
+  body.classList.toggle('menu-open',open);
+  menuBtn.setAttribute('aria-expanded',open);
+  menuLabel.textContent=open?'Close':'Menu';
+}
+menuBtn.addEventListener('click',()=>setMenu(!body.classList.contains('menu-open')));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&body.classList.contains('menu-open')){setMenu(false);menuBtn.focus();} });
+addEventListener('scroll',()=>{ document.getElementById('siteNav').classList.toggle('scrolled',scrollY>60); },{passive:true});
+
+const dot=document.querySelector('.cursor-dot'), ring=document.querySelector('.cursor-ring');
+if(matchMedia('(pointer:fine)').matches){
+  let cx=innerWidth/2, cy=innerHeight/2, rx=cx, ry=cy;
+  addEventListener('pointermove',e=>{ cx=e.clientX; cy=e.clientY;
+    dot.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+    const t=e.target.closest('a,button,[data-cursor]');
+    body.classList.toggle('cursor-link',!!t);
+    body.classList.toggle('cursor-stamp',!!e.target.closest('[data-cursor="stamp"]'));
+  });
+  (function ringLoop(){
+    rx+=(cx-rx)*.22; ry+=(cy-ry)*.22;
+    ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+    requestAnimationFrame(ringLoop);
+  })();
+}
+
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ============ lightbox ============ */
+(()=>{
+  const lb=document.createElement('div');
+  lb.className='lightbox'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-label','Image viewer');
+  lb.innerHTML='<div class="lb-frame"><img alt=""><div class="lb-cap"><span class="lb-txt"></span><span class="lb-idx"></span></div></div>'
+    +'<button class="lb-close" aria-label="Close">✕</button>'
+    +'<button class="lb-prev lb-nav" aria-label="Previous image">‹</button>'
+    +'<button class="lb-next lb-nav" aria-label="Next image">›</button>';
+  document.body.appendChild(lb);
+  let items=[], idx=0;
+  const show=(i)=>{ idx=(i+items.length)%items.length;
+    lb.querySelector('img').src=items[idx].src;
+    lb.querySelector('img').alt=items[idx].alt||'';
+    lb.querySelector('.lb-txt').textContent=items[idx].closest('figure')?.querySelector('figcaption')?.textContent||'';
+    lb.querySelector('.lb-idx').textContent=(idx+1)+' / '+items.length; };
+  const open=()=>{ lb.classList.add('open'); document.body.style.overflow='hidden'; };
+  const close=()=>{ lb.classList.remove('open'); document.body.style.overflow=''; };
+  lb.querySelector('.lb-close').addEventListener('click',close);
+  lb.querySelector('.lb-prev').addEventListener('click',()=>show(idx-1));
+  lb.querySelector('.lb-next').addEventListener('click',()=>show(idx+1));
+  lb.addEventListener('click',e=>{ if(e.target===lb) close(); });
+  document.addEventListener('keydown',e=>{ if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') close();
+    if(e.key==='ArrowLeft') show(idx-1);
+    if(e.key==='ArrowRight') show(idx+1); });
+  items=[...document.querySelectorAll('.gal .g-item img')];
+  items.forEach((im,i)=>im.closest('.g-item').addEventListener('click',()=>{ show(i); open(); }));
+})();
+
+/* ============ DAY ⇄ NIGHT — background only ============ */
+(()=>{
+  const root=document.documentElement;
+  const DAY={
+    bg:'#f6efe4', ink:'#2b2140', muted:'#8d84a0',
+    accent:'#d9773f', skyA:'#fdf6ec', skyB:'#ffe9d6'
+  };
+  const NIGHT={
+    bg:'#171030', ink:'#f3ecdf', muted:'#a89fd0',
+    accent:'#ff6ec7', skyA:'#100b26', skyB:'#241b45'
+  };
+  const lerpC=(a,b,t)=>a.map((v,i)=>Math.round(v+(b[i]-v)*t)).join(',');
+  const hex2rgb=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
+  const keys=['bg','ink','muted','accent','skyA','skyB'];
+  const rgbKeys={day:{},night:{}};
+  keys.forEach(k=>{ rgbKeys.day[k]=hex2rgb(DAY[k].slice(0,7)); rgbKeys.night[k]=hex2rgb(NIGHT[k].slice(0,7)); });
+
+  function apply(t){
+    root.style.setProperty('--t',t.toFixed(3));
+    keys.forEach(k=>{
+      root.style.setProperty('--'+k,`rgb(${lerpC(rgbKeys.day[k],rgbKeys.night[k],t)})`);
+    });
+    root.style.setProperty('--line',`rgba(${lerpC([43,33,64],[243,236,223],t)},${(0.16*(1-t)+0.16*t).toFixed(3)})`);
+    root.style.setProperty('--soft',`rgba(255,255,255,${(0.55*(1-t)+0.06*t).toFixed(3)})`);
+    /* night scene changes — background & typography only, images untouched */
+    document.getElementById('stars').style.opacity=t;
+    document.getElementById('hero').classList.toggle('knight',t>.5);
+    body.classList.toggle('night',t>.5);
+    const hrs=Math.round(t*24);
+    document.getElementById('dialTime').textContent=String(hrs).padStart(2,'0')+':00';
+    document.getElementById('timeLabel').style.color=`rgb(${lerpC(hex2rgb(DAY.ink),hex2rgb(NIGHT.muted),t)})`;
+    document.getElementById('timeLabelN').style.color=`rgb(${lerpC(hex2rgb(DAY.muted),hex2rgb(NIGHT.accent),t)})`;
+  }
+
+  let t=.25;
+  const dial=document.getElementById('dial'), knob=document.getElementById('knob');
+  function setT(v){ t=Math.max(0,Math.min(1,v)); apply(t);
+    knob.style.transform=`rotate(${-140+t*280}deg)`; }
+  let dragging=false;
+  const ang=(e)=>{ const r=dial.getBoundingClientRect();
+    const a=Math.atan2(e.clientY-(r.top+r.height/2),e.clientX-(r.left+r.width/2))*180/Math.PI;
+    return Math.max(-140,Math.min(140,a)); };
+  dial.addEventListener('pointerdown',e=>{ dragging=true; dial.setPointerCapture(e.pointerId);
+    setT((ang(e)+140)/280); });
+  dial.addEventListener('pointermove',e=>{ if(dragging) setT((ang(e)+140)/280); });
+  dial.addEventListener('pointerup',()=>dragging=false);
+  dial.addEventListener('pointercancel',()=>dragging=false);
+  document.getElementById('snapDay').addEventListener('click',()=>setT(0));
+  document.getElementById('snapNight').addEventListener('click',()=>setT(1));
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowUp') setT(t+.06);
+    if(e.key==='ArrowDown') setT(t-.06);
+  });
+  setT(t);
+})();
+
+/* ============ stars ============ */
+(()=>{
+  const stars=document.getElementById('stars');
+  for(let i=0;i<90;i++){
+    const s=document.createElement('i');
+    s.style.left=Math.random()*100+'%';
+    s.style.top=Math.random()*100+'%';
+    s.style.animationDelay=(Math.random()*3)+'s';
+    s.style.opacity=.3+Math.random()*.7;
+    stars.appendChild(s);
+  }
+})();
+
+/* ============ DAY-TO-NIGHT SLIDER (3 original renders) ============ */
+(()=>{
+  const stage=document.getElementById('dtnStage');
+  const imgs=[...stage.querySelectorAll('img')];
+  const slider=document.getElementById('timeSlider');
+  const tag=document.getElementById('dtnTag');
+  const label=document.getElementById('dtnLabel');
+  const playBtn=document.getElementById('dtnPlay');
+  const tagsEn=['Day — natural light','Evening — twilight','Night — neon glow'];
+  const tagsZh=['白天 — 自然光','黄昏 — 暮色','夜晚 — 霓虹'];
+  const labelsEn=['Day','Evening','Night'];
+  const labelsZh=['白天','黄昏','夜晚'];
+  const tags=()=>window.i18nLang==='zh'?tagsZh:tagsEn;
+  const labels=()=>window.i18nLang==='zh'?labelsZh:labelsEn;
+  let playing=false, playTimer;
+
+  function update(v){
+    const p=v/100;
+    const f=p*3;            /* 0..3 across 3 images — equal thirds */
+    const i=Math.min(2,Math.floor(f));
+    imgs.forEach((im,k)=>im.classList.toggle('on',k===i));
+    tag.textContent=tags()[i];
+    label.textContent=labels()[i];
+  }
+  slider.addEventListener('input',()=>update(+slider.value));
+  playBtn.addEventListener('click',()=>{
+    playing=!playing;
+    playBtn.classList.toggle('playing',playing);
+    playBtn.setAttribute('aria-pressed',playing);
+    playBtn.textContent=playing?(window.i18nLang==='zh'?'暂停一天':'Pause the day'):(window.i18nLang==='zh'?'播放一天':'Play the day');
+    if(playing){
+      playTimer=setInterval(()=>{
+        let v=+slider.value+1;
+        if(v>100){ v=0; }
+        slider.value=v; update(v);
+      },35);
+    }else clearInterval(playTimer);
+  });
+  update(0);
+})();
+</script>
+<script src="assets/js/i18n.js?v=2"></script>
+</body>
+</html>

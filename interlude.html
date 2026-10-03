@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>INTERLUDE — Abode of Simplicity · Haiyi Yu</title>
+<meta name="description" content="Interlude — between memory and silence. A residential interior unfolding from an antique fan: pleats, shadows and fluid thresholds.">
+<meta name="theme-color" content="#f5efe3">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css?v=6">
+<style>
+/* ============ INTERLUDE — a pause within the city ============ */
+:root{
+  --ink:#3a2f2a; --muted:#9a8c7c; --line:rgba(58,47,42,.16);
+  --accent:#c1502e; --sage:#7d8f69; --haze:#f7e8d4;
+}
+body{background:var(--paper);color:var(--ink)}
+.menu-overlay{background:var(--paper);color:var(--ink)}
+.menu-overlay .menu-item{border-color:var(--line)}
+.site-nav .nav-brand .brand-stamp{filter:invert(1)}
+.site-nav .nav-proj{color:var(--muted)}
+.site-nav .nav-menu-btn{border-color:var(--line)}
+.site-nav.scrolled{background:rgba(246,239,228,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+
+/* ---------- floating dust ---------- */
+.dust{position:fixed;inset:0;pointer-events:none;z-index:1}
+.dust i{
+  position:absolute;bottom:-2%;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,236,200,.9),rgba(255,236,200,0) 70%);
+  filter:blur(1px);
+  animation:dust-rise linear infinite;
+}
+@keyframes dust-rise{
+  0%{transform:translateY(0) translateX(0);opacity:0}
+  12%{opacity:.9}
+  88%{opacity:.5}
+  100%{transform:translateY(-108vh) translateX(6vw);opacity:0}
+}
+
+/* ---------- hero: unfolding fan ---------- */
+.hero{
+  position:relative;min-height:100svh;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:calc(var(--nav-h) + 26px) clamp(16px,4vw,60px) 70px;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 0%,rgba(255,240,214,.9),transparent 60%),
+    linear-gradient(180deg,#fdf8ef,#f5efe3 70%,#efe6d6);
+}
+.hero .haze{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none}
+.hero .hz1{left:-10%;top:8%;width:46vw;height:40vw;background:rgba(247,200,160,.4)}
+.hero .hz2{right:-12%;bottom:-6%;width:50vw;height:42vw;background:rgba(193,80,46,.14)}
+.hero .hz3{left:24%;bottom:14%;width:36vw;height:30vw;background:rgba(125,143,105,.18)}
+
+/* large leaves drifting down */
+.leaves{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.leaf{
+  position:absolute;top:-14%;filter:drop-shadow(0 8px 16px rgba(58,47,42,.14));
+  animation:leaf-fall var(--dur,15s) linear var(--delay,0s) infinite;
+  opacity:.16;
+}
+.leaf svg{width:100%;height:auto;display:block}
+@keyframes leaf-fall{
+  0%{top:-14%;transform:translateX(0) rotate(0deg)}
+  20%{transform:translateX(6vw) rotate(55deg)}
+  40%{transform:translateX(-4.5vw) rotate(-35deg)}
+  60%{transform:translateX(5vw) rotate(40deg)}
+  80%{transform:translateX(-4vw) rotate(-30deg)}
+  100%{top:110%;transform:translateX(4vw) rotate(-20deg)}
+}
+
+.fan-hold{position:relative;z-index:3;width:min(430px,64vw);aspect-ratio:1;margin-bottom:clamp(20px,4vh,40px)}
+.fan{
+  width:100%;height:100%;border-radius:50%;overflow:hidden;position:relative;
+  box-shadow:0 30px 80px rgba(58,47,42,.35),0 0 0 12px rgba(255,252,244,.7);
+  clip-path:circle(0% at 50% 100%);transition:clip-path 1.8s var(--ease-out);
+}
+.fan img{width:100%;height:100%;object-fit:cover;transform:scale(1.15);transform-origin:50% 100%}
+.fan.open{clip-path:circle(50.5% at 50% 50%)}
+.fan .fan-line{
+  position:absolute;left:50%;bottom:0;width:1.5px;height:100%;background:rgba(255,252,244,.65);
+  transform-origin:50% 100%;
+}
+.fan-pin{
+  position:absolute;left:50%;bottom:7%;transform:translate(-50%,50%);z-index:4;
+  width:clamp(20px,3vw,30px);height:clamp(20px,3vw,30px);border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fdf6ea,#c9a875 60%,#8a6c3f);
+  box-shadow:0 6px 16px rgba(58,47,42,.4);
+}
+.hero .p-kicker{
+  position:relative;z-index:3;
+  font-family:var(--font-tech);font-size:clamp(16px,1.8vw,22px);letter-spacing:.3em;text-transform:uppercase;
+  color:var(--accent);display:flex;align-items:center;gap:14px;justify-content:center;
+}
+.hero .p-kicker::before,.hero .p-kicker::after{content:"❋";color:var(--sage)}
+.hero h1{
+  position:relative;z-index:3;
+  font-family:var(--font-display);text-transform:uppercase;font-size:clamp(58px,12vw,190px);line-height:.92;
+  margin:6px 0 2px;letter-spacing:.02em;
+}
+.hero h1 .it{font-style:normal;color:var(--accent)}
+.hero .p-sub{
+  position:relative;z-index:3;
+  font-family:var(--font-serif);font-style:italic;font-size:clamp(18px,2.4vw,28px);color:var(--muted);
+}
+.hero .p-sub b{font-style:normal;font-family:var(--font-tech);font-size:.8em;letter-spacing:.2em;color:var(--sage)}
+
+/* ---------- sections ---------- */
+.sect{padding:clamp(70px,10vw,130px) 0;border-top:1px solid var(--line);position:relative;z-index:2}
+.sect .s-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(24px,4vw,70px)}
+.sect h2{font-family:var(--font-display);text-transform:uppercase;font-size:clamp(30px,4.4vw,62px);line-height:1;margin-bottom:22px}
+.sect h2 em{font-style:normal;color:var(--accent)}
+.sect p{font-size:clamp(15px,1.5vw,17px);line-height:2;color:#6d6051;max-width:640px}
+.sect p+p{margin-top:14px}
+.sect p b{color:var(--ink);font-weight:600}
+.sect .quote{
+  font-family:var(--font-serif);font-style:italic;font-size:clamp(20px,2.6vw,30px);line-height:1.5;
+  color:var(--ink);margin:26px 0;padding-left:22px;border-left:3px solid var(--accent);
+}
+.sect .reel{
+  display:inline-block;font-family:var(--font-tech);font-size:17px;letter-spacing:.26em;color:var(--sage);
+  border:1px solid var(--sage);border-radius:30px;padding:5px 16px;margin-bottom:22px;
+}
+@media (max-width:820px){.sect .s-grid{grid-template-columns:1fr}}
+
+/* pleated headers */
+.pleat-bar{display:flex;gap:5px;margin-top:14px;height:44px}
+.pleat-bar i{
+  flex:1;background:linear-gradient(180deg,#e8d9bd,#cdb48d);border-radius:2px 2px 0 0;
+  transform:scaleY(.12);transform-origin:bottom;transition:transform .8s var(--ease-out);
+  box-shadow:inset 0 0 0 1px rgba(58,47,42,.08);
+}
+.reveal.in .pleat-bar i{transform:scaleY(1)}
+.pleat-bar i:nth-child(2){transition-delay:.05s}.pleat-bar i:nth-child(3){transition-delay:.1s}
+.pleat-bar i:nth-child(4){transition-delay:.15s}.pleat-bar i:nth-child(5){transition-delay:.2s}
+.pleat-bar i:nth-child(6){transition-delay:.25s}.pleat-bar i:nth-child(7){transition-delay:.3s}
+.pleat-bar i:nth-child(8){transition-delay:.35s}.pleat-bar i:nth-child(9){transition-delay:.4s}
+.pleat-bar i:nth-child(10){transition-delay:.45s}
+
+/* folding gallery */
+.fold-gal{margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(18px,3vw,34px);perspective:1200px}
+.fold-gal .f-item{position:relative;border-radius:12px;overflow:hidden;
+  box-shadow:0 18px 50px rgba(58,47,42,.22);background:#e9ddc6;
+  transform:rotateX(24deg);transform-origin:top;
+  transition:transform 1s var(--ease-out),box-shadow .6s;
+}
+.fold-gal .f-item:hover{box-shadow:0 26px 70px rgba(58,47,42,.32)}
+.reveal.in .f-item{transform:rotateX(0)}
+.reveal.in .f-item:nth-child(2){transition-delay:.12s}
+.reveal.in .f-item:nth-child(3){transition-delay:.24s}
+.reveal.in .f-item:nth-child(4){transition-delay:.36s}
+.fold-gal .f-item img{width:100%;display:block;transition:transform .9s var(--ease-out)}
+/* folds gallery: every image fills its frame completely */
+.fold-fill .f-item{aspect-ratio:4/5}
+.fold-fill .f-item img{height:100%;object-fit:cover}
+.fold-gal .f-item:hover img{transform:scale(1.05)}
+.fold-gal .f-item figcaption{
+  position:absolute;left:12px;bottom:10px;font-family:var(--font-tech);font-size:15px;letter-spacing:.16em;
+  text-transform:uppercase;color:#fdf6ea;background:rgba(58,47,42,.55);padding:4px 14px;border-radius:20px;
+}
+@media (max-width:760px){.fold-gal{grid-template-columns:1fr}}
+
+/* axonometric — cursor tilt */
+.axo-wrap{perspective:1100px;margin-top:44px}
+.axo{
+  position:relative;border-radius:14px;overflow:hidden;transform-style:preserve-3d;
+  box-shadow:0 30px 80px rgba(58,47,42,.3);
+  transition:transform .5s var(--ease-soft);
+  will-change:transform;
+}
+.axo img{width:100%;display:block}
+.axo .axo-tag{
+  position:absolute;top:14px;left:14px;font-family:var(--font-tech);font-size:16px;letter-spacing:.22em;
+  color:#fdf6ea;background:rgba(58,47,42,.55);padding:5px 14px;border-radius:20px;
+}
+</style>
+</head>
+<body>
+
+<div class="dust" id="dust" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><img src="assets/img/stamp.png" alt=""></div>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-nav" id="siteNav">
+  <div class="nav-left">
+    <a class="nav-back" href="index.html" aria-label="Back to home">←</a>
+    <a class="nav-brand" href="index.html">
+      <img class="brand-stamp" src="assets/img/stamp.png" alt="Haiyi Yu stamp">
+      <span data-en="&lt;b&gt;Haiyi Yu&lt;/b&gt; — Folio" data-zh="&lt;b&gt;于海怡&lt;/b&gt; — 作品集"><b>Haiyi Yu</b> — Folio</span>
+    </a>
+  </div>
+  <span class="nav-proj">02 — Interlude</span>  <div class="nav-right">
+
+  <button class="nav-lang" id="langBtn" aria-label="Switch language / 切换语言">中</button>
+  <button class="nav-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
+    <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="btn-label">Menu</span>
+  </button>
+  </div>
+</header>
+
+<nav class="menu-overlay" id="site-menu" aria-label="Site menu">
+  <div class="menu-list">
+    <a class="menu-item" href="index.html" data-en="&lt;span class=&quot;m-num&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.08s&quot;&gt;Home&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Start&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.08s&quot;&gt;主页&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;开始&lt;/span&gt;"><span class="m-num">00</span><span class="m-title" style="transition-delay:.08s">Home</span><span class="m-tag">Start</span></a>
+    <a class="menu-item" href="intersection.html" data-en="&lt;span class=&quot;m-num&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.12s&quot;&gt;Intersection&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.12s&quot;&gt;Intersection&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">01</span><span class="m-title" style="transition-delay:.12s">Intersection</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="interlude.html" data-en="&lt;span class=&quot;m-num&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.16s&quot;&gt;Interlude&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.16s&quot;&gt;Interlude&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">02</span><span class="m-title" style="transition-delay:.16s">Interlude</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="endless-life.html" data-en="&lt;span class=&quot;m-num&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.20s&quot;&gt;Endless Life&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Adaptive Reuse&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.20s&quot;&gt;Endless Life&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;改造再利用&lt;/span&gt;"><span class="m-num">03</span><span class="m-title" style="transition-delay:.20s" data-en="Endless Life" data-zh="Endless Life">Endless Life</span><span class="m-tag">Adaptive Reuse</span></a>
+    <a class="menu-item" href="perception.html" data-en="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.24s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Graphic&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.24s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;平面&lt;/span&gt;"><span class="m-num">04</span><span class="m-title" style="transition-delay:.24s">Perception</span><span class="m-tag">Graphic</span></a>
+    <a class="menu-item" href="formation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.28s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;3D · Fabrication&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.28s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;3D · 制造&lt;/span&gt;"><span class="m-num">05</span><span class="m-title" style="transition-delay:.28s">Formation</span><span class="m-tag">3D · Fabrication</span></a>
+    <a class="menu-item" href="speculation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.32s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Future Library&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.32s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;未来图书馆&lt;/span&gt;"><span class="m-num">06</span><span class="m-title" style="transition-delay:.32s">Speculation</span><span class="m-tag">Future Library</span></a>
+    <a class="menu-item" href="other-works.html" data-en="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;&gt;Other Works&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Point Cloud · Music&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;&gt;其他作品&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;点云 · 音乐&lt;/span&gt;"><span class="m-num">07</span><span class="m-title" style="transition-delay:.36s">Other Works</span><span class="m-tag">Point Cloud · Music</span></a>
+    <a class="menu-item" href="about.html" data-en="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.40s&quot;&gt;About&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Contact&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.40s&quot;&gt;关于&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;联系&lt;/span&gt;"><span class="m-num">08</span><span class="m-title" style="transition-delay:.40s">About</span><span class="m-tag">Contact</span></a>
+  </div>
+  <div class="menu-foot">
+    <span>Melbourne / Beijing</span>
+    <span>hieee0103@outlook.com</span>
+    <span>@yu.interior_</span>
+  </div>
+</nav>
+
+<main aria-label="Interlude project">
+
+<!-- ============ HERO — the unfolding fan ============ -->
+<section class="hero" id="hero" aria-label="Interlude hero">
+  <span class="haze hz1" aria-hidden="true"></span>
+  <span class="haze hz2" aria-hidden="true"></span>
+  <span class="haze hz3" aria-hidden="true"></span>
+  <div class="leaves" id="leaves" aria-hidden="true"></div>
+
+  <div class="fan-hold" aria-hidden="false">
+    <div class="fan" id="fan">
+      <img src="assets/img/interl-hero.jpg" alt="The antique fan that inspired the project">
+    </div>
+    <span class="fan-pin"></span>
+  </div>
+
+  <p class="p-kicker" data-en="Project 02 — Abode of Simplicity" data-zh="项目 02 — 简朴居所">Project 02 — Abode of Simplicity</p>
+  <h1>Inter<span class="it">lude</span></h1>
+  <p class="p-sub" data-en="between memory and silence &lt;b&gt;· reel 01&lt;/b&gt;" data-zh="在记忆与寂静之间 &lt;b&gt;· 卷 01&lt;/b&gt;">between memory and silence <b>· reel 01</b></p>
+</section>
+
+<!-- ============ CONCEPT ============ -->
+<section class="sect" aria-label="Concept">
+  <div class="container">
+    <div class="s-grid">
+      <div class="s-num reveal" aria-hidden="true" style="font-family:var(--font-display);-webkit-text-stroke:1.5px var(--accent);color:transparent;font-size:clamp(64px,8vw,130px)">i</div>
+      <div>
+        <span class="reel reveal" data-en="Reel 02 — the fan" data-zh="卷 02 — 扇子">Reel 02 — the fan</span>
+        <h2 class="reveal" data-en="A small object becomes&lt;br&gt;a &lt;em&gt;spatial narrative&lt;/em&gt;" data-zh="一件小物&lt;br&gt;化为&lt;em&gt;空间叙事&lt;/em&gt;">A small object becomes<br>a <em>spatial narrative</em></h2>
+        <p class="reveal" data-en="This project unfolds from an antique fan, whose pleated form and fleeting shadows inspired spatial gestures. Corridors echo its folds, casting light like fan blades across curved walls." data-zh="这个项目从一把古董扇子展开——扇子的褶裥形态与转瞬即逝的光影启发了空间动作。走廊呼应着折痕，光线如扇骨般掠过曲面墙壁。">This project unfolds from an antique fan, whose pleated form and fleeting shadows inspired spatial gestures. Corridors echo its folds, casting light like fan blades across curved walls.</p>
+        <p class="reveal" data-en="Curtains and thresholds dissolve into fluid transitions, reimagining boundaries. What began as a small object becomes a spatial narrative — &lt;b&gt;a pause within the city&lt;/b&gt;, where memory and atmosphere quietly intertwine." data-zh="帷幔与门槛消融为流动的过渡，边界被重新想象。始于一件小物，最终成为一场空间叙事——&lt;b&gt;城市中的一次停顿&lt;/b&gt;，记忆与氛围在此静静交织。">Curtains and thresholds dissolve into fluid transitions, reimagining boundaries. What began as a small object becomes a spatial narrative — <b>a pause within the city</b>, where memory and atmosphere quietly intertwine.</p>
+        <div class="quote reveal" data-en="&quot;The folding form of the fan is expressed within the space.&quot;" data-zh="&quot;扇子的折叠形态在空间中得以表达。&quot;">"The folding form of the fan is expressed within the space."</div>
+        <div class="pleat-bar reveal" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOLDING FORM GALLERY ============ -->
+<section class="sect" aria-label="Folding form">
+  <div class="container">
+    <div class="s-grid">
+      <div class="s-num reveal" aria-hidden="true" style="font-family:var(--font-display);-webkit-text-stroke:1.5px var(--sage);color:transparent;font-size:clamp(64px,8vw,130px)">ii</div>
+      <div>
+        <span class="reel reveal" data-en="Reel 03 — folds in space" data-zh="卷 03 — 空间中的折痕">Reel 03 — folds in space</span>
+        <h2 class="reveal" data-en="Corridors echo&lt;br&gt;its &lt;em&gt;folds&lt;/em&gt;" data-zh="走廊回响着&lt;br&gt;它的&lt;em&gt;折痕&lt;/em&gt;">Corridors echo<br>its <em>folds</em></h2>
+        <p class="reveal" data-en="Light falls like fan blades across curved walls. Curtains and thresholds dissolve into fluid transitions — boundaries are reimagined as pleats of light and shadow." data-zh="光线如扇骨般落在曲面墙上。帷幔与门槛消融为流动的过渡——边界被重新想象为光与影的褶裥。">Light falls like fan blades across curved walls. Curtains and thresholds dissolve into fluid transitions — boundaries are reimagined as pleats of light and shadow.</p>
+        <div class="fold-gal fold-fill reveal">
+          <figure class="f-item"><img src="assets/img/interl-1.jpg" alt="The folding form expressed in space" loading="lazy"><figcaption data-en="View 01" data-zh="视角 01">View 01</figcaption></figure>
+          <figure class="f-item"><img src="assets/img/interl-2.jpg" alt="Curved wall catching light" loading="lazy"><figcaption data-en="View 02" data-zh="视角 02">View 02</figcaption></figure>
+          <figure class="f-item"><img src="assets/img/interl-3.jpg" alt="Fluid threshold" loading="lazy"><figcaption data-en="View 03" data-zh="视角 03">View 03</figcaption></figure>
+          <figure class="f-item"><img src="assets/img/interl-4.jpg" alt="Fan-blade light across the wall" loading="lazy"><figcaption data-en="View 04" data-zh="视角 04">View 04</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RE-COLLAGE ============ -->
+<section class="sect" aria-label="Re-collage">
+  <div class="container">
+    <div class="s-grid">
+      <div class="s-num reveal" aria-hidden="true" style="font-family:var(--font-display);-webkit-text-stroke:1.5px var(--accent);color:transparent;font-size:clamp(64px,8vw,130px)">iii</div>
+      <div>
+        <span class="reel reveal" data-en="Reel 04 — rotation &amp;amp; reassembly" data-zh="卷 04 — 旋转与重组">Reel 04 — rotation &amp; reassembly</span>
+        <h2 class="reveal" data-en="Re-collaging the &lt;em&gt;interior&lt;/em&gt;" data-zh="重新拼贴&lt;em&gt;室内&lt;/em&gt;">Re-collaging the <em>interior</em></h2>
+        <p class="reveal" data-en="By re-collaging and inverting interior elements, I was able to reimagine the possibilities of spatial design — no longer a conventional interior, but a new context generated through the rotation and reassembly of the previous space." data-zh="通过对室内元素的重新拼贴与倒置，我得以重新想象空间设计的可能——不再是常规的室内，而是通过旋转与重组原有空间而生成的新语境。">By re-collaging and inverting interior elements, I was able to reimagine the possibilities of spatial design — no longer a conventional interior, but a new context generated through the rotation and reassembly of the previous space.</p>
+        <p class="reveal" data-en="Doors, windows, and partitions are stripped of their traditional functions and reinterpreted as &lt;b&gt;mediators that redefine boundaries and fluidity&lt;/b&gt;. This approach became an important source of inspiration for Project 01 — Perception." data-zh="门、窗与隔断被剥离传统功能，重新诠释为&lt;b&gt;重新定义边界与流动性的媒介&lt;/b&gt;。这种方法成为项目 04 — Perception 的重要灵感来源。">Doors, windows, and partitions are stripped of their traditional functions and reinterpreted as <b>mediators that redefine boundaries and fluidity</b>. This approach became an important source of inspiration for Project 01 — Perception.</p>
+        <div class="axo-wrap reveal">
+          <div class="axo" id="axo" data-cursor="stamp">
+            <span class="axo-tag" data-en="Axonometric drawing — move to tilt" data-zh="轴测图 — 移动倾斜">Axonometric drawing — move to tilt</span>
+            <img src="assets/img/interl-axo2.png" alt="Axonometric drawing of the re-collaged interior" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLOOR PLAN ============ -->
+<section class="sect" aria-label="Floor plan">
+  <div class="container">
+    <div class="s-grid">
+      <div class="s-num reveal" aria-hidden="true" style="font-family:var(--font-display);-webkit-text-stroke:1.5px var(--sage);color:transparent;font-size:clamp(64px,8vw,130px)">iv</div>
+      <div>
+        <span class="reel reveal" data-en="Reel 05 — the plan" data-zh="卷 05 — 平面">Reel 05 — the plan</span>
+        <h2 class="reveal" data-en="Floor &lt;em&gt;plan&lt;/em&gt;" data-zh="平面&lt;em&gt;图&lt;/em&gt;">Floor <em>plan</em></h2>
+        <p class="reveal" data-en="The plan itself reads as a folded surface — corridors pleat across the dwelling, rooms open and close like the blades of a fan." data-zh="平面图本身如同一张折叠的表面——走廊在居所中折出褶痕，房间如扇骨般开合。">The plan itself reads as a folded surface — corridors pleat across the dwelling, rooms open and close like the blades of a fan.</p>
+        <div class="axo-wrap reveal">
+          <div class="axo" id="planTilt" data-cursor="stamp">
+            <span class="axo-tag" data-en="Floor plan — move to tilt" data-zh="平面图 — 移动倾斜">Floor plan — move to tilt</span>
+            <img src="assets/img/interl-7.jpg" alt="Floor plan of the re-collaged interior" loading="lazy">
+          </div>
+        </div>
+        <div class="fold-gal fold-fill reveal">
+          <figure class="f-item"><img src="assets/img/interl-5.jpg" alt="Interior view" loading="lazy"><figcaption data-en="View 05" data-zh="视角 05">View 05</figcaption></figure>
+          <figure class="f-item"><img src="assets/img/interl-6.jpg" alt="Interior view" loading="lazy"><figcaption data-en="View 06" data-zh="视角 06">View 06</figcaption></figure>
+          <figure class="f-item"><img src="assets/img/interl-8.jpg" alt="View — the sculptural chair" loading="lazy"><figcaption data-en="View 07" data-zh="视角 07">View 07</figcaption></figure>
+          <figure class="f-item"><img src="assets/img/interl-9.jpg" alt="Interior view" loading="lazy"><figcaption data-en="View 08" data-zh="视角 08">View 08</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEXT ============ -->
+<a class="next-project" href="endless-life.html" aria-label="Next project: Endless Life">
+  <span class="np-label" data-en="Next project — 03" data-zh="下一个项目 — 03">Next project — 03</span>
+  <span class="np-title">Endless Life</span>
+  <span class="np-arrow">↗</span>
+</a>
+
+</main>
+
+<footer class="site-foot">
+  <div class="foot-stamp-row">
+    <img class="foot-stamp" src="assets/img/stamp.png" alt="Haiyi Yu stamp mark">
+    <p class="foot-mantra">stay curious. stay focused.<br>stay professional. <em>still in progress.</em></p>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Haiyi Yu — Design Works 2023–2025</span>
+    <span>Melbourne / Beijing</span>
+    <span>RMIT Interior Design</span>
+  </div>
+</footer>
+
+<script>
+/* ============ shared: nav / cursor / reveal ============ */
+const body=document.body, menuBtn=document.querySelector('.nav-menu-btn'), menuLabel=menuBtn.querySelector('.btn-label');
+function setMenu(open){
+  body.classList.toggle('menu-open',open);
+  menuBtn.setAttribute('aria-expanded',open);
+  menuLabel.textContent=open?'Close':'Menu';
+}
+menuBtn.addEventListener('click',()=>setMenu(!body.classList.contains('menu-open')));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&body.classList.contains('menu-open')){setMenu(false);menuBtn.focus();} });
+addEventListener('scroll',()=>{ document.getElementById('siteNav').classList.toggle('scrolled',scrollY>60); },{passive:true});
+
+const dot=document.querySelector('.cursor-dot'), ring=document.querySelector('.cursor-ring');
+if(matchMedia('(pointer:fine)').matches){
+  let cx=innerWidth/2, cy=innerHeight/2, rx=cx, ry=cy;
+  addEventListener('pointermove',e=>{ cx=e.clientX; cy=e.clientY;
+    dot.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+    const t=e.target.closest('a,button,[data-cursor]');
+    body.classList.toggle('cursor-link',!!t);
+    body.classList.toggle('cursor-stamp',!!e.target.closest('[data-cursor="stamp"]'));
+  });
+  (function ringLoop(){
+    rx+=(cx-rx)*.22; ry+=(cy-ry)*.22;
+    ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+    requestAnimationFrame(ringLoop);
+  })();
+}
+
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ============ fan unfold on load ============ */
+(()=>{
+  const fan=document.getElementById('fan');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* draw 12 pleat lines */
+  for(let i=1;i<12;i++){
+    const l=document.createElement('i');
+    l.className='fan-line';
+    l.style.transform=`rotate(${i*30}deg)`;
+    l.style.transformOrigin='50% 100%';
+    fan.appendChild(l);
+  }
+  if(reduced){ fan.classList.add('open'); return; }
+  requestAnimationFrame(()=>requestAnimationFrame(()=>fan.classList.add('open')));
+})();
+
+/* ============ falling leaves — organic, serrated, veined ============ */
+(()=>{
+  const box=document.getElementById('leaves');
+  if(!box||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const colors=['#7a8f5c','#8f9a63','#c9a23a','#a8752e','#7d5230','#b5653a','#6f8f4a'];
+  function shade(hex,f){
+    const n=parseInt(hex.slice(1),16);
+    let r=(n>>16)&255,g=(n>>8)&255,b=n&255;
+    r=Math.min(255,Math.round(r*f));g=Math.min(255,Math.round(g*f));b=Math.min(255,Math.round(b*f));
+    return '#'+((r<<16)|(g<<8)|b).toString(16).padStart(6,'0');
+  }
+  function leafSVG(base,seed){
+    const gid='lg'+Math.floor(Math.random()*1e6);
+    const bend=(Math.random()*18-9);
+    const wscale=13+Math.random()*5;
+    const right=[],left=[];
+    const N=40;
+    for(let i=0;i<=N;i++){
+      const t=i/N;
+      const y=8+t*126;
+      const prof=Math.sin(Math.PI*Math.pow(t,.8));
+      const w=prof*wscale;
+      const serr=(t>.06&&t<.95)? Math.sin(t*42+seed)*1.7:0;
+      const cx=60+bend*Math.sin(Math.PI*t);
+      right.push([cx+w+serr,y]);
+      left.push([cx-w+serr*.7,y]);
+    }
+    let d='M '+(60+bend*.02).toFixed(1)+' 5';
+    right.forEach(p=>{d+=' L'+p[0].toFixed(1)+' '+p[1].toFixed(1);});
+    d+=' Q 60 '+(134+bend*.3).toFixed(1)+' '+left[left.length-1][0].toFixed(1)+' '+left[left.length-1][1].toFixed(1);
+    for(let i=left.length-2;i>=0;i--){d+=' L'+left[i][0].toFixed(1)+' '+left[i][1].toFixed(1);}
+    d+=' Z';
+    let veins='<path d="M60 8 Q '+(60+bend*.5).toFixed(1)+' 70 '+(60+bend*.8).toFixed(1)+' 132" stroke="'+shade(base,.55)+'" stroke-width="1.3" fill="none" opacity=".85"/>';
+    for(let k=1;k<8;k++){
+      const t=k/8;
+      const y=8+t*126;
+      const cx=60+bend*Math.sin(Math.PI*t);
+      const w=Math.sin(Math.PI*Math.pow(t,.8))*wscale;
+      const dir=(k%2?1:-1);
+      veins+='<path d="M'+cx.toFixed(1)+' '+y.toFixed(1)+' Q '+(cx+dir*w*.55).toFixed(1)+' '+(y+4).toFixed(1)+' '+(cx+dir*w*.97).toFixed(1)+' '+(y+7).toFixed(1)+'" stroke="'+shade(base,.6)+'" stroke-width="1" fill="none" opacity=".7"/>';
+    }
+    const rot=(Math.random()*16-8).toFixed(1);
+    return '<svg viewBox="0 0 120 150"><defs><linearGradient id="'+gid+'" x1="0" y1="0" x2="1" y2="1">'
+      +'<stop offset="0" stop-color="'+shade(base,1.22)+'"/>'
+      +'<stop offset=".55" stop-color="'+base+'"/>'
+      +'<stop offset="1" stop-color="'+shade(base,.55)+'"/>'
+      +'</linearGradient></defs><g transform="rotate('+rot+' 60 75)">'
+      +'<path d="'+d+'" fill="url(#'+gid+')"/>'+veins
+      +'<path d="M'+(60+bend*.8).toFixed(1)+' 128 Q 62 140 '+(60+bend*.9).toFixed(1)+' 146" stroke="'+shade(base,.65)+'" stroke-width="1.6" fill="none"/></g></svg>';
+  }
+  /* three large, distinct leaves */
+  const picks=[...colors].sort(()=>Math.random()-.5).slice(0,3);
+  for(let i=0;i<picks.length;i++){
+    const l=document.createElement('span');
+    l.className='leaf';
+    l.innerHTML=leafSVG(picks[i], Math.random()*20);
+    l.style.left=(4+Math.random()*82)+'%';
+    l.style.width=(150+Math.random()*110)+'px';
+    l.style.setProperty('--dur',(13+Math.random()*8)+'s');
+    l.style.setProperty('--delay',(-Math.random()*20)+'s');
+    box.appendChild(l);
+  }
+})();
+
+/* ============ dust motes ============ */
+(()=>{
+  const dust=document.getElementById('dust');
+  for(let i=0;i<26;i++){
+    const d=document.createElement('i');
+    const s=2+Math.random()*5;
+    d.style.width=s+'px'; d.style.height=s+'px';
+    d.style.left=Math.random()*100+'%';
+    d.style.animationDuration=(16+Math.random()*26)+'s';
+    d.style.animationDelay=(-Math.random()*30)+'s';
+    dust.appendChild(d);
+  }
+})();
+
+/* ============ tilts (axonometric + floor plan) ============ */
+(()=>{
+  if(!matchMedia('(pointer:fine)').matches) return;
+  ['axo','planTilt'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('pointermove',e=>{
+      const r=el.getBoundingClientRect();
+      const px=(e.clientX-r.left)/r.width-.5, py=(e.clientY-r.top)/r.height-.5;
+      el.style.transform=`rotateY(${px*10}deg) rotateX(${-py*8}deg) translateY(-4px)`;
+    });
+    el.addEventListener('pointerleave',()=>{ el.style.transform=''; });
+  });
+})();
+
+/* ============ lightbox ============ */
+(()=>{
+  const lb=document.createElement('div');
+  lb.className='lightbox'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-label','Image viewer');
+  lb.innerHTML='<div class="lb-frame"><img alt=""><div class="lb-cap"><span class="lb-txt"></span><span class="lb-idx"></span></div></div>'
+    +'<button class="lb-close" aria-label="Close">✕</button>'
+    +'<button class="lb-prev lb-nav" aria-label="Previous image">‹</button>'
+    +'<button class="lb-next lb-nav" aria-label="Next image">›</button>';
+  document.body.appendChild(lb);
+  let items=[], idx=0;
+  const show=(i)=>{ idx=(i+items.length)%items.length;
+    lb.querySelector('img').src=items[idx].src;
+    lb.querySelector('img').alt=items[idx].alt||'';
+    lb.querySelector('.lb-txt').textContent=items[idx].closest('figure')?.querySelector('figcaption')?.textContent
+      || items[idx].closest('.axo')?.querySelector('.axo-tag')?.textContent || '';
+    lb.querySelector('.lb-idx').textContent=(idx+1)+' / '+items.length; };
+  const open=()=>{ lb.classList.add('open'); document.body.style.overflow='hidden'; };
+  const close=()=>{ lb.classList.remove('open'); document.body.style.overflow=''; };
+  lb.querySelector('.lb-close').addEventListener('click',close);
+  lb.querySelector('.lb-prev').addEventListener('click',()=>show(idx-1));
+  lb.querySelector('.lb-next').addEventListener('click',()=>show(idx+1));
+  lb.addEventListener('click',e=>{ if(e.target===lb) close(); });
+  document.addEventListener('keydown',e=>{ if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') close();
+    if(e.key==='ArrowLeft') show(idx-1);
+    if(e.key==='ArrowRight') show(idx+1); });
+  items=[...document.querySelectorAll('.fold-gal .f-item img, .axo img')];
+  items.forEach((im,i)=>{
+    im.closest('.f-item, .axo').addEventListener('click',()=>{ show(i); open(); });
+  });
+})();
+</script>
+<script src="assets/js/i18n.js?v=2"></script>
+</body>
+</html>
