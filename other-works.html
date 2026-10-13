@@ -172,6 +172,24 @@ body{
 @media (max-width:560px){.lenovo-grid{grid-template-columns:1fr}.mailer-row{grid-template-columns:1fr}}
 .mailer-row{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.4vw,26px);align-items:stretch}
 
+/* ---------- photography gallery ---------- */
+.photo-grid{margin-top:34px;columns:3;column-gap:clamp(14px,2.4vw,26px)}
+.photo-fig{
+  position:relative;display:inline-block;width:100%;margin:0 0 clamp(14px,2.4vw,26px);
+  break-inside:avoid;border-radius:12px;overflow:hidden;cursor:zoom-in;
+  border:1px solid var(--line);background:#fff;box-shadow:0 16px 44px rgba(51,36,29,.22);
+  transition:transform .6s var(--ease-out),box-shadow .6s;
+}
+.photo-fig:hover{transform:translateY(-6px);box-shadow:0 26px 70px rgba(51,36,29,.32)}
+.photo-fig img{width:100%;display:block;transition:transform .9s var(--ease-out)}
+.photo-fig:hover img{transform:scale(1.04)}
+.photo-fig .l-cap{
+  position:absolute;left:12px;bottom:10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:#fff;background:rgba(51,36,29,.62);padding:5px 14px;border-radius:20px;
+}
+@media (max-width:900px){.photo-grid{columns:2}}
+@media (max-width:560px){.photo-grid{columns:1}}
+
 /* ---------- music room ---------- */
 .music-room{
   padding:clamp(60px,9vw,110px) clamp(18px,5vw,70px);
@@ -297,7 +315,7 @@ body{
     <a class="menu-item" href="perception.html" data-en="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.24s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Graphic&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.24s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;平面&lt;/span&gt;"><span class="m-num">04</span><span class="m-title" style="transition-delay:.24s">Perception</span><span class="m-tag">Graphic</span></a>
     <a class="menu-item" href="formation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.28s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;3D · Fabrication&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.28s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;3D · 制造&lt;/span&gt;"><span class="m-num">05</span><span class="m-title" style="transition-delay:.28s">Formation</span><span class="m-tag">3D · Fabrication</span></a>
     <a class="menu-item" href="speculation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.32s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Future Library&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.32s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;未来图书馆&lt;/span&gt;"><span class="m-num">06</span><span class="m-title" style="transition-delay:.32s">Speculation</span><span class="m-tag">Future Library</span></a>
-    <a class="menu-item" href="other-works.html" data-en="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;&gt;Other Works&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Point Cloud · Music&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;&gt;其他作品&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;点云 · 音乐&lt;/span&gt;"><span class="m-num">07</span><span class="m-title" style="transition-delay:.36s">Other Works</span><span class="m-tag">Point Cloud · Music</span></a>
+    <a class="menu-item" href="other-works.html" data-en="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;&gt;Other Works&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Photo · Music&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;&gt;其他作品&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;摄影 · 音乐&lt;/span&gt;"><span class="m-num">07</span><span class="m-title" style="transition-delay:.36s">Other Works</span><span class="m-tag">Photo · Music</span></a>
     <a class="menu-item" href="about.html" data-en="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.40s&quot;&gt;About&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Contact&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.40s&quot;&gt;关于&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;联系&lt;/span&gt;"><span class="m-num">08</span><span class="m-title" style="transition-delay:.40s">About</span><span class="m-tag">Contact</span></a>
   </div>
   <div class="menu-foot">
@@ -314,55 +332,12 @@ body{
   <div class="window" aria-hidden="true"></div>
   <p class="p-kicker" data-en="The attic — beyond the six projects" data-zh="阁楼 — 六个项目之外">The attic — beyond the six projects</p>
   <h1>Other<br><span class="stroke">Works</span></h1>
-  <p class="p-sub" data-en="Point clouds, products &amp;amp; music — the experiments between projects" data-zh="点云、产品与音乐 — 项目之间的实验">Point clouds, products &amp; music — the experiments between projects</p>
+  <p class="p-sub" data-en="Products, photography, point clouds &amp;amp; music — the experiments between projects" data-zh="产品、摄影、点云与音乐 — 项目之间的实验">Products, photography, point clouds &amp; music — the experiments between projects</p>
   <div class="hero-chips">
-    <a class="hero-chip" href="#pointcloud" data-en="◈ Point Cloud" data-zh="◈ 点云">◈ Point Cloud</a>
     <a class="hero-chip" href="#lenovo" data-en="▣ Lenovo · Amazon" data-zh="▣ 联想 · 亚马逊">▣ Lenovo · Amazon</a>
+    <a class="hero-chip" href="#photography" data-en="❖ Photography" data-zh="❖ 摄影">❖ Photography</a>
+    <a class="hero-chip" href="#pointcloud" data-en="◈ Point Cloud" data-zh="◈ 点云">◈ Point Cloud</a>
     <a class="hero-chip" href="#music" data-en="♪ Music — HIEee" data-zh="♪ 音乐 — HIEee">♪ Music — HIEee</a>
-  </div>
-</section>
-
-<!-- ============ POINT CLOUD ============ -->
-<section class="sect" id="pointcloud" aria-label="Point cloud studio">
-  <div class="s-inner">
-    <div class="s-head reveal">
-      <span class="mono-label" data-en="01 — Point Cloud" data-zh="01 — 点云">01 — Point Cloud</span>
-      <h2 data-en="Cyberpunk &lt;em&gt;Studio&lt;/em&gt;" data-zh="赛博朋克&lt;em&gt;工作室&lt;/em&gt;">Cyberpunk <em>Studio</em></h2>
-    </div>
-    <p class="reveal" data-en="A scanned world, rebuilt as pure light. Drag to orbit, scroll to zoom — the raw .ply is yours to download." data-zh="一个被扫描的世界，以纯粹的光重建。拖拽旋转，滚轮缩放——原始 .ply 文件可供下载。">A scanned world, rebuilt as pure light. Drag to orbit, scroll to zoom — the raw .ply is yours to download.</p>
-
-    <div class="pc-hold reveal">
-      <div class="pc-viewer" id="pcViewer">
-        <div class="pc-loading" id="pcLoading">
-          <span class="spinner" aria-hidden="true"></span>
-          <span data-en="Scanning the room ..." data-zh="正在扫描房间 ...">Scanning the room ...</span>
-        </div>
-        <div class="pc-fallback" aria-hidden="true">
-          <img src="assets/img/other-cyberpunk.jpg" alt="Cyberpunk studio point cloud render">
-        </div>
-        <span class="pc-hint" data-en="Drag to orbit · scroll to zoom" data-zh="拖拽旋转 · 滚轮缩放">Drag to orbit · scroll to zoom</span>
-      </div>
-      <div class="pc-side">
-        <div class="pc-card">
-          <b data-en="About the scan" data-zh="关于扫描">About the scan</b>
-          <p data-en="A cyberpunk studio captured as a point cloud — every surface dissolved into coordinates, then rebuilt as a navigable memory of a space that never existed." data-zh="一个被点云捕捉的赛博朋克工作室——每一面都化为坐标，再重建成一段可漫游的记忆：一个从未存在的空间。">A cyberpunk studio captured as a point cloud — every surface dissolved into coordinates, then rebuilt as a navigable memory of a space that never existed.</p>
-        </div>
-        <div class="pc-card">
-          <b data-en="The file" data-zh="文件">The file</b>
-          <p data-en="cyberpunk_studio.ply · 5.4 MB · point cloud format, opens in CloudCompare, MeshLab, Blender, or any PLY viewer." data-zh="cyberpunk_studio.ply · 5.4 MB · 点云格式，可用 CloudCompare、MeshLab、Blender 或任意 PLY 查看器打开。">cyberpunk_studio.ply · 5.4 MB · point cloud format, opens in CloudCompare, MeshLab, Blender, or any PLY viewer.</p>
-        </div>
-        <div class="pc-btns">
-          <a class="btn solid" href="assets/files/cyberpunk_studio.ply" download data-en="Download .ply ↓" data-zh="下载 .ply ↓">Download .ply ↓</a>
-          <a class="btn" href="assets/img/other-cyberpunk.jpg" target="_blank" data-en="Open render ↗" data-zh="查看渲染图 ↗">Open render ↗</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- the render — same page as the model -->
-    <figure class="pc-render reveal">
-      <img src="assets/img/other-cyberpunk.jpg" alt="Cyberpunk studio — point cloud render, creative experiment" loading="lazy">
-      <figcaption data-en="Creative experiment — the studio, rendered from the point cloud &lt;b&gt;· click to enlarge&lt;/b&gt;" data-zh="创意实验 — 从点云渲染的工作室 &lt;b&gt;· 点击放大&lt;/b&gt;">Creative experiment — the studio, rendered from the point cloud <b>· click to enlarge</b></figcaption>
-    </figure>
   </div>
 </section>
 
@@ -370,7 +345,7 @@ body{
 <section class="sect" id="lenovo" aria-label="Lenovo Amazon product graphic design">
   <div class="s-inner">
     <div class="s-head reveal">
-      <span class="mono-label" data-en="02 — Lenovo · Amazon" data-zh="02 — 联想 · 亚马逊">02 — Lenovo · Amazon</span>
+      <span class="mono-label" data-en="01 — Lenovo · Amazon" data-zh="01 — 联想 · 亚马逊">01 — Lenovo · Amazon</span>
       <h2 data-en="Product &lt;em&gt;Graphic&lt;/em&gt; Design" data-zh="产品&lt;em&gt;平面&lt;/em&gt;设计">Product <em>Graphic</em> Design</h2>
     </div>
     <p class="reveal" data-en="At Lenovo Beijing HQ I designed the product graphics for the Amazon storefront — turning the specifications of the Options &amp;amp; Accessories portfolio into visual assets, from photography coordination to the final layouts, now live on Lenovo's official Amazon pages." data-zh="在联想北京总部，我为亚马逊店铺设计产品平面视觉——将选件与配件产品线的规格转化为视觉资产，从拍摄协调到最终排版，现已上线联想官方亚马逊页面。">At Lenovo Beijing HQ I designed the product graphics for the Amazon storefront — turning the specifications of the Options &amp; Accessories portfolio into visual assets, from photography coordination to the final layouts, now live on Lenovo's official Amazon pages.</p>
@@ -417,11 +392,100 @@ body{
   </div>
 </section>
 
+<!-- ============ PHOTOGRAPHY ============ -->
+<section class="sect" id="photography" aria-label="Photography series">
+  <div class="s-inner">
+    <div class="s-head reveal">
+      <span class="mono-label" data-en="02 — Photography" data-zh="02 — 摄影">02 — Photography</span>
+      <h2 data-en="Through the &lt;em&gt;Lens&lt;/em&gt;" data-zh="透过&lt;em&gt;镜头&lt;/em&gt;">Through the <em>Lens</em></h2>
+    </div>
+    <p class="reveal" data-en="Three photographic series — city, people, and artworks — fragments of light collected between design projects. Click any frame to enlarge." data-zh="三组摄影系列——城市、人物与艺术品——在设计项目之间收集的光的片段。点击任意照片可放大。">Three photographic series — city, people, and artworks — fragments of light collected between design projects. Click any frame to enlarge.</p>
+
+    <p class="mono-label reveal" style="margin:34px 0 12px;color:var(--accent)" data-en="Series 01 — City" data-zh="系列 01 — 城市">Series 01 — City</p>
+    <div class="photo-grid">
+      <figure class="photo-fig reveal"><img src="assets/img/photos/city-01.jpg" alt="Photography city series 01" loading="lazy"><figcaption class="l-cap" data-en="City · 01" data-zh="城市 · 01">City · 01</figcaption></figure>
+      <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/city-02.jpg" alt="Photography city series 02" loading="lazy"><figcaption class="l-cap" data-en="City · 02" data-zh="城市 · 02">City · 02</figcaption></figure>
+      <figure class="photo-fig reveal"><img src="assets/img/photos/city-03.jpg" alt="Photography city series 03" loading="lazy"><figcaption class="l-cap" data-en="City · 03" data-zh="城市 · 03">City · 03</figcaption></figure>
+      <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/city-04.jpg" alt="Photography city series 04" loading="lazy"><figcaption class="l-cap" data-en="City · 04" data-zh="城市 · 04">City · 04</figcaption></figure>
+      <figure class="photo-fig reveal"><img src="assets/img/photos/city-05.jpg" alt="Photography city series 05" loading="lazy"><figcaption class="l-cap" data-en="City · 05" data-zh="城市 · 05">City · 05</figcaption></figure>
+      <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/city-06.jpg" alt="Photography city series 06" loading="lazy"><figcaption class="l-cap" data-en="City · 06" data-zh="城市 · 06">City · 06</figcaption></figure>
+      <figure class="photo-fig reveal"><img src="assets/img/photos/city-07.jpg" alt="Photography city series 07" loading="lazy"><figcaption class="l-cap" data-en="City · 07" data-zh="城市 · 07">City · 07</figcaption></figure>
+      <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/city-08.jpg" alt="Photography city series 08" loading="lazy"><figcaption class="l-cap" data-en="City · 08" data-zh="城市 · 08">City · 08</figcaption></figure>
+      <figure class="photo-fig reveal"><img src="assets/img/photos/city-09.jpg" alt="Photography city series 09" loading="lazy"><figcaption class="l-cap" data-en="City · 09" data-zh="城市 · 09">City · 09</figcaption></figure>
+    </div>
+
+    <p class="mono-label reveal" style="margin:34px 0 12px;color:var(--accent)" data-en="Series 02 — People" data-zh="系列 02 — 人物">Series 02 — People</p>
+    <div class="photo-grid">
+      <figure class="photo-fig reveal"><img src="assets/img/photos/people-01.jpg" alt="Photography people series 01" loading="lazy"><figcaption class="l-cap" data-en="People · 01" data-zh="人物 · 01">People · 01</figcaption></figure>
+      <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/people-02.jpg" alt="Photography people series 02" loading="lazy"><figcaption class="l-cap" data-en="People · 02" data-zh="人物 · 02">People · 02</figcaption></figure>
+      <figure class="photo-fig reveal"><img src="assets/img/photos/people-03.jpg" alt="Photography people series 03" loading="lazy"><figcaption class="l-cap" data-en="People · 03" data-zh="人物 · 03">People · 03</figcaption></figure>
+      <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/people-04.jpg" alt="Photography people series 04" loading="lazy"><figcaption class="l-cap" data-en="People · 04" data-zh="人物 · 04">People · 04</figcaption></figure>
+      <figure class="photo-fig reveal"><img src="assets/img/photos/people-05.jpg" alt="Photography people series 05" loading="lazy"><figcaption class="l-cap" data-en="People · 05" data-zh="人物 · 05">People · 05</figcaption></figure>
+      <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/people-06.jpg" alt="Photography people series 06" loading="lazy"><figcaption class="l-cap" data-en="People · 06" data-zh="人物 · 06">People · 06</figcaption></figure>
+      <figure class="photo-fig reveal"><img src="assets/img/photos/people-07.jpg" alt="Photography people series 07" loading="lazy"><figcaption class="l-cap" data-en="People · 07" data-zh="人物 · 07">People · 07</figcaption></figure>
+    </div>
+
+    <p class="mono-label reveal" style="margin:34px 0 12px;color:var(--accent)" data-en="Series 03 — Artworks" data-zh="系列 03 — 艺术品">Series 03 — Artworks</p>
+    <div class="photo-grid">
+      <figure class="photo-fig reveal"><img src="assets/img/photos/art-01.jpg" alt="Photography artworks series 01" loading="lazy"><figcaption class="l-cap" data-en="Artworks · 01" data-zh="艺术品 · 01">Artworks · 01</figcaption></figure>
+      <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/art-02.jpg" alt="Photography artworks series 02" loading="lazy"><figcaption class="l-cap" data-en="Artworks · 02" data-zh="艺术品 · 02">Artworks · 02</figcaption></figure>
+      <figure class="photo-fig reveal"><img src="assets/img/photos/art-03.jpg" alt="Photography artworks series 03" loading="lazy"><figcaption class="l-cap" data-en="Artworks · 03" data-zh="艺术品 · 03">Artworks · 03</figcaption></figure>
+      <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/art-04.jpg" alt="Photography artworks series 04" loading="lazy"><figcaption class="l-cap" data-en="Artworks · 04" data-zh="艺术品 · 04">Artworks · 04</figcaption></figure>
+      <figure class="photo-fig reveal"><img src="assets/img/photos/art-05.jpg" alt="Photography artworks series 05" loading="lazy"><figcaption class="l-cap" data-en="Artworks · 05" data-zh="艺术品 · 05">Artworks · 05</figcaption></figure>
+      <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/art-06.jpg" alt="Photography artworks series 06" loading="lazy"><figcaption class="l-cap" data-en="Artworks · 06" data-zh="艺术品 · 06">Artworks · 06</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POINT CLOUD ============ -->
+<section class="sect" id="pointcloud" aria-label="Point cloud studio">
+  <div class="s-inner">
+    <div class="s-head reveal">
+      <span class="mono-label" data-en="03 — Point Cloud" data-zh="03 — 点云">03 — Point Cloud</span>
+      <h2 data-en="Cyberpunk &lt;em&gt;Studio&lt;/em&gt;" data-zh="赛博朋克&lt;em&gt;工作室&lt;/em&gt;">Cyberpunk <em>Studio</em></h2>
+    </div>
+    <p class="reveal" data-en="A scanned world, rebuilt as pure light. Drag to orbit, scroll to zoom — the raw .ply is yours to download." data-zh="一个被扫描的世界，以纯粹的光重建。拖拽旋转，滚轮缩放——原始 .ply 文件可供下载。">A scanned world, rebuilt as pure light. Drag to orbit, scroll to zoom — the raw .ply is yours to download.</p>
+
+    <div class="pc-hold reveal">
+      <div class="pc-viewer" id="pcViewer">
+        <div class="pc-loading" id="pcLoading">
+          <span class="spinner" aria-hidden="true"></span>
+          <span data-en="Scanning the room ..." data-zh="正在扫描房间 ...">Scanning the room ...</span>
+        </div>
+        <div class="pc-fallback" aria-hidden="true">
+          <img src="assets/img/other-cyberpunk.jpg" alt="Cyberpunk studio point cloud render">
+        </div>
+        <span class="pc-hint" data-en="Drag to orbit · scroll to zoom" data-zh="拖拽旋转 · 滚轮缩放">Drag to orbit · scroll to zoom</span>
+      </div>
+      <div class="pc-side">
+        <div class="pc-card">
+          <b data-en="About the scan" data-zh="关于扫描">About the scan</b>
+          <p data-en="A cyberpunk studio captured as a point cloud — every surface dissolved into coordinates, then rebuilt as a navigable memory of a space that never existed." data-zh="一个被点云捕捉的赛博朋克工作室——每一面都化为坐标，再重建成一段可漫游的记忆：一个从未存在的空间。">A cyberpunk studio captured as a point cloud — every surface dissolved into coordinates, then rebuilt as a navigable memory of a space that never existed.</p>
+        </div>
+        <div class="pc-card">
+          <b data-en="The file" data-zh="文件">The file</b>
+          <p data-en="cyberpunk_studio.ply · 5.4 MB · point cloud format, opens in CloudCompare, MeshLab, Blender, or any PLY viewer." data-zh="cyberpunk_studio.ply · 5.4 MB · 点云格式，可用 CloudCompare、MeshLab、Blender 或任意 PLY 查看器打开。">cyberpunk_studio.ply · 5.4 MB · point cloud format, opens in CloudCompare, MeshLab, Blender, or any PLY viewer.</p>
+        </div>
+        <div class="pc-btns">
+          <a class="btn solid" href="assets/files/cyberpunk_studio.ply" download data-en="Download .ply ↓" data-zh="下载 .ply ↓">Download .ply ↓</a>
+          <a class="btn" href="assets/img/other-cyberpunk.jpg" target="_blank" data-en="Open render ↗" data-zh="查看渲染图 ↗">Open render ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- the render — same page as the model -->
+    <figure class="pc-render reveal">
+      <img src="assets/img/other-cyberpunk.jpg" alt="Cyberpunk studio — point cloud render, creative experiment" loading="lazy">
+      <figcaption data-en="Creative experiment — the studio, rendered from the point cloud &lt;b&gt;· click to enlarge&lt;/b&gt;" data-zh="创意实验 — 从点云渲染的工作室 &lt;b&gt;· 点击放大&lt;/b&gt;">Creative experiment — the studio, rendered from the point cloud <b>· click to enlarge</b></figcaption>
+    </figure>
+  </div>
+</section>
+
 <!-- ============ MUSIC ============ -->
 <section class="music-room" id="music" aria-label="Music room">
   <div class="mr-inner">
     <div class="s-head reveal">
-      <span class="mono-label" data-en="03 — Music" data-zh="03 — 音乐">03 — Music</span>
+      <span class="mono-label" data-en="04 — Music" data-zh="04 — 音乐">04 — Music</span>
       <h2 data-en="The &lt;em&gt;Listening&lt;/em&gt; Room" data-zh="&lt;em&gt;聆听&lt;/em&gt;室">The <em>Listening</em> Room</h2>
     </div>
     <p class="reveal" style="margin-bottom:36px;color:#6d5848" data-en="Original music under the name &lt;b&gt;HIEee&lt;/b&gt;, streaming on NetEase Cloud Music. Put a record on." data-zh="以 &lt;b&gt;HIEee&lt;/b&gt; 之名发布的原创音乐，收录于网易云音乐。放上一张唱片吧。">Original music under the name <b>HIEee</b>, streaming on NetEase Cloud Music. Put a record on.</p>
@@ -601,9 +665,9 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     if(e.key==='Escape') close();
     if(e.key==='ArrowLeft') show(idx-1);
     if(e.key==='ArrowRight') show(idx+1); });
-  items=[...document.querySelectorAll('.l-card img, .l-strip img, .pc-render img')];
+  items=[...document.querySelectorAll('.l-card img, .l-strip img, .pc-render img, .photo-fig img')];
   items.forEach(im=>{
-    im.closest('.l-card, .l-strip, .pc-render').addEventListener('click',e=>{
+    im.closest('.l-card, .l-strip, .pc-render, .photo-fig').addEventListener('click',e=>{
       e.preventDefault(); show(items.indexOf(im)); open();
     });
   });
