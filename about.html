@@ -178,6 +178,9 @@ body.cursor-link .cursor-ring::before,body.cursor-link .cursor-ring::after{backg
 .skill:hover{background:var(--ink);color:var(--paper)}
 .skill.hot{color:var(--red)}
 .skill.hot:hover{background:var(--red);color:#fff}
+/* skills-fill: wrap chips so every row stretches to the same full width */
+.skills-fill{display:flex;flex-wrap:wrap}
+.skills-fill .skill{flex:1 1 150px}
 
 /* strengths — bracketed cards */
 .strengths{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(16px,2.4vw,26px)}
@@ -415,7 +418,7 @@ body.cursor-link .cursor-ring::before,body.cursor-link .cursor-ring::after{backg
       <span class="skill">Photoshop</span><span class="skill">Illustrator</span><span class="skill">InDesign</span><span class="skill">Figma</span><span class="skill">Miro</span><span class="skill">CapCut</span>
     </div>
     <p class="mono-label reveal" style="margin:24px 0 12px;color:var(--muted)" data-en="AI Tools" data-zh="AI 工具">AI Tools</p>
-    <div class="skills reveal">
+    <div class="skills skills-fill reveal">
       <span class="skill hot">Claude Code</span><span class="skill hot">Codex</span><span class="skill hot">DeepSeek</span><span class="skill hot">Midjourney</span><span class="skill hot">Seedance</span><span class="skill hot">Seedream</span><span class="skill hot">Nano Banana</span><span class="skill hot">Kling</span><span class="skill hot">Tripo 3D</span>
     </div>
     <p class="mono-label reveal" style="margin:24px 0 12px;color:var(--muted)" data-en="Operations &amp;amp; Data" data-zh="运营与数据">Operations &amp; Data</p>
