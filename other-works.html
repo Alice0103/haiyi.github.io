@@ -190,6 +190,20 @@ body{
 @media (max-width:900px){.photo-grid{columns:2}}
 @media (max-width:560px){.photo-grid{columns:1}}
 
+/* photography tabs */
+.photo-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.photo-tab{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);border:1px solid var(--accent);background:transparent;
+  padding:10px 20px;border-radius:30px;cursor:pointer;
+  transition:background .3s,color .3s,transform .3s;
+}
+.photo-tab:hover{transform:translateY(-2px)}
+.photo-tab.active{background:var(--accent);color:var(--paper)}
+.photo-panel .photo-grid{margin-top:18px}
+.photo-panel{animation:panelIn .55s var(--ease-out) both}
+@keyframes panelIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
 /* ---------- music room ---------- */
 .music-room{
   padding:clamp(60px,9vw,110px) clamp(18px,5vw,70px);
@@ -399,10 +413,16 @@ body{
       <span class="mono-label" data-en="02 — Photography" data-zh="02 — 摄影">02 — Photography</span>
       <h2 data-en="Through the &lt;em&gt;Lens&lt;/em&gt;" data-zh="透过&lt;em&gt;镜头&lt;/em&gt;">Through the <em>Lens</em></h2>
     </div>
-    <p class="reveal" data-en="Three photographic series — city, people, and artworks — fragments of light collected between design projects. Click any frame to enlarge." data-zh="三组摄影系列——城市、人物与艺术品——在设计项目之间收集的光的片段。点击任意照片可放大。">Three photographic series — city, people, and artworks — fragments of light collected between design projects. Click any frame to enlarge.</p>
+    <p class="reveal" data-en="Three photographic series — city, people, and artworks — fragments of light collected between design projects. Choose a series below, click any frame to enlarge." data-zh="三组摄影系列——城市、人物与艺术品——在设计项目之间收集的光的片段。点击下方选项卡切换系列，点击任意照片可放大。">Three photographic series — city, people, and artworks — fragments of light collected between design projects. Click any frame to enlarge.</p>
 
-    <p class="mono-label reveal" style="margin:34px 0 12px;color:var(--accent)" data-en="Series 01 — City" data-zh="系列 01 — 城市">Series 01 — City</p>
-    <div class="photo-grid">
+    <div class="photo-tabs reveal" role="tablist" aria-label="Photography series">
+      <button class="photo-tab active" role="tab" aria-selected="true" aria-controls="ph-city" data-en="Series 01 — City" data-zh="系列 01 — 城市">Series 01 — City</button>
+      <button class="photo-tab" role="tab" aria-selected="false" aria-controls="ph-people" data-en="Series 02 — People" data-zh="系列 02 — 人物">Series 02 — People</button>
+      <button class="photo-tab" role="tab" aria-selected="false" aria-controls="ph-art" data-en="Series 03 — Artworks" data-zh="系列 03 — 艺术品">Series 03 — Artworks</button>
+    </div>
+
+    <div class="photo-panel" id="ph-city" role="tabpanel">
+      <div class="photo-grid">
       <figure class="photo-fig reveal"><img src="assets/img/photos/city-01.jpg" alt="Photography city series 01" loading="lazy"><figcaption class="l-cap" data-en="City · 01" data-zh="城市 · 01">City · 01</figcaption></figure>
       <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/city-02.jpg" alt="Photography city series 02" loading="lazy"><figcaption class="l-cap" data-en="City · 02" data-zh="城市 · 02">City · 02</figcaption></figure>
       <figure class="photo-fig reveal"><img src="assets/img/photos/city-03.jpg" alt="Photography city series 03" loading="lazy"><figcaption class="l-cap" data-en="City · 03" data-zh="城市 · 03">City · 03</figcaption></figure>
@@ -412,10 +432,11 @@ body{
       <figure class="photo-fig reveal"><img src="assets/img/photos/city-07.jpg" alt="Photography city series 07" loading="lazy"><figcaption class="l-cap" data-en="City · 07" data-zh="城市 · 07">City · 07</figcaption></figure>
       <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/city-08.jpg" alt="Photography city series 08" loading="lazy"><figcaption class="l-cap" data-en="City · 08" data-zh="城市 · 08">City · 08</figcaption></figure>
       <figure class="photo-fig reveal"><img src="assets/img/photos/city-09.jpg" alt="Photography city series 09" loading="lazy"><figcaption class="l-cap" data-en="City · 09" data-zh="城市 · 09">City · 09</figcaption></figure>
+      </div>
     </div>
 
-    <p class="mono-label reveal" style="margin:34px 0 12px;color:var(--accent)" data-en="Series 02 — People" data-zh="系列 02 — 人物">Series 02 — People</p>
-    <div class="photo-grid">
+    <div class="photo-panel" id="ph-people" role="tabpanel" hidden>
+      <div class="photo-grid">
       <figure class="photo-fig reveal"><img src="assets/img/photos/people-01.jpg" alt="Photography people series 01" loading="lazy"><figcaption class="l-cap" data-en="People · 01" data-zh="人物 · 01">People · 01</figcaption></figure>
       <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/people-02.jpg" alt="Photography people series 02" loading="lazy"><figcaption class="l-cap" data-en="People · 02" data-zh="人物 · 02">People · 02</figcaption></figure>
       <figure class="photo-fig reveal"><img src="assets/img/photos/people-03.jpg" alt="Photography people series 03" loading="lazy"><figcaption class="l-cap" data-en="People · 03" data-zh="人物 · 03">People · 03</figcaption></figure>
@@ -423,16 +444,18 @@ body{
       <figure class="photo-fig reveal"><img src="assets/img/photos/people-05.jpg" alt="Photography people series 05" loading="lazy"><figcaption class="l-cap" data-en="People · 05" data-zh="人物 · 05">People · 05</figcaption></figure>
       <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/people-06.jpg" alt="Photography people series 06" loading="lazy"><figcaption class="l-cap" data-en="People · 06" data-zh="人物 · 06">People · 06</figcaption></figure>
       <figure class="photo-fig reveal"><img src="assets/img/photos/people-07.jpg" alt="Photography people series 07" loading="lazy"><figcaption class="l-cap" data-en="People · 07" data-zh="人物 · 07">People · 07</figcaption></figure>
+      </div>
     </div>
 
-    <p class="mono-label reveal" style="margin:34px 0 12px;color:var(--accent)" data-en="Series 03 — Artworks" data-zh="系列 03 — 艺术品">Series 03 — Artworks</p>
-    <div class="photo-grid">
+    <div class="photo-panel" id="ph-art" role="tabpanel" hidden>
+      <div class="photo-grid">
       <figure class="photo-fig reveal"><img src="assets/img/photos/art-01.jpg" alt="Photography artworks series 01" loading="lazy"><figcaption class="l-cap" data-en="Artworks · 01" data-zh="艺术品 · 01">Artworks · 01</figcaption></figure>
       <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/art-02.jpg" alt="Photography artworks series 02" loading="lazy"><figcaption class="l-cap" data-en="Artworks · 02" data-zh="艺术品 · 02">Artworks · 02</figcaption></figure>
       <figure class="photo-fig reveal"><img src="assets/img/photos/art-03.jpg" alt="Photography artworks series 03" loading="lazy"><figcaption class="l-cap" data-en="Artworks · 03" data-zh="艺术品 · 03">Artworks · 03</figcaption></figure>
       <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/art-04.jpg" alt="Photography artworks series 04" loading="lazy"><figcaption class="l-cap" data-en="Artworks · 04" data-zh="艺术品 · 04">Artworks · 04</figcaption></figure>
       <figure class="photo-fig reveal"><img src="assets/img/photos/art-05.jpg" alt="Photography artworks series 05" loading="lazy"><figcaption class="l-cap" data-en="Artworks · 05" data-zh="艺术品 · 05">Artworks · 05</figcaption></figure>
       <figure class="photo-fig reveal reveal-d1"><img src="assets/img/photos/art-06.jpg" alt="Photography artworks series 06" loading="lazy"><figcaption class="l-cap" data-en="Artworks · 06" data-zh="艺术品 · 06">Artworks · 06</figcaption></figure>
+      </div>
     </div>
   </div>
 </section>
@@ -665,12 +688,27 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     if(e.key==='Escape') close();
     if(e.key==='ArrowLeft') show(idx-1);
     if(e.key==='ArrowRight') show(idx+1); });
-  items=[...document.querySelectorAll('.l-card img, .l-strip img, .pc-render img, .photo-fig img')];
-  items.forEach(im=>{
+  const baseItems=[...document.querySelectorAll('.l-card img, .l-strip img, .pc-render img')];
+  const collect=()=>baseItems.concat([...document.querySelectorAll('.photo-fig img')].filter(im=>im.offsetParent!==null));
+  document.querySelectorAll('.l-card img, .l-strip img, .pc-render img, .photo-fig img').forEach(im=>{
     im.closest('.l-card, .l-strip, .pc-render, .photo-fig').addEventListener('click',e=>{
-      e.preventDefault(); show(items.indexOf(im)); open();
+      e.preventDefault(); items=collect(); show(items.indexOf(im)); open();
     });
   });
+})();
+
+/* ============ photography tabs ============ */
+(()=>{
+  const tabs=[...document.querySelectorAll('.photo-tab')];
+  const panels=[...document.querySelectorAll('.photo-panel')];
+  if(!tabs.length) return;
+  const activate=tab=>{
+    tabs.forEach(t=>{t.classList.toggle('active',t===tab);t.setAttribute('aria-selected',t===tab?'true':'false');});
+    panels.forEach(p=>{p.hidden=(p.id!==tab.getAttribute('aria-controls'));});
+    const panel=document.getElementById(tab.getAttribute('aria-controls'));
+    panel.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+  };
+  tabs.forEach(tab=>tab.addEventListener('click',()=>activate(tab)));
 })();
 
 /* ============ 3D point cloud viewer (three.js, graceful fallback) ============ */
