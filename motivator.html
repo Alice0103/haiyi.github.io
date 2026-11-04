@@ -6,48 +6,75 @@
 <title>上班鼓励器</title>
 <style>
   :root{
-    --bg1:#0d1020; --bg2:#221436;
-    --body:#1c2138; --lcd:#0d1122; --line:#2b3152;
-    --gold:#f5c542; --green:#5ee08a; --pink:#f78bb3;
-    --text:#eef0ff; --muted:#8f96b8;
+    --bg1:#030a1c; --bg2:#071633;
+    --panel1:#0e1f47; --panel2:#132a5e;
+    --lcd:#02060f;
+    --line:#24407e; --line-dark:#0a1636;
+    --blue:#2f7bff; --cyan:#4fd8ff; --bright:#8fd4ff;
+    --text:#dce9ff; --muted:#6f8fc0;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{
     min-height:100vh;display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(150deg,var(--bg1),var(--bg2));
+    background:
+      repeating-linear-gradient(0deg, rgba(47,123,255,.05) 0 1px, transparent 1px 40px),
+      repeating-linear-gradient(90deg, rgba(47,123,255,.05) 0 1px, transparent 1px 40px),
+      linear-gradient(150deg,var(--bg1),var(--bg2));
     font-family:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
     color:var(--text);padding:14px;
   }
   .calc{
-    width:320px;background:var(--body);border:1px solid var(--line);
-    border-radius:20px;padding:14px 16px 12px;
-    box-shadow:0 20px 50px rgba(0,0,0,.5);
+    width:320px;position:relative;border-radius:16px;padding:16px;
+    background:linear-gradient(160deg,var(--panel1),var(--panel2));
+    border:1px solid var(--line);
+    box-shadow:
+      0 20px 50px rgba(0,0,0,.6),
+      inset 0 1px 0 rgba(255,255,255,.1),
+      inset 0 -2px 0 rgba(0,0,0,.4);
   }
-  .titlebar{display:flex;align-items:center;gap:5px;padding:0 2px 10px}
-  .dot{width:8px;height:8px;border-radius:50%;background:var(--line)}
-  .name{margin-left:6px;color:var(--muted);font-size:11px;letter-spacing:3px}
-  .lcd{background:var(--lcd);border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-align:center;font-variant-numeric:tabular-nums}
+  .screw{position:absolute;width:12px;height:12px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #3d5d9e, #16294f 60%, #0a1428);
+    box-shadow:inset 0 1px 2px rgba(255,255,255,.25), 0 1px 2px rgba(0,0,0,.6)}
+  .screw::after{content:'';position:absolute;left:2px;right:2px;top:5px;height:2px;background:#0a1428}
+  .tl{top:7px;left:7px}.tl::after{transform:rotate(45deg)}
+  .tr{top:7px;right:7px}.tr::after{transform:rotate(-45deg)}
+  .bl{bottom:7px;left:7px}.bl::after{transform:rotate(-45deg)}
+  .br{bottom:7px;right:7px}.br::after{transform:rotate(45deg)}
+  .titlebar{display:flex;align-items:center;gap:5px;padding:0 2px 12px}
+  .dot{width:8px;height:8px;border-radius:50%;background:#16305e;box-shadow:inset 0 1px 1px rgba(255,255,255,.15)}
+  .name{margin-left:6px;color:#8fb4e8;font-size:11px;letter-spacing:4px;font-weight:600}
+  .pwr{margin-left:auto;width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:blink 2s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+  .lcd{
+    background:var(--lcd);border:1px solid var(--line-dark);border-radius:10px;
+    padding:10px 12px;text-align:center;font-variant-numeric:tabular-nums;
+    box-shadow:inset 0 2px 8px rgba(0,0,0,.8), 0 0 12px rgba(47,123,255,.15);
+  }
   #date{color:var(--muted);font-size:11px}
-  #clock{font-size:28px;font-weight:700;margin-top:2px;letter-spacing:2px}
-  .row{padding:10px 2px;text-align:center;border-bottom:1px solid var(--line)}
+  #clock{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:26px;font-weight:700;margin-top:2px;letter-spacing:3px;color:var(--cyan);text-shadow:0 0 10px rgba(79,216,255,.6)}
+  .row{padding:10px 2px;text-align:center;border-bottom:1px dashed var(--line-dark)}
   .row:last-child{border-bottom:none;padding-bottom:2px}
-  .label{color:var(--muted);font-size:11px}
-  #countdown{font-size:24px;font-weight:700;color:var(--green);margin-top:2px;letter-spacing:1px;font-variant-numeric:tabular-nums}
-  #note{color:var(--pink);font-size:10px;margin-top:3px;min-height:13px}
-  #earned{font-size:34px;font-weight:800;color:var(--gold);margin-top:2px;font-variant-numeric:tabular-nums}
+  .label{color:var(--muted);font-size:11px;letter-spacing:1px}
+  #countdown{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:23px;font-weight:700;color:var(--cyan);margin-top:2px;letter-spacing:2px;font-variant-numeric:tabular-nums;text-shadow:0 0 8px rgba(79,216,255,.45)}
+  #note{color:#7ea6e0;font-size:10px;margin-top:3px;min-height:13px}
+  #earned{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:33px;font-weight:800;color:var(--bright);margin-top:2px;font-variant-numeric:tabular-nums;text-shadow:0 0 18px rgba(79,216,255,.5)}
   .rate{color:var(--muted);font-size:10px;margin-top:3px}
-  .bar{height:6px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;margin-top:8px}
-  #fill{height:100%;width:0%;background:linear-gradient(90deg,var(--green),var(--gold));border-radius:99px;transition:width .5s linear}
+  .bar{height:8px;background:#060d1f;border:1px solid var(--line-dark);border-radius:4px;overflow:hidden;position:relative;margin-top:8px;box-shadow:inset 0 2px 4px rgba(0,0,0,.7)}
+  .bar::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 calc(10% - 1px),#04070f calc(10% - 1px) 10%)}
+  #fill{height:100%;width:0%;background:linear-gradient(90deg,var(--blue),var(--cyan));box-shadow:0 0 10px rgba(79,216,255,.6);transition:width .5s linear}
   .meta{display:flex;justify-content:space-between;margin-top:6px;color:var(--muted);font-size:11px}
   #worked{color:var(--text);font-weight:600}
-  #month{font-size:20px;font-weight:700;color:var(--gold);margin-top:2px;font-variant-numeric:tabular-nums}
+  #month{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:20px;font-weight:700;color:var(--cyan);margin-top:2px;font-variant-numeric:tabular-nums;text-shadow:0 0 8px rgba(79,216,255,.4)}
 </style>
 </head>
 <body>
   <main class="calc">
+    <span class="screw tl"></span><span class="screw tr"></span>
+    <span class="screw bl"></span><span class="screw br"></span>
     <div class="titlebar">
       <span class="dot"></span><span class="dot"></span><span class="dot"></span>
       <span class="name">上班鼓励器</span>
+      <span class="pwr"></span>
     </div>
     <div class="lcd">
       <div id="date"></div>
