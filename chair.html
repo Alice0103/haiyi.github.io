@@ -83,8 +83,9 @@ body{background:#eef0f2;color:var(--ink)}
 
 /* gallery */
 .gal{margin-top:44px;display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(16px,3vw,28px);align-items:stretch}
-.g-chair{height:100%;min-height:420px}
-.g-chair img{aspect-ratio:auto;height:100%;object-fit:contain}
+.g-chair{height:100%;min-height:420px;display:flex;flex-direction:column}
+.g-chair img{aspect-ratio:auto;height:100%;object-fit:contain;flex:1;min-height:0}
+.g-item.g-full img{object-fit:contain;background:#fff}
 .g-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,28px)}
 .gal .g-item{
   border-radius:12px;overflow:hidden;position:relative;
@@ -249,14 +250,14 @@ body{background:#eef0f2;color:var(--ink)}
         </div>
 
         <div class="gal">
-          <figure class="g-item g-chair reveal"><img src="assets/img/form-chair.jpg" alt="Cantilevered swivel chair" loading="lazy"><figcaption data-en="The chair" data-zh="旋转椅">The chair</figcaption></figure>
+          <figure class="g-item g-chair reveal"><img src="assets/img/form-13.jpg" alt="The cantilevered swivel chair — full view" loading="lazy"><figcaption data-en="The chair — full view" data-zh="座椅 — 全貌">The chair — full view</figcaption></figure>
           <div class="g-grid">
             <figure class="g-item reveal"><img src="assets/img/form-7.jpg" alt="3D printed gears" loading="lazy"><figcaption data-en="3D printed gears" data-zh="3D 打印齿轮">3D printed gears</figcaption></figure>
             <figure class="g-item reveal reveal-d1"><img src="assets/img/form-12.jpg" alt="Veneer as the bearing structure" loading="lazy"><figcaption data-en="Veneer as bearing structure" data-zh="胶合板承重结构">Veneer as bearing structure</figcaption></figure>
             <figure class="g-item reveal"><img src="assets/img/form-9.jpg" alt="Dual use of bent lamination and digital fabrication" loading="lazy"><figcaption data-en="Dual use — bent lamination" data-zh="双重用途 — 弯曲层压">Dual use — bent lamination</figcaption></figure>
             <figure class="g-item reveal reveal-d1"><img src="assets/img/form-10.jpg" alt="Mechanism detail" loading="lazy"><figcaption data-en="Mechanism" data-zh="机械结构">Mechanism</figcaption></figure>
             <figure class="g-item reveal"><img src="assets/img/form-11.jpg" alt="Load bearing" loading="lazy"><figcaption data-en="Load bearing" data-zh="承重">Load bearing</figcaption></figure>
-            <figure class="g-item g-wide reveal"><img src="assets/img/form-13.jpg" alt="The cantilevered swivel chair — full view" loading="lazy"><figcaption data-en="The chair — full view" data-zh="座椅 — 全貌">The chair — full view</figcaption></figure>
+            <figure class="g-item g-full reveal reveal-d1"><img src="assets/img/form-chair.jpg" alt="Cantilevered swivel chair" loading="lazy"><figcaption data-en="The chair" data-zh="旋转椅">The chair</figcaption></figure>
           </div>
         </div>
       </div>
