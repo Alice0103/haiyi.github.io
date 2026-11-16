@@ -84,6 +84,12 @@ body{
 }
 .video-cap b{color:var(--accent)}
 
+/* ---------- disclaimer ---------- */
+.disclaimer{
+  max-width:1160px;margin:0 auto clamp(40px,6vw,60px);padding:0 clamp(18px,5vw,70px);
+  font-size:12px;letter-spacing:.14em;line-height:2;color:var(--muted);text-align:center;
+}
+
 /* ---------- process strip ---------- */
 .process-row{margin-top:36px;display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(12px,2vw,20px)}
 @media (max-width:900px){.process-row{grid-template-columns:repeat(3,1fr)}}
@@ -239,6 +245,8 @@ body{
     </div>
   </div>
 </section>
+
+<p class="disclaimer" data-en="This project is a practice exercise only — the brand is fictional and the design is for reference only." data-zh="该项目仅为练习项目，该品牌为虚构，设计仅供参考。">This project is a practice exercise only — the brand is fictional and the design is for reference only.</p>
 
 <!-- ============ NEXT ============ -->
 <a class="next-project" href="intersection.html" aria-label="Next: Intersection">
