@@ -370,18 +370,14 @@ addEventListener('scroll',()=>{ document.getElementById('siteNav').classList.tog
 
 const dot=document.querySelector('.cursor-dot'), ring=document.querySelector('.cursor-ring');
 if(matchMedia('(pointer:fine)').matches){
-  let cx=innerWidth/2, cy=innerHeight/2, rx=cx, ry=cy;
+  let cx=innerWidth/2, cy=innerHeight/2;
   addEventListener('pointermove',e=>{ cx=e.clientX; cy=e.clientY;
     dot.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+    ring.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;
     const t=e.target.closest('a,button,[data-cursor]');
     body.classList.toggle('cursor-link',!!t);
     body.classList.toggle('cursor-stamp',!!e.target.closest('[data-cursor="stamp"]'));
   });
-  (function ringLoop(){
-    rx+=(cx-rx)*.22; ry+=(cy-ry)*.22;
-    ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;
-    requestAnimationFrame(ringLoop);
-  })();
 }
 
 const io=new IntersectionObserver(es=>es.forEach(en=>{
