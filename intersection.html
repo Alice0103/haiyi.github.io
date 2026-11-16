@@ -72,7 +72,7 @@ body{background:var(--bg);color:var(--ink);transition:background .8s ease,color 
 }
 .hero .p-sub{position:relative;z-index:2;font-style:italic;font-size:clamp(18px,2.6vw,30px);color:var(--muted);margin-bottom:clamp(28px,5vh,50px)}
 .hero .hero-img{
-  position:relative;z-index:2;width:min(980px,100%);margin-left:auto;margin-right:0;border-radius:20px;overflow:hidden;
+  position:relative;z-index:2;width:min(980px,100%);margin-left:auto;margin-right:0;border-radius:0;overflow:hidden;
   box-shadow:0 30px 90px rgba(20,12,40,.35);
 }
 .hero .hero-img img{width:100%;display:block}
@@ -208,7 +208,7 @@ body{background:var(--bg);color:var(--ink);transition:background .8s ease,color 
 /* gallery */
 .gal{margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,3vw,28px)}
 .gal .g-item{
-  border-radius:16px;overflow:hidden;box-shadow:0 16px 50px rgba(20,12,40,.25);position:relative;
+  border-radius:0;overflow:hidden;box-shadow:0 16px 50px rgba(20,12,40,.25);position:relative;
   cursor:zoom-in;transition:transform .5s var(--ease-out),box-shadow .5s;
 }
 .gal .g-item:hover{transform:translateY(-6px);box-shadow:0 26px 70px rgba(20,12,40,.35)}
