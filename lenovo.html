@@ -35,18 +35,6 @@ body{
   position:relative;min-height:92svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;padding:calc(var(--nav-h) + 24px) clamp(16px,4vw,60px) 60px;overflow:hidden;
 }
-.hero .window{
-  position:absolute;right:8%;top:18%;width:clamp(120px,14vw,200px);aspect-ratio:3/4;pointer-events:none;
-  border:8px solid var(--wood);border-radius:6px;box-shadow:0 20px 50px rgba(43,50,77,.28),inset 0 0 30px rgba(240,243,255,.55);
-  background:linear-gradient(180deg,#dfe4fb,#c9cdf0);
-  transform:rotate(3deg);
-}
-.hero .window::before{
-  content:"";position:absolute;left:50%;top:0;bottom:0;width:6px;background:var(--wood);transform:translateX(-50%);
-}
-.hero .window::after{
-  content:"";position:absolute;top:50%;left:0;right:0;height:6px;background:var(--wood);transform:translateY(-50%);
-}
 .hero .dust{position:absolute;border-radius:50%;filter:blur(2px);pointer-events:none;
   background:radial-gradient(circle,rgba(214,222,255,.9),rgba(214,222,255,0) 70%);
   animation:dust-rise linear infinite}
@@ -185,10 +173,9 @@ body{
 
 <!-- ============ HERO ============ -->
 <section class="hero" aria-label="Lenovo hero">
-  <div class="window" aria-hidden="true"></div>
   <p class="p-kicker" data-en="Graphic Series — 01" data-zh="平面系列 — 01">Graphic Series — 01</p>
   <h1>Lenovo<br><span class="stroke">A+</span></h1>
-  <p class="p-sub" data-en="Three product series for the Amazon storefront — Lenovo Beijing" data-zh="亚马逊店铺三个产品系列 — 联想北京">Three product series for the Amazon storefront — Lenovo Beijing</p>
+  <p class="p-sub" data-en="Amazon A+ selling point design — Lenovo Beijing" data-zh="亚马逊A+卖点图设计 — 联想北京">Amazon A+ selling point design — Lenovo Beijing</p>
   <div class="hero-chips">
     <a class="hero-chip" href="#headphone" data-en="◉ Headphone series" data-zh="◉ 耳机系列">◉ Headphone series</a>
     <a class="hero-chip" href="#bag" data-en="▣ Backpack series" data-zh="▣ 背包系列">▣ Backpack series</a>
