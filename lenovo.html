@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LENOVO · A+ — Product Graphic · Haiyi Yu</title>
+<meta name="description" content="Lenovo Amazon storefront product graphics by Haiyi Yu — A+ content, monthly design mailers, and the Headphone YOGA PC Edition selling-point series.">
+<meta name="theme-color" content="#33241b">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css?v=6">
+<style>
+/* ============ LENOVO · A+ — the studio desk ============ */
+:root{
+  --ink:#33241b; --muted:#9c8577; --line:rgba(51,36,29,.16);
+  --accent:#c9a24b; --wood:#3b2b1f; --paper2:#f6efe4;
+}
+body{
+  background:
+    radial-gradient(ellipse 90% 50% at 50% 0%,rgba(255,240,214,.7),transparent 60%),
+    linear-gradient(180deg,#f6efe4,#efe5d2);
+  color:var(--ink);
+}
+.menu-overlay{background:var(--paper2);color:var(--ink)}
+.menu-overlay .menu-item{border-color:var(--line)}
+.site-nav .nav-brand .brand-stamp{filter:invert(1)}
+.site-nav .nav-proj{color:var(--muted)}
+.site-nav .nav-menu-btn{border-color:var(--line)}
+.site-nav.scrolled{background:rgba(246,239,228,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:92svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:calc(var(--nav-h) + 24px) clamp(16px,4vw,60px) 60px;overflow:hidden;
+}
+.hero .window{
+  position:absolute;right:8%;top:18%;width:clamp(120px,14vw,200px);aspect-ratio:3/4;pointer-events:none;
+  border:8px solid var(--wood);border-radius:6px;box-shadow:0 20px 50px rgba(51,36,29,.35),inset 0 0 30px rgba(255,240,210,.35);
+  background:linear-gradient(180deg,#dfe6ea,#c4d0d6);
+  transform:rotate(3deg);
+}
+.hero .window::before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;width:6px;background:var(--wood);transform:translateX(-50%);
+}
+.hero .window::after{
+  content:"";position:absolute;top:50%;left:0;right:0;height:6px;background:var(--wood);transform:translateY(-50%);
+}
+.hero .dust{position:absolute;border-radius:50%;filter:blur(2px);pointer-events:none;
+  background:radial-gradient(circle,rgba(255,236,200,.9),rgba(255,236,200,0) 70%);
+  animation:dust-rise linear infinite}
+@keyframes dust-rise{
+  0%{transform:translateY(0);opacity:0}12%{opacity:.8}88%{opacity:.4}
+  100%{transform:translateY(-88vh);opacity:0}}
+.hero .p-kicker{
+  position:relative;z-index:2;font-size:clamp(12px,1.6vw,17px);letter-spacing:.36em;text-transform:uppercase;
+  color:var(--accent);display:flex;align-items:center;gap:16px;justify-content:center;
+}
+.hero .p-kicker::before,.hero .p-kicker::after{content:"—";opacity:.6}
+.hero h1{
+  position:relative;z-index:2;font-family:var(--font-display);text-transform:uppercase;
+  font-size:clamp(56px,11vw,180px);line-height:.92;margin:10px 0 8px;
+  text-shadow:0 3px 0 rgba(0,0,0,.18);
+}
+.hero h1 .stroke{color:transparent;-webkit-text-stroke:2px var(--ink)}
+.hero .p-sub{
+  position:relative;z-index:2;font-style:italic;font-size:clamp(16px,2.2vw,26px);color:var(--muted);margin-bottom:clamp(24px,4vh,40px);
+}
+.hero .hero-chips{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.hero .hero-chip{
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding:9px 20px;border-radius:30px;
+  border:1px solid var(--line);background:rgba(255,255,255,.5);backdrop-filter:blur(6px);transition:transform .3s,border-color .3s;
+}
+.hero .hero-chip:hover{transform:translateY(-3px);border-color:var(--accent)}
+
+/* ---------- sections ---------- */
+.sect{padding:clamp(60px,9vw,110px) clamp(18px,5vw,70px);border-top:1px solid var(--line);position:relative;overflow:hidden}
+.sect .s-inner{max-width:1160px;margin:0 auto}
+.sect .s-head{display:flex;align-items:baseline;gap:22px;margin-bottom:clamp(26px,4vw,44px)}
+.sect .s-head .mono-label{color:var(--accent)}
+.sect .s-head h2{font-family:var(--font-display);text-transform:uppercase;font-size:clamp(32px,4.8vw,68px);line-height:1}
+.sect .s-head h2 em{font-style:normal;color:var(--accent)}
+.sect p{font-size:clamp(14px,1.5vw,16px);line-height:1.9;color:#6d5848;max-width:680px}
+
+/* ---------- lenovo gallery ---------- */
+.lenovo-grid{margin-top:36px;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.4vw,26px)}
+.l-card{position:relative;border-radius:12px;overflow:hidden;cursor:zoom-in;
+  box-shadow:0 16px 44px rgba(51,36,29,.22);background:#fff;border:1px solid var(--line);
+  transition:transform .6s var(--ease-out),box-shadow .6s;
+}
+.l-card:hover{transform:translateY(-6px);box-shadow:0 26px 70px rgba(51,36,29,.32)}
+.l-card img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover;transition:transform .9s var(--ease-out)}
+.l-card:hover img{transform:scale(1.05)}
+.l-card .l-cap{
+  position:absolute;left:12px;bottom:10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:#fff;background:rgba(51,36,29,.62);padding:5px 14px;border-radius:20px;
+}
+/* tall A+ strips */
+.l-strips{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,30px)}
+.l-strip{
+  position:relative;height:420px;border-radius:12px;overflow:hidden;cursor:zoom-in;
+  border:1px solid var(--line);background:#fff;box-shadow:0 16px 44px rgba(51,36,29,.22);
+}
+.l-strip img{position:absolute;left:0;top:0;width:100%;will-change:transform}
+.l-strip .l-cap{
+  position:absolute;left:12px;bottom:10px;z-index:2;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:#fff;background:rgba(51,36,29,.62);padding:5px 14px;border-radius:20px;
+}
+@media (max-width:900px){.lenovo-grid{grid-template-columns:1fr 1fr}.l-strips{grid-template-columns:1fr}.mailer-row{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.lenovo-grid{grid-template-columns:1fr}.mailer-row{grid-template-columns:1fr}}
+.mailer-row{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.4vw,26px);align-items:stretch}
+
+/* ---------- prototype on the desk ---------- */
+.proto-fig{
+  position:relative;max-width:560px;margin:34px auto 0;cursor:zoom-in;
+  background:#fff;padding:clamp(10px,1.6vw,16px);border-radius:10px;
+  border:1px solid var(--line);box-shadow:0 24px 70px rgba(51,36,29,.28);
+  transition:transform .6s var(--ease-out),box-shadow .6s;
+}
+.proto-fig:hover{transform:translateY(-6px);box-shadow:0 32px 90px rgba(51,36,29,.34)}
+.proto-fig img{width:100%;display:block;border-radius:5px}
+.proto-fig figcaption{
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  margin-top:12px;padding:0 4px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+}
+.proto-fig figcaption b{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><img src="assets/img/stamp.png" alt=""></div>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-nav" id="siteNav">
+  <div class="nav-left">
+    <a class="nav-back" href="index.html" aria-label="Back to home">←</a>
+    <a class="nav-brand" href="index.html">
+      <img class="brand-stamp" src="assets/img/stamp.png" alt="Haiyi Yu stamp">
+      <span data-en="&lt;b&gt;Haiyi Yu&lt;/b&gt; — Folio" data-zh="&lt;b&gt;于海怡&lt;/b&gt; — 作品集"><b>Haiyi Yu</b> — Folio</span>
+    </a>
+  </div>
+  <span class="nav-proj" data-en="01 — Lenovo · A+" data-zh="01 — 联想 · A+">01 — Lenovo · A+</span>  <div class="nav-right">
+
+  <button class="nav-lang" id="langBtn" aria-label="Switch language / 切换语言">中</button>
+  <button class="nav-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
+    <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="btn-label">Menu</span>
+  </button>
+  </div>
+</header>
+
+<nav class="menu-overlay" id="site-menu" aria-label="Site menu">
+  <div class="menu-list">
+    <p class="menu-group"><span class="g-num">01</span><span data-en="Graphic Series" data-zh="平面系列">Graphic Series</span></p>
+    <a class="menu-item" href="lenovo.html" data-en="&lt;span class=&quot;m-num&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.10s&quot;&gt;Lenovo · A+&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Graphic&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.10s&quot;&gt;联想 · A+&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;平面&lt;/span&gt;"><span class="m-num">01</span><span class="m-title" style="transition-delay:.10s">Lenovo · A+</span><span class="m-tag">Graphic</span></a>
+    <a class="menu-item" href="perception.html" data-en="&lt;span class=&quot;m-num&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.14s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Graphic&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.14s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;平面&lt;/span&gt;"><span class="m-num">02</span><span class="m-title" style="transition-delay:.14s">Perception</span><span class="m-tag">Graphic</span></a>
+    <p class="menu-group"><span class="g-num">02</span><span data-en="Spatial Series" data-zh="空间系列">Spatial Series</span></p>
+    <a class="menu-item" href="intersection.html" data-en="&lt;span class=&quot;m-num&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.18s&quot;&gt;Intersection&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.18s&quot;&gt;Intersection&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">03</span><span class="m-title" style="transition-delay:.18s">Intersection</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="interlude.html" data-en="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.22s&quot;&gt;Interlude&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.22s&quot;&gt;Interlude&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">04</span><span class="m-title" style="transition-delay:.22s">Interlude</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="endless-life.html" data-en="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.26s&quot;&gt;Endless Life&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.26s&quot;&gt;Endless Life&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">05</span><span class="m-title" style="transition-delay:.26s">Endless Life</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="speculation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.30s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.30s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">06</span><span class="m-title" style="transition-delay:.30s">Speculation</span><span class="m-tag">Spatial</span></a>
+    <p class="menu-group"><span class="g-num">03</span><span data-en="Making Series" data-zh="制造系列">Making Series</span></p>
+    <a class="menu-item" href="formation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.34s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Making&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.34s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;制造&lt;/span&gt;"><span class="m-num">07</span><span class="m-title" style="transition-delay:.34s">Formation</span><span class="m-tag">Making</span></a>
+    <p class="menu-group"><span class="g-num">04</span><span data-en="Other Works" data-zh="其他作品">Other Works</span></p>
+    <a class="menu-item" href="other-works.html" data-en="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.38s&quot;&gt;Other Works&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Photo · Music&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.38s&quot;&gt;其他作品&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;摄影 · 音乐&lt;/span&gt;"><span class="m-num">08</span><span class="m-title" style="transition-delay:.38s">Other Works</span><span class="m-tag">Photo · Music</span></a>
+    <a class="menu-item" href="about.html" data-en="&lt;span class=&quot;m-num&quot;&gt;09&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.42s&quot;&gt;About&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Contact&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;09&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.42s&quot;&gt;关于&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;联系&lt;/span&gt;"><span class="m-num">09</span><span class="m-title" style="transition-delay:.42s">About</span><span class="m-tag">Contact</span></a>
+  </div>
+  <div class="menu-foot">
+    <span data-en="Melbourne / Beijing" data-zh="墨尔本 / 北京">Melbourne / Beijing</span>
+    <span data-en="hieee0103@outlook.com" data-zh="hieee0103@outlook.com">hieee0103@outlook.com</span>
+    <span>@yu.interior_</span>
+  </div>
+</nav>
+
+<main aria-label="Lenovo product graphic design">
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-label="Lenovo hero">
+  <div class="window" aria-hidden="true"></div>
+  <p class="p-kicker" data-en="Graphic Series — 01" data-zh="平面系列 — 01">Graphic Series — 01</p>
+  <h1>Lenovo<br><span class="stroke">A+</span></h1>
+  <p class="p-sub" data-en="Product graphic design for the Amazon storefront — Lenovo Beijing" data-zh="亚马逊店铺产品平面设计 — 联想北京">Product graphic design for the Amazon storefront — Lenovo Beijing</p>
+  <div class="hero-chips">
+    <a class="hero-chip" href="#aplus" data-en="▣ Amazon A+ content" data-zh="▣ 亚马逊 A+ 内容">▣ Amazon A+ content</a>
+    <a class="hero-chip" href="#headphone" data-en="◉ Headphone series" data-zh="◉ 耳机系列">◉ Headphone series</a>
+    <a class="hero-chip" href="#mailer" data-en="✉ Design mailer" data-zh="✉ 设计邮件">✉ Design mailer</a>
+  </div>
+</section>
+
+<!-- ============ 01 · AMAZON A+ ============ -->
+<section class="sect" id="aplus" aria-label="Lenovo Amazon A+ content">
+  <div class="s-inner">
+    <div class="s-head reveal">
+      <span class="mono-label" data-en="01 — Lenovo · A+" data-zh="01 — 联想 · A+">01 — Lenovo · A+</span>
+      <h2 data-en="Product &lt;em&gt;Graphic&lt;/em&gt; Design" data-zh="产品&lt;em&gt;平面&lt;/em&gt;设计">Product <em>Graphic</em> Design</h2>
+    </div>
+    <p class="reveal" data-en="At Lenovo Beijing HQ I designed the product graphics for the Amazon storefront — turning the specifications of the Options &amp;amp; Accessories portfolio into visual assets, from photography coordination to the final layouts, now live on Lenovo's official Amazon pages." data-zh="在联想北京总部，我为亚马逊店铺设计产品平面视觉——将选件与配件产品线的规格转化为视觉资产，从拍摄协调到最终排版，现已上线联想官方亚马逊页面。">At Lenovo Beijing HQ I designed the product graphics for the Amazon storefront — turning the specifications of the Options &amp; Accessories portfolio into visual assets, from photography coordination to the final layouts, now live on Lenovo's official Amazon pages.</p>
+
+    <!-- Amazon A+ -->
+    <p class="mono-label reveal" style="margin:34px 0 12px;color:var(--accent)" data-en="Amazon A+ content" data-zh="亚马逊 A+ 内容">Amazon A+ content</p>
+    <div class="l-strips" style="grid-template-columns:min(640px,100%);justify-content:center">
+      <figure class="l-strip reveal">
+        <img src="assets/img/lenovo-headphone-aplus.jpg" alt="Lenovo Headphone YOGA PC Edition — Amazon A+ content strip" loading="lazy">
+        <figcaption class="l-cap" data-en="Headphone — A+ strip" data-zh="耳机 — A+ 长图">Headphone — A+ strip</figcaption>
+      </figure>
+    </div>
+    <div class="lenovo-grid">
+      <figure class="l-card reveal">
+        <img src="assets/img/lenovo-keyboard.jpg" alt="Lenovo 900 multi-device low-profile mechanical keyboard — Amazon A+" loading="lazy">
+        <figcaption class="l-cap" data-en="900 Keyboard — A+" data-zh="900 键盘 — A+">900 Keyboard — A+</figcaption>
+      </figure>
+      <figure class="l-card reveal reveal-d1">
+        <img src="assets/img/lenovo-headphone-scene.jpg" alt="Lenovo Headphone YOGA PC Edition scene — Amazon A+" loading="lazy">
+        <figcaption class="l-cap" data-en="Headphone YOGA — A+" data-zh="YOGA 耳机 — A+">Headphone YOGA — A+</figcaption>
+      </figure>
+      <figure class="l-card reveal reveal-d2">
+        <img src="assets/img/lenovo-banner.jpg" alt="Lenovo accessories banner — Amazon A+" loading="lazy">
+        <figcaption class="l-cap" data-en="Storefront banner — A+" data-zh="店铺横幅 — A+">Storefront banner — A+</figcaption>
+      </figure>
+      <figure class="l-card reveal">
+        <img src="assets/img/lenovo-tote-backpack.jpg" alt="Lenovo tote backpack — Amazon A+" loading="lazy">
+        <figcaption class="l-cap" data-en="Tote Backpack — A+" data-zh="Tote 双肩包 — A+">Tote Backpack — A+</figcaption>
+      </figure>
+    </div>
+
+    <!-- Monthly design mailer -->
+    <p class="mono-label reveal" style="margin:44px 0 12px;color:var(--accent)" data-en="Monthly design mailer" data-zh="月度产品设计邮件">Monthly design mailer</p>
+    <div class="mailer-row" id="mailer">
+      <figure class="l-card reveal">
+        <img src="assets/img/lenovo-email.jpg" alt="Lenovo Seashell Family — monthly product design mailer" loading="lazy">
+        <figcaption class="l-cap" data-en="Lenovo Seashell Family — Design Mailer" data-zh="联想 Seashell 系列 — 设计邮件">Lenovo Seashell Family — Design Mailer</figcaption>
+      </figure>
+      <figure class="l-strip reveal reveal-d1" style="height:420px">
+        <img src="assets/img/lenovo-tote-aplus.jpg" alt="Lenovo tote backpack — monthly design mailer strip" loading="lazy">
+        <figcaption class="l-cap" data-en="Tote Backpack — mailer strip" data-zh="Tote 双肩包 — 邮件长图">Tote Backpack — mailer strip</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 · HEADPHONE SERIES ============ -->
+<section class="sect" id="headphone" aria-label="Headphone YOGA PC Edition selling point series">
+  <div class="s-inner">
+    <div class="s-head reveal">
+      <span class="mono-label" data-en="02 — Headphone YOGA PC Edition" data-zh="02 — YOGA 耳机系列">02 — Headphone YOGA PC Edition</span>
+      <h2 data-en="From &lt;em&gt;Prototype&lt;/em&gt; to Selling Points" data-zh="从&lt;em&gt;原型&lt;/em&gt;到卖点图">From <em>Prototype</em> to Selling Points</h2>
+    </div>
+    <p class="reveal" data-en="The object on the desk is where every campaign starts — the headphone itself, photographed as the reference prototype. From it I built the full Amazon selling-point series: seven frames that turn its hardware details into the reasons to buy." data-zh="桌上的实物是一切设计的起点——耳机本身，作为参照原型拍摄。围绕它，我完成了整套亚马逊卖点图系列：七张画面，把它的硬件细节变成购买的理由。">The object on the desk is where every campaign starts — the headphone itself, photographed as the reference prototype. From it I built the full Amazon selling-point series: seven frames that turn its hardware details into the reasons to buy.</p>
+
+    <!-- prototype -->
+    <p class="mono-label reveal" style="margin:34px 0 12px;color:var(--accent)" data-en="The object — prototype" data-zh="设计对象 · 原型">The object — prototype</p>
+    <figure class="proto-fig reveal">
+      <img src="assets/img/lenovo-hp-prototype.jpg" alt="Lenovo Headphone YOGA PC Edition — prototype photograph" loading="lazy">
+      <figcaption><span data-en="Headphone YOGA PC Edition" data-zh="YOGA PC 版耳机">Headphone YOGA PC Edition</span><b data-en="PROTOTYPE" data-zh="原型">PROTOTYPE</b></figcaption>
+    </figure>
+
+    <!-- selling point series -->
+    <p class="mono-label reveal" style="margin:48px 0 12px;color:var(--accent)" data-en="Amazon selling-point series — 07 frames" data-zh="亚马逊卖点图系列 — 07 张">Amazon selling-point series — 07 frames</p>
+    <div class="lenovo-grid">
+      <figure class="l-card reveal">
+        <img src="assets/img/lenovo-hp-aplus-1.jpg" alt="Headphone YOGA PC Edition — Amazon selling point 01" loading="lazy">
+        <figcaption class="l-cap" data-en="Selling point — A+ 01" data-zh="卖点图 — A+ 01">Selling point — A+ 01</figcaption>
+      </figure>
+      <figure class="l-card reveal reveal-d1">
+        <img src="assets/img/lenovo-hp-aplus-2.jpg" alt="Headphone YOGA PC Edition — Amazon selling point 02" loading="lazy">
+        <figcaption class="l-cap" data-en="Selling point — A+ 02" data-zh="卖点图 — A+ 02">Selling point — A+ 02</figcaption>
+      </figure>
+      <figure class="l-card reveal reveal-d2">
+        <img src="assets/img/lenovo-hp-aplus-3.jpg" alt="Headphone YOGA PC Edition — Amazon selling point 03" loading="lazy">
+        <figcaption class="l-cap" data-en="Selling point — A+ 03" data-zh="卖点图 — A+ 03">Selling point — A+ 03</figcaption>
+      </figure>
+      <figure class="l-card reveal">
+        <img src="assets/img/lenovo-hp-aplus-4.jpg" alt="Headphone YOGA PC Edition — Amazon selling point 04" loading="lazy">
+        <figcaption class="l-cap" data-en="Selling point — A+ 04" data-zh="卖点图 — A+ 04">Selling point — A+ 04</figcaption>
+      </figure>
+      <figure class="l-card reveal reveal-d1">
+        <img src="assets/img/lenovo-hp-aplus-5.jpg" alt="Headphone YOGA PC Edition — Amazon selling point 05" loading="lazy">
+        <figcaption class="l-cap" data-en="Selling point — A+ 05" data-zh="卖点图 — A+ 05">Selling point — A+ 05</figcaption>
+      </figure>
+      <figure class="l-card reveal reveal-d2">
+        <img src="assets/img/lenovo-hp-aplus-6.jpg" alt="Headphone YOGA PC Edition — Amazon selling point 06" loading="lazy">
+        <figcaption class="l-cap" data-en="Selling point — A+ 06" data-zh="卖点图 — A+ 06">Selling point — A+ 06</figcaption>
+      </figure>
+      <figure class="l-card reveal">
+        <img src="assets/img/lenovo-hp-aplus-7.jpg" alt="Headphone YOGA PC Edition — Amazon selling point 07" loading="lazy">
+        <figcaption class="l-cap" data-en="Selling point — A+ 07" data-zh="卖点图 — A+ 07">Selling point — A+ 07</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEXT ============ -->
+<a class="next-project" href="perception.html" aria-label="Next: Perception">
+  <span class="np-label" data-en="Next — 02" data-zh="下一站 — 02">Next — 02</span>
+  <span class="np-title" data-en="Perception — Graphic Collage" data-zh="Perception — 平面拼贴">Perception — Graphic Collage</span>
+  <span class="np-arrow">↗</span>
+</a>
+
+</main>
+
+<footer class="site-foot">
+  <div class="foot-stamp-row">
+    <img class="foot-stamp" src="assets/img/stamp.png" alt="Haiyi Yu stamp mark">
+    <p class="foot-mantra">stay curious. stay focused.<br>stay professional. <em>still in progress.</em></p>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Haiyi Yu — Design Works 2023–2026</span>
+    <span>Melbourne / Beijing</span>
+    <span>RMIT Interior Design</span>
+  </div>
+</footer>
+
+<script>
+/* ============ shared: nav / cursor / reveal ============ */
+const body=document.body, menuBtn=document.querySelector('.nav-menu-btn'), menuLabel=menuBtn.querySelector('.btn-label');
+function setMenu(open){
+  body.classList.toggle('menu-open',open);
+  menuBtn.setAttribute('aria-expanded',open);
+  menuLabel.textContent=open?'Close':'Menu';
+}
+menuBtn.addEventListener('click',()=>setMenu(!body.classList.contains('menu-open')));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&body.classList.contains('menu-open')){setMenu(false);menuBtn.focus();} });
+addEventListener('scroll',()=>{ document.getElementById('siteNav').classList.toggle('scrolled',scrollY>60); },{passive:true});
+
+const dot=document.querySelector('.cursor-dot'), ring=document.querySelector('.cursor-ring');
+if(matchMedia('(pointer:fine)').matches){
+  let cx=innerWidth/2, cy=innerHeight/2, rx=cx, ry=cy;
+  addEventListener('pointermove',e=>{ cx=e.clientX; cy=e.clientY;
+    dot.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+    const t=e.target.closest('a,button,[data-cursor]');
+    body.classList.toggle('cursor-link',!!t);
+    body.classList.toggle('cursor-stamp',!!e.target.closest('[data-cursor="stamp"]'));
+  });
+  (function ringLoop(){
+    rx+=(cx-rx)*.22; ry+=(cy-ry)*.22;
+    ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+    requestAnimationFrame(ringLoop);
+  })();
+}
+
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ============ dust motes in hero ============ */
+(()=>{
+  const hero=document.querySelector('.hero');
+  for(let i=0;i<18;i++){
+    const d=document.createElement('span');
+    d.className='dust';
+    const s=2+Math.random()*4;
+    d.style.width=s+'px'; d.style.height=s+'px';
+    d.style.left=Math.random()*100+'%';
+    d.style.bottom='-2%';
+    d.style.animationDuration=(14+Math.random()*22)+'s';
+    d.style.animationDelay=(-Math.random()*24)+'s';
+    hero.appendChild(d);
+  }
+})();
+
+/* ============ lightbox ============ */
+(()=>{
+  const lb=document.createElement('div');
+  lb.className='lightbox'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-label','Image viewer');
+  lb.innerHTML='<div class="lb-frame"><img alt=""><div class="lb-cap"><span class="lb-txt"></span><span class="lb-idx"></span></div></div>'
+    +'<button class="lb-close" aria-label="Close">✕</button>'
+    +'<button class="lb-prev lb-nav" aria-label="Previous image">‹</button>'
+    +'<button class="lb-next lb-nav" aria-label="Next image">›</button>';
+  document.body.appendChild(lb);
+  let items=[], idx=0;
+  const show=(i)=>{ idx=(i+items.length)%items.length;
+    lb.querySelector('img').src=items[idx].src;
+    lb.querySelector('img').alt=items[idx].alt||'';
+    lb.querySelector('.lb-txt').textContent=items[idx].closest('figure')?.querySelector('figcaption')?.textContent||'';
+    lb.querySelector('.lb-idx').textContent=(idx+1)+' / '+items.length; };
+  const open=()=>{ lb.classList.add('open'); document.body.style.overflow='hidden'; };
+  const close=()=>{ lb.classList.remove('open'); document.body.style.overflow=''; };
+  lb.querySelector('.lb-close').addEventListener('click',close);
+  lb.querySelector('.lb-prev').addEventListener('click',()=>show(idx-1));
+  lb.querySelector('.lb-next').addEventListener('click',()=>show(idx+1));
+  lb.addEventListener('click',e=>{ if(e.target===lb) close(); });
+  document.addEventListener('keydown',e=>{ if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') close();
+    if(e.key==='ArrowLeft') show(idx-1);
+    if(e.key==='ArrowRight') show(idx+1); });
+  const items_=[...document.querySelectorAll('.l-card img, .l-strip img, .proto-fig img')];
+  document.querySelectorAll('.l-card img, .l-strip img, .proto-fig img').forEach(im=>{
+    im.closest('.l-card, .l-strip, .proto-fig').addEventListener('click',e=>{
+      e.preventDefault(); items=items_; show(items.indexOf(im)); open();
+    });
+  });
+})();
+</script>
+
+<script src="assets/js/i18n.js?v=2"></script>
+</body>
+</html>

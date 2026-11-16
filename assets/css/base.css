@@ -219,6 +219,15 @@ body.menu-open{overflow:hidden}
   text-transform:uppercase;color:var(--muted)}
 .menu-overlay .menu-item:hover .m-title{color:var(--accent)}
 body.menu-open .menu-overlay .m-title{transform:translateY(0)}
+/* series group headers inside the menu */
+.menu-overlay .menu-group{
+  display:flex;align-items:baseline;gap:12px;
+  margin-top:26px;padding:6px 0 8px;border-bottom:1px solid var(--red);
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);
+}
+.menu-overlay .menu-group:first-child{margin-top:0}
+.menu-overlay .menu-group .g-num{color:var(--muted);letter-spacing:.14em}
+.menu-overlay .menu-group + .menu-item{border-bottom:1px solid var(--line)}
 .menu-overlay .menu-foot{margin-top:26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
   font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 /* short viewports: compact the menu so it fits without scrolling */

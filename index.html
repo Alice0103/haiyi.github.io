@@ -161,12 +161,29 @@ body.cursor-link .cursor-ring::before,body.cursor-link .cursor-ring::after{backg
 }
 .hero-head .hh-note b{color:var(--ink);font-weight:600}
 
-/* the works, hung in one row */
-.wall{position:relative;z-index:2;flex:1;display:flex;align-items:center;justify-content:center;margin-top:clamp(20px,4vh,40px)}
+/* the works, hung in four series zones */
+.wall{position:relative;z-index:2;margin-top:clamp(24px,4vh,44px)}
+.wall-zone{margin-bottom:clamp(28px,4.5vh,50px)}
+.wall-zone:last-child{margin-bottom:0}
+.zone-head{
+  display:flex;align-items:baseline;gap:14px;
+  max-width:1500px;margin:0 auto clamp(14px,2vh,22px);padding:0 clamp(8px,1.5vw,18px);
+}
+.zone-head .z-num{font-family:var(--font-mono);font-size:11px;letter-spacing:.3em;color:var(--red);min-width:24px}
+.zone-head .z-title{
+  font-family:var(--font-display);text-transform:uppercase;
+  font-size:clamp(14px,1.7vw,21px);letter-spacing:.14em;line-height:1;
+}
+.zone-head .z-line{flex:1;height:1px;background:rgba(22,19,14,.28);position:relative;min-width:40px}
+.zone-head .z-line::after{
+  content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;
+  border-top:1px solid rgba(22,19,14,.5);border-right:1px solid rgba(22,19,14,.5);transform:rotate(45deg);
+}
+.zone-head .z-note{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
 .works-row{
   display:flex;align-items:flex-end;justify-content:center;
   gap:clamp(18px,3vw,48px);
-  width:100%;max-width:1500px;
+  width:100%;max-width:1500px;margin:0 auto;
 }
 .work{
   flex:0 1 clamp(140px,14.5vw,208px);position:relative;text-decoration:none;color:inherit;
@@ -246,6 +263,8 @@ body.cursor-link .cursor-ring::before,body.cursor-link .cursor-ring::after{backg
   .work:nth-child(2n),.work:nth-child(3n){--hang:0}
   .rot-badge{display:none}
   .hero .coord{display:none}
+  .zone-head .z-note{display:none}
+  .zone-head{gap:10px}
 }
 @media (max-width:600px){.work{flex:0 1 44vw}}
 
@@ -392,15 +411,20 @@ body.cursor-link .cursor-ring::before,body.cursor-link .cursor-ring::after{backg
 
 <nav class="menu-overlay" id="site-menu" aria-label="Site menu">
   <div class="menu-list">
-    <a class="menu-item" href="index.html" data-en="&lt;span class=&quot;m-num&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.08s&quot;&gt;Home&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Start&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.08s&quot;&gt;主页&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;开始&lt;/span&gt;"><span class="m-num">00</span><span class="m-title" style="transition-delay:.08s">Home</span><span class="m-tag">Start</span></a>
-    <a class="menu-item" href="intersection.html" data-en="&lt;span class=&quot;m-num&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.12s&quot;&gt;Intersection&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.12s&quot;&gt;Intersection&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">01</span><span class="m-title" style="transition-delay:.12s">Intersection</span><span class="m-tag">Spatial</span></a>
-    <a class="menu-item" href="interlude.html" data-en="&lt;span class=&quot;m-num&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.16s&quot;&gt;Interlude&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.16s&quot;&gt;Interlude&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">02</span><span class="m-title" style="transition-delay:.16s">Interlude</span><span class="m-tag">Spatial</span></a>
-    <a class="menu-item" href="endless-life.html" data-en="&lt;span class=&quot;m-num&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.20s&quot;&gt;Endless Life&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Adaptive Reuse&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.20s&quot;&gt;Endless Life&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;改造再利用&lt;/span&gt;"><span class="m-num">03</span><span class="m-title" style="transition-delay:.20s">Endless Life</span><span class="m-tag">Adaptive Reuse</span></a>
-    <a class="menu-item" href="perception.html" data-en="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.24s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Graphic&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.24s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;平面&lt;/span&gt;"><span class="m-num">04</span><span class="m-title" style="transition-delay:.24s">Perception</span><span class="m-tag">Graphic</span></a>
-    <a class="menu-item" href="formation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.28s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;3D · Fabrication&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.28s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;3D · 制造&lt;/span&gt;"><span class="m-num">05</span><span class="m-title" style="transition-delay:.28s">Formation</span><span class="m-tag">3D · Fabrication</span></a>
-    <a class="menu-item" href="speculation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.32s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Future Library&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.32s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;未来图书馆&lt;/span&gt;"><span class="m-num" data-en="06" data-zh="06">06</span><span class="m-title" style="transition-delay:.32s">Speculation</span><span class="m-tag">Future Library</span></a>
-    <a class="menu-item" href="other-works.html" data-en="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;&gt;Other Works&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Point Cloud · Music&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.36s&quot;&gt;其他作品&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;点云 · 音乐&lt;/span&gt;"><span class="m-num">07</span><span class="m-title" style="transition-delay:.36s">Other Works</span><span class="m-tag">Point Cloud · Music</span></a>
-    <a class="menu-item" href="about.html" data-en="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.40s&quot;&gt;About&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Contact&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.40s&quot;&gt;关于&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;联系&lt;/span&gt;"><span class="m-num">08</span><span class="m-title" style="transition-delay:.40s">About</span><span class="m-tag" data-en="Contact" data-zh="联系">Contact</span></a>
+    <a class="menu-item" href="index.html" data-en="&lt;span class=&quot;m-num&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.06s&quot;&gt;Home&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Start&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.06s&quot;&gt;主页&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;开始&lt;/span&gt;"><span class="m-num">00</span><span class="m-title" style="transition-delay:.06s">Home</span><span class="m-tag">Start</span></a>
+    <p class="menu-group"><span class="g-num">01</span><span data-en="Graphic Series" data-zh="平面系列">Graphic Series</span></p>
+    <a class="menu-item" href="lenovo.html" data-en="&lt;span class=&quot;m-num&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.10s&quot;&gt;Lenovo · A+&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Graphic&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.10s&quot;&gt;联想 · A+&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;平面&lt;/span&gt;"><span class="m-num">01</span><span class="m-title" style="transition-delay:.10s">Lenovo · A+</span><span class="m-tag">Graphic</span></a>
+    <a class="menu-item" href="perception.html" data-en="&lt;span class=&quot;m-num&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.14s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Graphic&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.14s&quot;&gt;Perception&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;平面&lt;/span&gt;"><span class="m-num">02</span><span class="m-title" style="transition-delay:.14s">Perception</span><span class="m-tag">Graphic</span></a>
+    <p class="menu-group"><span class="g-num">02</span><span data-en="Spatial Series" data-zh="空间系列">Spatial Series</span></p>
+    <a class="menu-item" href="intersection.html" data-en="&lt;span class=&quot;m-num&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.18s&quot;&gt;Intersection&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;03&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.18s&quot;&gt;Intersection&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">03</span><span class="m-title" style="transition-delay:.18s">Intersection</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="interlude.html" data-en="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.22s&quot;&gt;Interlude&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;04&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.22s&quot;&gt;Interlude&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">04</span><span class="m-title" style="transition-delay:.22s">Interlude</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="endless-life.html" data-en="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.26s&quot;&gt;Endless Life&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.26s&quot;&gt;Endless Life&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">05</span><span class="m-title" style="transition-delay:.26s">Endless Life</span><span class="m-tag">Spatial</span></a>
+    <a class="menu-item" href="speculation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.30s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.30s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">06</span><span class="m-title" style="transition-delay:.30s">Speculation</span><span class="m-tag">Spatial</span></a>
+    <p class="menu-group"><span class="g-num">03</span><span data-en="Making Series" data-zh="制造系列">Making Series</span></p>
+    <a class="menu-item" href="formation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.34s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Making&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.34s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;制造&lt;/span&gt;"><span class="m-num">07</span><span class="m-title" style="transition-delay:.34s">Formation</span><span class="m-tag">Making</span></a>
+    <p class="menu-group"><span class="g-num">04</span><span data-en="Other Works" data-zh="其他作品">Other Works</span></p>
+    <a class="menu-item" href="other-works.html" data-en="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.38s&quot;&gt;Other Works&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Photo · Music&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.38s&quot;&gt;其他作品&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;摄影 · 音乐&lt;/span&gt;"><span class="m-num">08</span><span class="m-title" style="transition-delay:.38s">Other Works</span><span class="m-tag">Photo · Music</span></a>
+    <a class="menu-item" href="about.html" data-en="&lt;span class=&quot;m-num&quot;&gt;09&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.42s&quot;&gt;About&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Contact&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;09&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.42s&quot;&gt;关于&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;联系&lt;/span&gt;"><span class="m-num">09</span><span class="m-title" style="transition-delay:.42s">About</span><span class="m-tag">Contact</span></a>
   </div>
   <div class="menu-foot">
     <span data-en="Melbourne / Beijing" data-zh="墨尔本 / 北京">Melbourne / Beijing</span>
@@ -427,23 +451,64 @@ body.cursor-link .cursor-ring::before,body.cursor-link .cursor-ring::after{backg
       <p class="hh-kicker" data-en="Haiyi Yu — Portfolio" data-zh="于海怡 — 作品集">Haiyi Yu — Portfolio</p>
       <h1 data-en="Selected&lt;br&gt;&lt;span class=&quot;outline&quot;&gt;Works&lt;/span&gt; &lt;span class=&quot;it&quot;&gt;2023–2026&lt;/span&gt;" data-zh="精选&lt;br&gt;&lt;span class=&quot;outline&quot;&gt;作品&lt;/span&gt; &lt;span class=&quot;it&quot;&gt;2023–2026&lt;/span&gt;">Selected<br><span class="outline">Works</span> <span class="it">2023–2026</span></h1>
     </div>
-    <p class="hh-note" data-en="Interior &amp;amp; spatial design&lt;br&gt;
+    <p class="hh-note" data-en="Interior, graphic &amp;amp; making&lt;br&gt;
       &lt;b&gt;Melbourne&lt;/b&gt; — &lt;b&gt;Beijing&lt;/b&gt;&lt;br&gt;
-      Six works on the wall" data-zh="室内与空间设计&lt;br&gt;
+      Eight works in four series" data-zh="室内、平面与制造&lt;br&gt;
       &lt;b&gt;墨尔本&lt;/b&gt; — &lt;b&gt;北京&lt;/b&gt;&lt;br&gt;
-      墙上六件作品">      Interior &amp; spatial design<br>
+      四个系列 · 八件作品">      Interior, graphic &amp; making<br>
       <b>Melbourne</b> — <b>Beijing</b><br>
-      Six works on the wall
+      Eight works in four series
     </p>
   </div>
 
   <div class="wall">
-    <div class="works-row" id="worksRow">      <a class="work reveal" href="intersection.html" data-cursor="stamp">
+
+    <!-- ===== 01 · GRAPHIC SERIES ===== -->
+    <div class="wall-zone">
+      <div class="zone-head reveal">
+        <span class="z-num">01</span>
+        <h2 class="z-title" data-en="Graphic Series" data-zh="平面系列">Graphic Series</h2>
+        <span class="z-line" aria-hidden="true"></span>
+        <span class="z-note" data-en="Product graphic &amp; collage" data-zh="产品平面与拼贴">Product graphic &amp; collage</span>
+      </div>
+      <div class="works-row">
+      <a class="work reveal" href="lenovo.html" data-cursor="stamp">
+        <div class="frame"><img src="assets/img/lenovo-hp-aplus-1.jpg" alt="Lenovo · A+" loading="lazy"></div>
+        <span class="reg" aria-hidden="true"><i></i></span>
+        <div class="dim"><span class="d-txt" data-en="Nº01 · 1080×1080mm" data-zh="Nº01 · 1080×1080mm">Nº01 · 1080×1080mm</span><span class="d-line" aria-hidden="true"></span></div>
+        <div class="label">
+          <p class="l-num" data-en="Nº01" data-zh="Nº01">Nº01</p><p class="l-title">Lenovo · A+</p>
+          <p class="l-meta" data-en="Product graphic · 2026" data-zh="产品平面 · 2026">Product graphic · 2026</p><span class="l-rule" aria-hidden="true"></span>
+        </div>
+      </a>
+
+      <a class="work reveal" href="perception.html" data-cursor="stamp">
+        <div class="frame"><img src="assets/img/perc-poster-1.jpg" alt="Perception" loading="lazy"></div>
+        <span class="reg" aria-hidden="true"><i></i></span>
+        <div class="dim"><span class="d-txt" data-en="Nº02 · 700×875mm" data-zh="Nº02 · 700×875mm">Nº02 · 700×875mm</span><span class="d-line" aria-hidden="true"></span></div>
+        <div class="label">
+          <p class="l-num" data-en="Nº02" data-zh="Nº02">Nº02</p><p class="l-title">Perception</p>
+          <p class="l-meta" data-en="Graphic collage · 2025" data-zh="平面拼贴 · 2025">Graphic collage · 2025</p><span class="l-rule" aria-hidden="true"></span>
+        </div>
+      </a>
+      </div>
+    </div>
+
+    <!-- ===== 02 · SPATIAL SERIES ===== -->
+    <div class="wall-zone">
+      <div class="zone-head reveal">
+        <span class="z-num">02</span>
+        <h2 class="z-title" data-en="Spatial Series" data-zh="空间系列">Spatial Series</h2>
+        <span class="z-line" aria-hidden="true"></span>
+        <span class="z-note" data-en="Interior &amp; speculative space" data-zh="室内与思辨空间">Interior &amp; speculative space</span>
+      </div>
+      <div class="works-row">
+      <a class="work reveal" href="intersection.html" data-cursor="stamp">
         <div class="frame"><img src="assets/img/inter-hero.jpg" alt="Intersection" loading="lazy"></div>
         <span class="reg" aria-hidden="true"><i></i></span>
-        <div class="dim"><span class="d-txt" data-en="Nº01 · 800×640mm" data-zh="Nº01 · 800×640mm">Nº01 · 800×640mm</span><span class="d-line" aria-hidden="true"></span></div>
+        <div class="dim"><span class="d-txt" data-en="Nº03 · 800×640mm" data-zh="Nº03 · 800×640mm">Nº03 · 800×640mm</span><span class="d-line" aria-hidden="true"></span></div>
         <div class="label">
-          <p class="l-num" data-en="Nº01" data-zh="Nº01">Nº01</p><p class="l-title">Intersection</p>
+          <p class="l-num" data-en="Nº03" data-zh="Nº03">Nº03</p><p class="l-title">Intersection</p>
           <p class="l-meta" data-en="Izakaya &amp;amp; bar · 2023" data-zh="居酒屋与酒吧 · 2023">Izakaya &amp; bar · 2023</p><span class="l-rule" aria-hidden="true"></span>
         </div>
       </a>
@@ -451,9 +516,9 @@ body.cursor-link .cursor-ring::before,body.cursor-link .cursor-ring::after{backg
       <a class="work reveal" href="interlude.html" data-cursor="stamp">
         <div class="frame"><img src="assets/img/interl-hero.jpg" alt="Interlude" loading="lazy"></div>
         <span class="reg" aria-hidden="true"><i></i></span>
-        <div class="dim"><span class="d-txt" data-en="Nº02 · 700×875mm" data-zh="Nº02 · 700×875mm">Nº02 · 700×875mm</span><span class="d-line" aria-hidden="true"></span></div>
+        <div class="dim"><span class="d-txt" data-en="Nº04 · 700×875mm" data-zh="Nº04 · 700×875mm">Nº04 · 700×875mm</span><span class="d-line" aria-hidden="true"></span></div>
         <div class="label">
-          <p class="l-num" data-en="Nº02" data-zh="Nº02">Nº02</p><p class="l-title">Interlude</p>
+          <p class="l-num" data-en="Nº04" data-zh="Nº04">Nº04</p><p class="l-title">Interlude</p>
           <p class="l-meta" data-en="Residence · 2023" data-zh="住宅 · 2023">Residence · 2023</p><span class="l-rule" aria-hidden="true"></span>
         </div>
       </a>
@@ -461,30 +526,10 @@ body.cursor-link .cursor-ring::before,body.cursor-link .cursor-ring::after{backg
       <a class="work reveal" href="endless-life.html" data-cursor="stamp">
         <div class="frame"><img src="assets/img/endless-hero.jpg" alt="Endless Life" loading="lazy"></div>
         <span class="reg" aria-hidden="true"><i></i></span>
-        <div class="dim"><span class="d-txt" data-en="Nº03 · 700×875mm" data-zh="Nº03 · 700×875mm">Nº03 · 700×875mm</span><span class="d-line" aria-hidden="true"></span></div>
-        <div class="label">
-          <p class="l-num" data-en="Nº03" data-zh="Nº03">Nº03</p><p class="l-title">Endless Life</p>
-          <p class="l-meta" data-en="Adaptive reuse · 2024" data-zh="改造再利用 · 2024">Adaptive reuse · 2024</p><span class="l-rule" aria-hidden="true"></span>
-        </div>
-      </a>
-
-      <a class="work reveal" href="perception.html" data-cursor="stamp">
-        <div class="frame"><img src="assets/img/perc-poster-1.jpg" alt="Perception" loading="lazy"></div>
-        <span class="reg" aria-hidden="true"><i></i></span>
-        <div class="dim"><span class="d-txt" data-en="Nº04 · 700×875mm" data-zh="Nº04 · 700×875mm">Nº04 · 700×875mm</span><span class="d-line" aria-hidden="true"></span></div>
-        <div class="label">
-          <p class="l-num" data-en="Nº04" data-zh="Nº04">Nº04</p><p class="l-title">Perception</p>
-          <p class="l-meta" data-en="Graphic collage · 2025" data-zh="平面拼贴 · 2025">Graphic collage · 2025</p><span class="l-rule" aria-hidden="true"></span>
-        </div>
-      </a>
-
-      <a class="work reveal" href="formation.html" data-cursor="stamp">
-        <div class="frame"><img src="assets/img/form-hero.jpg" alt="Formation" loading="lazy"></div>
-        <span class="reg" aria-hidden="true"><i></i></span>
         <div class="dim"><span class="d-txt" data-en="Nº05 · 700×875mm" data-zh="Nº05 · 700×875mm">Nº05 · 700×875mm</span><span class="d-line" aria-hidden="true"></span></div>
         <div class="label">
-          <p class="l-num" data-en="Nº05" data-zh="Nº05">Nº05</p><p class="l-title">Formation</p>
-          <p class="l-meta" data-en="3D fabrication · 2025" data-zh="3D制造 · 2025">3D fabrication · 2025</p><span class="l-rule" aria-hidden="true"></span>
+          <p class="l-num" data-en="Nº05" data-zh="Nº05">Nº05</p><p class="l-title">Endless Life</p>
+          <p class="l-meta" data-en="Adaptive reuse · 2024" data-zh="改造再利用 · 2024">Adaptive reuse · 2024</p><span class="l-rule" aria-hidden="true"></span>
         </div>
       </a>
 
@@ -497,6 +542,49 @@ body.cursor-link .cursor-ring::before,body.cursor-link .cursor-ring::after{backg
           <p class="l-meta" data-en="Future library · 2025" data-zh="未来图书馆 · 2025">Future library · 2025</p><span class="l-rule" aria-hidden="true"></span>
         </div>
       </a>
+      </div>
+    </div>
+
+    <!-- ===== 03 · MAKING SERIES ===== -->
+    <div class="wall-zone">
+      <div class="zone-head reveal">
+        <span class="z-num">03</span>
+        <h2 class="z-title" data-en="Making Series" data-zh="制造系列">Making Series</h2>
+        <span class="z-line" aria-hidden="true"></span>
+        <span class="z-note" data-en="Digital fabrication" data-zh="数字化制造">Digital fabrication</span>
+      </div>
+      <div class="works-row">
+      <a class="work reveal" href="formation.html" data-cursor="stamp">
+        <div class="frame"><img src="assets/img/form-hero.jpg" alt="Formation" loading="lazy"></div>
+        <span class="reg" aria-hidden="true"><i></i></span>
+        <div class="dim"><span class="d-txt" data-en="Nº07 · 700×875mm" data-zh="Nº07 · 700×875mm">Nº07 · 700×875mm</span><span class="d-line" aria-hidden="true"></span></div>
+        <div class="label">
+          <p class="l-num" data-en="Nº07" data-zh="Nº07">Nº07</p><p class="l-title">Formation</p>
+          <p class="l-meta" data-en="3D fabrication · 2025" data-zh="3D制造 · 2025">3D fabrication · 2025</p><span class="l-rule" aria-hidden="true"></span>
+        </div>
+      </a>
+      </div>
+    </div>
+
+    <!-- ===== 04 · OTHER WORKS ===== -->
+    <div class="wall-zone">
+      <div class="zone-head reveal">
+        <span class="z-num">04</span>
+        <h2 class="z-title" data-en="Other Works" data-zh="其他作品">Other Works</h2>
+        <span class="z-line" aria-hidden="true"></span>
+        <span class="z-note" data-en="Photo · point cloud · music" data-zh="摄影 · 点云 · 音乐">Photo · point cloud · music</span>
+      </div>
+      <div class="works-row">
+      <a class="work reveal" href="other-works.html" data-cursor="stamp">
+        <div class="frame"><img src="assets/img/photos/city-01.jpg" alt="Other Works" loading="lazy"></div>
+        <span class="reg" aria-hidden="true"><i></i></span>
+        <div class="dim"><span class="d-txt" data-en="Nº08 · 700×875mm" data-zh="Nº08 · 700×875mm">Nº08 · 700×875mm</span><span class="d-line" aria-hidden="true"></span></div>
+        <div class="label">
+          <p class="l-num" data-en="Nº08" data-zh="Nº08">Nº08</p><p class="l-title">Other Works</p>
+          <p class="l-meta" data-en="Photo · point cloud · music" data-zh="摄影 · 点云 · 音乐">Photo · point cloud · music</p><span class="l-rule" aria-hidden="true"></span>
+        </div>
+      </a>
+      </div>
     </div>
   </div>
 
@@ -511,8 +599,8 @@ body.cursor-link .cursor-ring::before,body.cursor-link .cursor-ring::after{backg
   <div class="hero-foot">
     <p class="hf-hint" data-en="Hover to measure · click to enter" data-zh="悬停测量 · 点击进入">Hover to measure · click to enter</p>
     <div class="hf-index">
-      <a href="other-works.html" data-en="&lt;b&gt;07&lt;/b&gt;Other Works" data-zh="&lt;b&gt;07&lt;/b&gt;其他作品"><b>07</b>Other Works</a>
-      <a href="about.html" data-en="&lt;b&gt;08&lt;/b&gt;About &amp;amp; Contact" data-zh="&lt;b&gt;08&lt;/b&gt;关于与联系"><b>08</b>About &amp; Contact</a>
+      <a href="other-works.html" data-en="&lt;b&gt;08&lt;/b&gt;Other Works" data-zh="&lt;b&gt;08&lt;/b&gt;其他作品"><b>08</b>Other Works</a>
+      <a href="about.html" data-en="&lt;b&gt;09&lt;/b&gt;About &amp;amp; Contact" data-zh="&lt;b&gt;09&lt;/b&gt;关于与联系"><b>09</b>About &amp; Contact</a>
       <a href="assets/docs/Haiyi_Yu_Portfolio.pdf" target="_blank" rel="noopener" data-en="&lt;b&gt;PDF&lt;/b&gt;Portfolio ↓" data-zh="&lt;b&gt;PDF&lt;/b&gt;作品集 ↓"><b>PDF</b>Portfolio ↓</a>
     </div>
   </div>
@@ -522,18 +610,18 @@ body.cursor-link .cursor-ring::before,body.cursor-link .cursor-ring::after{backg
 <div class="band" aria-hidden="true">
   <div class="marquee">
     <div class="mq-track">
-      <span class="mq-item" data-en="Graphic Collage &lt;i&gt;✦&lt;/i&gt;" data-zh="平面拼贴 &lt;i&gt;✦&lt;/i&gt;">Graphic Collage <i>✦</i></span>
-      <span class="mq-item" data-en="Spatial Narrative &lt;i&gt;✦&lt;/i&gt;" data-zh="空间叙事 &lt;i&gt;✦&lt;/i&gt;">Spatial Narrative <i>✦</i></span>
-      <span class="mq-item" data-en="Adaptive Reuse &lt;i&gt;✦&lt;/i&gt;" data-zh="改造再利用 &lt;i&gt;✦&lt;/i&gt;">Adaptive Reuse <i>✦</i></span>
-      <span class="mq-item" data-en="Digital Fabrication &lt;i&gt;✦&lt;/i&gt;" data-zh="数字化制造 &lt;i&gt;✦&lt;/i&gt;">Digital Fabrication <i>✦</i></span>
-      <span class="mq-item" data-en="Speculative Design &lt;i&gt;✦&lt;/i&gt;" data-zh="思辨设计 &lt;i&gt;✦&lt;/i&gt;">Speculative Design <i>✦</i></span>
-      <span class="mq-item" data-en="AI Workflows &lt;i&gt;✦&lt;/i&gt;" data-zh="AI 工作流 &lt;i&gt;✦&lt;/i&gt;">AI Workflows <i>✦</i></span>
-      <span class="mq-item" data-en="Graphic Collage &lt;i&gt;✦&lt;/i&gt;" data-zh="平面拼贴 &lt;i&gt;✦&lt;/i&gt;">Graphic Collage <i>✦</i></span>
-      <span class="mq-item" data-en="Spatial Narrative &lt;i&gt;✦&lt;/i&gt;" data-zh="空间叙事 &lt;i&gt;✦&lt;/i&gt;">Spatial Narrative <i>✦</i></span>
-      <span class="mq-item" data-en="Adaptive Reuse &lt;i&gt;✦&lt;/i&gt;" data-zh="改造再利用 &lt;i&gt;✦&lt;/i&gt;">Adaptive Reuse <i>✦</i></span>
-      <span class="mq-item" data-en="Digital Fabrication &lt;i&gt;✦&lt;/i&gt;" data-zh="数字化制造 &lt;i&gt;✦&lt;/i&gt;">Digital Fabrication <i>✦</i></span>
-      <span class="mq-item" data-en="Speculative Design &lt;i&gt;✦&lt;/i&gt;" data-zh="思辨设计 &lt;i&gt;✦&lt;/i&gt;">Speculative Design <i>✦</i></span>
-      <span class="mq-item" data-en="AI Workflows &lt;i&gt;✦&lt;/i&gt;" data-zh="AI 工作流 &lt;i&gt;✦&lt;/i&gt;">AI Workflows <i>✦</i></span>
+      <span class="mq-item" data-en="Graphic Series &lt;i&gt;✦&lt;/i&gt;" data-zh="平面系列 &lt;i&gt;✦&lt;/i&gt;">Graphic Series <i>✦</i></span>
+      <span class="mq-item" data-en="Spatial Series &lt;i&gt;✦&lt;/i&gt;" data-zh="空间系列 &lt;i&gt;✦&lt;/i&gt;">Spatial Series <i>✦</i></span>
+      <span class="mq-item" data-en="Making Series &lt;i&gt;✦&lt;/i&gt;" data-zh="制造系列 &lt;i&gt;✦&lt;/i&gt;">Making Series <i>✦</i></span>
+      <span class="mq-item" data-en="Photography &lt;i&gt;✦&lt;/i&gt;" data-zh="摄影 &lt;i&gt;✦&lt;/i&gt;">Photography <i>✦</i></span>
+      <span class="mq-item" data-en="Point Cloud &lt;i&gt;✦&lt;/i&gt;" data-zh="点云 &lt;i&gt;✦&lt;/i&gt;">Point Cloud <i>✦</i></span>
+      <span class="mq-item" data-en="Music &lt;i&gt;✦&lt;/i&gt;" data-zh="音乐 &lt;i&gt;✦&lt;/i&gt;">Music <i>✦</i></span>
+      <span class="mq-item" data-en="Graphic Series &lt;i&gt;✦&lt;/i&gt;" data-zh="平面系列 &lt;i&gt;✦&lt;/i&gt;">Graphic Series <i>✦</i></span>
+      <span class="mq-item" data-en="Spatial Series &lt;i&gt;✦&lt;/i&gt;" data-zh="空间系列 &lt;i&gt;✦&lt;/i&gt;">Spatial Series <i>✦</i></span>
+      <span class="mq-item" data-en="Making Series &lt;i&gt;✦&lt;/i&gt;" data-zh="制造系列 &lt;i&gt;✦&lt;/i&gt;">Making Series <i>✦</i></span>
+      <span class="mq-item" data-en="Photography &lt;i&gt;✦&lt;/i&gt;" data-zh="摄影 &lt;i&gt;✦&lt;/i&gt;">Photography <i>✦</i></span>
+      <span class="mq-item" data-en="Point Cloud &lt;i&gt;✦&lt;/i&gt;" data-zh="点云 &lt;i&gt;✦&lt;/i&gt;">Point Cloud <i>✦</i></span>
+      <span class="mq-item" data-en="Music &lt;i&gt;✦&lt;/i&gt;" data-zh="音乐 &lt;i&gt;✦&lt;/i&gt;">Music <i>✦</i></span>
     </div>
   </div>
 </div>
@@ -596,13 +684,14 @@ body.cursor-link .cursor-ring::before,body.cursor-link .cursor-ring::after{backg
     </div>
     <div>
       <p class="fc-head" data-en="Index" data-zh="目录">Index</p>
-      <a href="intersection.html" data-en="01 Intersection" data-zh="01 Intersection">01 Intersection</a>
-      <a href="interlude.html" data-en="02 Interlude" data-zh="02 Interlude">02 Interlude</a>
-      <a href="endless-life.html" data-en="03 Endless Life" data-zh="03 Endless Life">03 Endless Life</a>
-      <a href="perception.html" data-en="04 Perception" data-zh="04 Perception">04 Perception</a>
-      <a href="formation.html" data-en="05 Formation" data-zh="05 Formation">05 Formation</a>
+      <a href="lenovo.html" data-en="01 Lenovo · A+" data-zh="01 联想 · A+">01 Lenovo · A+</a>
+      <a href="perception.html" data-en="02 Perception" data-zh="02 Perception">02 Perception</a>
+      <a href="intersection.html" data-en="03 Intersection" data-zh="03 Intersection">03 Intersection</a>
+      <a href="interlude.html" data-en="04 Interlude" data-zh="04 Interlude">04 Interlude</a>
+      <a href="endless-life.html" data-en="05 Endless Life" data-zh="05 Endless Life">05 Endless Life</a>
       <a href="speculation.html" data-en="06 Speculation" data-zh="06 Speculation">06 Speculation</a>
-      <a href="other-works.html" data-en="07 Other Works" data-zh="07 其他作品">07 Other Works</a>
+      <a href="formation.html" data-en="07 Formation" data-zh="07 Formation">07 Formation</a>
+      <a href="other-works.html" data-en="08 Other Works" data-zh="08 其他作品">08 Other Works</a>
     </div>
     <div>
       <p class="fc-head" data-en="Elsewhere" data-zh="其他平台">Elsewhere</p>
