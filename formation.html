@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>FORMATION — Pattern to Spatial Depth · Haiyi Yu</title>
-<meta name="description" content="Formation — from pattern to spatial depth. AI-generated morph partitions and a cantilevered swivel chair through digital fabrication.">
+<title>FORMATION — ISF Partition · Haiyi Yu</title>
+<meta name="description" content="Formation — AI-generated morph patterns transformed into a spatial partition through ISF (incremental sheet forming) and digital fabrication.">
 <meta name="theme-color" content="#eef0f2">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -140,57 +140,6 @@ body{background:#eef0f2;color:var(--ink)}
 .gal .g-wide{grid-column:1/-1}
 @media (max-width:760px){.gal{grid-template-columns:1fr}}
 
-/* veneer structure — layer focus */
-.veneer-hold{margin-top:44px;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,4vw,50px);align-items:center}
-.veneer-frame{
-  position:relative;aspect-ratio:3/4;border-radius:12px;overflow:hidden;cursor:zoom-in;
-  box-shadow:0 16px 50px rgba(29,31,38,.22);background:#e9ebee;
-}
-.veneer-frame img{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% var(--obj,0%);
-  transition:object-position 1s var(--ease-out),transform .9s var(--ease-out);
-}
-.veneer-frame img:active{transform:scale(1.03)}
-.veneer-frame .v-tag{
-  position:absolute;left:12px;bottom:10px;z-index:2;font-size:11px;letter-spacing:.16em;
-  text-transform:uppercase;color:#fff;background:rgba(29,31,38,.65);padding:5px 14px;border-radius:20px;
-}
-.veneer-frame::after{
-  content:"";position:absolute;left:0;right:0;height:33.33%;pointer-events:none;
-  background:rgba(36,86,255,.22);mix-blend-mode:screen;
-  top:var(--band,0%);transition:top .9s var(--ease-out);
-  opacity:var(--band-op,0);
-}
-.layer-btns{display:flex;flex-direction:column;gap:10px}
-.layer-btns .layer{
-  text-align:left;border:1px solid var(--line);border-left:5px solid #cfd3da;border-radius:10px;
-  padding:14px 18px;background:rgba(255,255,255,.5);transition:transform .4s,background .3s,border-color .3s;
-}
-.layer-btns .layer:hover{transform:translateX(-6px);background:rgba(255,255,255,.85)}
-.layer-btns .layer.on{border-left-color:var(--accent);background:rgba(36,86,255,.07);box-shadow:inset 0 0 0 1px var(--accent)}
-.layer-btns .layer b{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
-.layer-btns .layer p{font-size:14px;margin-top:6px;color:#565b66}
-@media (max-width:900px){.veneer-hold{grid-template-columns:1fr}}
-/* chair mechanism */
-.mech{
-  margin-top:44px;display:grid;grid-template-columns:1fr auto;gap:clamp(20px,4vw,50px);align-items:center;
-}
-.mech .gears-hold{
-  position:relative;width:clamp(220px,26vw,340px);aspect-ratio:1;flex:0 0 auto;
-}
-.mech .gears-hold svg{position:absolute;width:62%;filter:drop-shadow(0 10px 22px rgba(29,31,38,.25))}
-.mech .gears-hold .g1{left:0;top:6%;animation:gear-spin 7s linear infinite}
-.mech .gears-hold .g2{left:38%;top:30%;animation:gear-spin 5s linear infinite reverse}
-.mech .gears-hold .g3{left:6%;top:52%;width:44%;animation:gear-spin 6s linear infinite}
-.mech .layers{display:flex;flex-direction:column;gap:12px}
-.mech .layer{
-  border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;
-  padding:14px 18px;background:rgba(255,255,255,.5);transition:transform .4s,background .3s;
-}
-.mech .layer:hover{transform:translateX(-8px);background:rgba(255,255,255,.85)}
-.mech .layer b{font-family:var(--font-tech);font-size:17px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
-.mech .layer p{font-size:14px;margin-top:6px}
-@media (max-width:900px){.mech{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -233,9 +182,11 @@ body{background:#eef0f2;color:var(--ink)}
     <a class="menu-item" href="speculation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.30s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Spatial&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;06&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.30s&quot;&gt;Speculation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;空间&lt;/span&gt;"><span class="m-num">06</span><span class="m-title" style="transition-delay:.30s">Speculation</span><span class="m-tag">Spatial</span></a>
     <p class="menu-group"><span class="g-num">03</span><span data-en="Making Series" data-zh="制造系列">Making Series</span></p>
     <a class="menu-item" href="formation.html" data-en="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.34s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Making&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.34s&quot;&gt;Formation&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;制造&lt;/span&gt;"><span class="m-num">07</span><span class="m-title" style="transition-delay:.34s">Formation</span><span class="m-tag">Making</span></a>
+    <a class="menu-item" href="chair.html" data-en="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.38s&quot;&gt;Swivel Chair&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Making&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.38s&quot;&gt;旋转椅&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;制造&lt;/span&gt;"><span class="m-num">08</span><span class="m-title" style="transition-delay:.38s">Swivel Chair</span><span class="m-tag">Making</span></a>
+
     <p class="menu-group"><span class="g-num">04</span><span data-en="Other Works" data-zh="其他作品">Other Works</span></p>
-    <a class="menu-item" href="other-works.html" data-en="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.38s&quot;&gt;Other Works&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Photo · Music&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.38s&quot;&gt;其他作品&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;摄影 · 音乐&lt;/span&gt;"><span class="m-num">08</span><span class="m-title" style="transition-delay:.38s">Other Works</span><span class="m-tag">Photo · Music</span></a>
-    <a class="menu-item" href="about.html" data-en="&lt;span class=&quot;m-num&quot;&gt;09&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.42s&quot;&gt;About&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Contact&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;09&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.42s&quot;&gt;关于&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;联系&lt;/span&gt;"><span class="m-num">09</span><span class="m-title" style="transition-delay:.42s">About</span><span class="m-tag">Contact</span></a>
+    <a class="menu-item" href="other-works.html" data-en="&lt;span class=&quot;m-num&quot;&gt;09&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.42s&quot;&gt;Other Works&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Photo · Music&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;09&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.42s&quot;&gt;其他作品&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;摄影 · 音乐&lt;/span&gt;"><span class="m-num">09</span><span class="m-title" style="transition-delay:.42s">Other Works</span><span class="m-tag">Photo · Music</span></a>
+    <a class="menu-item" href="about.html" data-en="&lt;span class=&quot;m-num&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.46s&quot;&gt;About&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;Contact&lt;/span&gt;" data-zh="&lt;span class=&quot;m-num&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;m-title&quot; style=&quot;transition-delay:.46s&quot;&gt;关于&lt;/span&gt;&lt;span class=&quot;m-tag&quot;&gt;联系&lt;/span&gt;"><span class="m-num">10</span><span class="m-title" style="transition-delay:.46s">About</span><span class="m-tag">Contact</span></a>
   </div>
   <div class="menu-foot">
     <span data-en="Melbourne / Beijing" data-zh="墨尔本 / 北京">Melbourne / Beijing</span>
@@ -342,54 +293,10 @@ body{background:#eef0f2;color:var(--ink)}
   </div>
 </section>
 
-<!-- ============ 02 CHAIR ============ -->
-<section class="sect" aria-label="Cantilevered swivel chair">
-  <div class="container">
-    <div class="s-grid">
-      <div class="s-num reveal" aria-hidden="true">02</div>
-      <div>
-        <h2 class="reveal" data-en="Cantilevered&lt;br&gt;&lt;em&gt;swivel chair&lt;/em&gt;" data-zh="悬臂式&lt;br&gt;&lt;em&gt;旋转椅&lt;/em&gt;">Cantilevered<br><em>swivel chair</em></h2>
-        <p class="reveal" data-en="This project explores a cantilevered swivel chair driven by a gear-based rotation mechanism, realised through the combined use of bent veneer lamination and digital fabrication. Veneer is not treated as a surface finish but as a &lt;b&gt;structural material&lt;/b&gt; that actively participates in load-bearing and motion control." data-zh="该项目探索一把由齿轮旋转机构驱动的悬臂式旋转椅，通过弯曲胶合板层压与数字化制造的结合实现。胶合板不再被当作表面饰面，而是作为&lt;b&gt;结构材料&lt;/b&gt;积极参与承重与运动控制。">This project explores a cantilevered swivel chair driven by a gear-based rotation mechanism, realised through the combined use of bent veneer lamination and digital fabrication. Veneer is not treated as a surface finish but as a <b>structural material</b> that actively participates in load-bearing and motion control.</p>
-
-        <div class="veneer-hold reveal">
-          <div class="veneer-frame" id="veneerFrame">
-            <img src="assets/img/form-8.jpg" alt="Chair profile — click a layer to focus its part" loading="lazy">
-            <span class="v-tag" id="vTag">The chair — full structure</span>
-          </div>
-          <div class="layer-btns" id="layerBtns" role="group" aria-label="Chair layers — click to focus">
-            <button class="layer" data-band="upper"><b data-en="Upper layer" data-zh="上层">Upper layer</b><p data-en="When a person rotates, the central gear drives the surrounding gears to turn." data-zh="当人旋转时，中央齿轮带动周围齿轮转动。">When a person rotates, the central gear drives the surrounding gears to turn.</p></button>
-            <button class="layer" data-band="middle"><b data-en="Middle layer" data-zh="中层">Middle layer</b><p data-en="The gears drive the veneer to rotate, and a rotatable connector between the two veneer layers fixes their position and links the upper and lower structures." data-zh="齿轮带动胶合板旋转，两层胶合板之间的可旋转连接件固定其位置，并连接上下结构。">The gears drive the veneer to rotate, and a rotatable connector between the two veneer layers fixes their position and links the upper and lower structures.</p></button>
-            <button class="layer" data-band="lower"><b data-en="Lower layer" data-zh="下层">Lower layer</b><p data-en="The gear structure separates the veneer from the base surface." data-zh="齿轮结构将胶合板与底座表面分离。">The gear structure separates the veneer from the base surface.</p></button>
-          </div>
-        </div>
-
-        <div class="mech reveal">
-          <div class="gears-hold" aria-hidden="true">
-            <svg class="g1" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#2456ff" stroke-width="7" stroke-dasharray="9.5 7"/><circle cx="50" cy="50" r="24" fill="none" stroke="#2456ff" stroke-width="3"/><circle cx="50" cy="50" r="8" fill="none" stroke="#2456ff" stroke-width="3"/><g stroke="#2456ff" stroke-width="3"><line x1="50" y1="26" x2="50" y2="42"/><line x1="50" y1="58" x2="50" y2="74"/><line x1="26" y1="50" x2="42" y2="50"/><line x1="58" y1="50" x2="74" y2="50"/></g></svg>
-            <svg class="g2" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#1d1f26" stroke-width="7" stroke-dasharray="9.5 7"/><circle cx="50" cy="50" r="24" fill="none" stroke="#1d1f26" stroke-width="3"/><circle cx="50" cy="50" r="8" fill="none" stroke="#1d1f26" stroke-width="3"/></svg>
-            <svg class="g3" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#2456ff" stroke-width="7" stroke-dasharray="9.5 7"/><circle cx="50" cy="50" r="24" fill="none" stroke="#2456ff" stroke-width="3"/><circle cx="50" cy="50" r="8" fill="none" stroke="#2456ff" stroke-width="3"/></svg>
-          </div>
-
-        </div>
-
-        <div class="gal">
-          <figure class="g-item reveal"><img src="assets/img/form-chair.jpg" alt="Cantilevered swivel chair" loading="lazy"><figcaption data-en="The chair" data-zh="旋转椅">The chair</figcaption></figure>
-          <figure class="g-item reveal reveal-d1"><img src="assets/img/form-7.jpg" alt="3D printed gears" loading="lazy"><figcaption data-en="3D printed gears" data-zh="3D 打印齿轮">3D printed gears</figcaption></figure>
-          <figure class="g-item reveal"><img src="assets/img/form-12.jpg" alt="Veneer as the bearing structure" loading="lazy"><figcaption data-en="Veneer as bearing structure" data-zh="胶合板承重结构">Veneer as bearing structure</figcaption></figure>
-          <figure class="g-item reveal reveal-d1"><img src="assets/img/form-9.jpg" alt="Dual use of bent lamination and digital fabrication" loading="lazy"><figcaption data-en="Dual use — bent lamination" data-zh="双重用途 — 弯曲层压">Dual use — bent lamination</figcaption></figure>
-          <figure class="g-item reveal"><img src="assets/img/form-10.jpg" alt="Mechanism detail" loading="lazy"><figcaption data-en="Mechanism" data-zh="机械结构">Mechanism</figcaption></figure>
-          <figure class="g-item reveal reveal-d1"><img src="assets/img/form-11.jpg" alt="Load bearing" loading="lazy"><figcaption data-en="Load bearing" data-zh="承重">Load bearing</figcaption></figure>
-          <figure class="g-item reveal"><img src="assets/img/form-13.jpg" alt="The cantilevered swivel chair — full view" loading="lazy"><figcaption data-en="The chair — full view" data-zh="座椅 — 全貌">The chair — full view</figcaption></figure>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ NEXT ============ -->
-<a class="next-project" href="other-works.html" aria-label="Next project: Other Works">
+<a class="next-project" href="chair.html" aria-label="Next project: Swivel Chair">
   <span class="np-label" data-en="Next project — 08" data-zh="下一个项目 — 08">Next project — 08</span>
-  <span class="np-title" data-en="Other Works" data-zh="其他作品">Other Works</span>
+  <span class="np-title" data-en="Swivel Chair" data-zh="旋转椅">Swivel Chair</span>
   <span class="np-arrow">↗</span>
 </a>
 
@@ -440,38 +347,6 @@ const io=new IntersectionObserver(es=>es.forEach(en=>{
 }),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* ============ veneer layer focus ============ */
-(()=>{
-  const frame=document.getElementById('veneerFrame');
-  if(!frame) return;
-  const img=frame.querySelector('img');
-  const tag=document.getElementById('vTag');
-  const btns=[...document.querySelectorAll('#layerBtns .layer')];
-  const bandsEn={upper:{obj:'0%',band:'0%',label:'Chair — upper layer'},
-                 middle:{obj:'50%',band:'33.33%',label:'Chair — middle layer'},
-                 lower:{obj:'100%',band:'66.66%',label:'Chair — lower layer'}};
-  const bandsZh={upper:{obj:'0%',band:'0%',label:'座椅 — 上层'},
-                 middle:{obj:'50%',band:'33.33%',label:'座椅 — 中层'},
-                 lower:{obj:'100%',band:'66.66%',label:'座椅 — 下层'}};
-  const bands=()=>window.i18nLang==='zh'?bandsZh:bandsEn;
-  let current=null;
-  btns.forEach(b=>b.addEventListener('click',()=>{
-    const same=current===b.dataset.band;
-    btns.forEach(x=>x.classList.remove('on'));
-    if(same){ current=null;
-      img.style.objectPosition='50% 50%'; frame.style.setProperty('--band','0%');
-      frame.style.setProperty('--band-op','0'); tag.textContent=window.i18nLang==='zh'?'座椅 — 完整结构':'The chair — full structure';
-      return; }
-    current=b.dataset.band;
-    b.classList.add('on');
-    const cfg=bands()[current];
-    img.style.objectPosition=`50% ${cfg.obj}`;
-    frame.style.setProperty('--band',cfg.band);
-    frame.style.setProperty('--band-op','.8');
-    tag.textContent=cfg.label;
-  }));
-})();
-
 /* ============ lightbox ============ */
 (()=>{
   const lb=document.createElement('div');
@@ -486,7 +361,6 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     lb.querySelector('img').src=items[idx].src;
     lb.querySelector('img').alt=items[idx].alt||'';
     lb.querySelector('.lb-txt').textContent=items[idx].closest('figure')?.querySelector('figcaption')?.textContent
-      || items[idx].closest('.veneer-frame')?.querySelector('.v-tag')?.textContent
       || items[idx].closest('.side-fig')?.querySelector('figcaption')?.textContent || '';
     lb.querySelector('.lb-idx').textContent=(idx+1)+' / '+items.length; };
   const open=()=>{ lb.classList.add('open'); document.body.style.overflow='hidden'; };
@@ -499,9 +373,9 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     if(e.key==='Escape') close();
     if(e.key==='ArrowLeft') show(idx-1);
     if(e.key==='ArrowRight') show(idx+1); });
-  items=[...document.querySelectorAll('.gal .g-item img, .veneer-frame img, .side-fig img')];
+  items=[...document.querySelectorAll('.gal .g-item img, .side-fig img')];
   items.forEach(im=>{
-    im.closest('.g-item, .veneer-frame, .side-fig').addEventListener('click',e=>{
+    im.closest('.g-item, .side-fig').addEventListener('click',e=>{
       e.preventDefault(); show(items.indexOf(im)); open();
     });
   });
