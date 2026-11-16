@@ -115,14 +115,15 @@ body{
 .proto-fig figcaption b{color:var(--accent)}
 
 /* ---------- poster series ---------- */
-.poster-row{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,30px);align-items:start}
+.poster-row{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,30px);align-items:stretch}
 @media (max-width:760px){.poster-row{grid-template-columns:1fr}}
 .poster-fig{position:relative;border-radius:12px;overflow:hidden;cursor:zoom-in;
+  aspect-ratio:1080/1429;
   background:#fff;border:1px solid var(--line);box-shadow:0 16px 44px rgba(51,36,29,.22);
   transition:transform .6s var(--ease-out),box-shadow .6s;
 }
 .poster-fig:hover{transform:translateY(-6px);box-shadow:0 26px 70px rgba(51,36,29,.32)}
-.poster-fig img{width:100%;display:block;transition:transform .9s var(--ease-out)}
+.poster-fig img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block;transition:transform .9s var(--ease-out)}
 .poster-fig:hover img{transform:scale(1.03)}
 .poster-fig .l-cap{
   position:absolute;left:12px;bottom:10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
@@ -187,52 +188,17 @@ body{
   <h1>Lenovo<br><span class="stroke">A+</span></h1>
   <p class="p-sub" data-en="Three product series for the Amazon storefront — Lenovo Beijing" data-zh="亚马逊店铺三个产品系列 — 联想北京">Three product series for the Amazon storefront — Lenovo Beijing</p>
   <div class="hero-chips">
-    <a class="hero-chip" href="#bag" data-en="▣ Backpack series" data-zh="▣ 背包系列">▣ Backpack series</a>
     <a class="hero-chip" href="#headphone" data-en="◉ Headphone series" data-zh="◉ 耳机系列">◉ Headphone series</a>
+    <a class="hero-chip" href="#bag" data-en="▣ Backpack series" data-zh="▣ 背包系列">▣ Backpack series</a>
     <a class="hero-chip" href="#poster" data-en="▤ Poster series" data-zh="▤ 海报系列">▤ Poster series</a>
   </div>
 </section>
 
-<!-- ============ 01 · BACKPACK SERIES ============ -->
-<section class="sect" id="bag" aria-label="Lenovo 540 tote backpack series">
-  <div class="s-inner">
-    <div class="s-head reveal">
-      <span class="mono-label" data-en="01 — 540 Tote Backpack" data-zh="01 — 540 Tote 双肩包">01 — 540 Tote Backpack</span>
-      <h2 data-en="The &lt;em&gt;Backpack&lt;/em&gt; Series" data-zh="背包&lt;em&gt;系列&lt;/em&gt;">The <em>Backpack</em> Series</h2>
-    </div>
-    <p class="reveal" data-en="Every series starts with the object itself — the backpack photographed as the reference original. From it I built the Amazon selling-point frames that turn its details into the reasons to buy." data-zh="每个系列都从实物本身开始——以双肩包实拍图作为参照原始图。围绕它，我完成了亚马逊卖点图，把它的细节变成购买的理由。">Every series starts with the object itself — the backpack photographed as the reference original. From it I built the Amazon selling-point frames that turn its details into the reasons to buy.</p>
-
-    <!-- original object -->
-    <p class="mono-label reveal" style="margin:34px 0 12px;color:var(--accent)" data-en="The object — original" data-zh="设计对象 · 原始图">The object — original</p>
-    <figure class="proto-fig reveal">
-      <img src="assets/img/lenovo-bag-original.jpg" alt="Lenovo 540 tote backpack — original photograph" loading="lazy">
-      <figcaption><span data-en="540 Tote Backpack" data-zh="540 Tote 双肩包">540 Tote Backpack</span><b data-en="ORIGINAL" data-zh="原始图">ORIGINAL</b></figcaption>
-    </figure>
-
-    <!-- selling points -->
-    <p class="mono-label reveal" style="margin:48px 0 12px;color:var(--accent)" data-en="Amazon selling-point series — 03 frames" data-zh="亚马逊卖点图系列 — 03 张">Amazon selling-point series — 03 frames</p>
-    <div class="series-grid">
-      <figure class="l-card reveal">
-        <img src="assets/img/lenovo-bag-aplus-1.jpg" alt="Lenovo 540 tote backpack — Amazon selling point 01" loading="lazy">
-        <figcaption class="l-cap" data-en="Selling point — A+ 01" data-zh="卖点图 — A+ 01">Selling point — A+ 01</figcaption>
-      </figure>
-      <figure class="l-card reveal reveal-d1">
-        <img src="assets/img/lenovo-bag-aplus-2.jpg" alt="Lenovo 540 tote backpack — Amazon selling point 02" loading="lazy">
-        <figcaption class="l-cap" data-en="Selling point — A+ 02" data-zh="卖点图 — A+ 02">Selling point — A+ 02</figcaption>
-      </figure>
-      <figure class="l-card reveal reveal-d2">
-        <img src="assets/img/lenovo-bag-aplus-3.jpg" alt="Lenovo 540 tote backpack — Amazon selling point 03" loading="lazy">
-        <figcaption class="l-cap" data-en="Selling point — A+ 03" data-zh="卖点图 — A+ 03">Selling point — A+ 03</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 02 · HEADPHONE SERIES ============ -->
+<!-- ============ 01 · HEADPHONE SERIES ============ -->
 <section class="sect" id="headphone" aria-label="Headphone YOGA PC Edition selling point series">
   <div class="s-inner">
     <div class="s-head reveal">
-      <span class="mono-label" data-en="02 — Headphone YOGA PC Edition" data-zh="02 — YOGA 耳机系列">02 — Headphone YOGA PC Edition</span>
+      <span class="mono-label" data-en="01 — Headphone YOGA PC Edition" data-zh="01 — YOGA 耳机系列">01 — Headphone YOGA PC Edition</span>
       <h2 data-en="The &lt;em&gt;Headphone&lt;/em&gt; Series" data-zh="耳机&lt;em&gt;系列&lt;/em&gt;">The <em>Headphone</em> Series</h2>
     </div>
     <p class="reveal" data-en="The object on the desk is where the campaign starts — the headphone itself, photographed as the reference original. Around it I built the full Amazon selling-point series: seven frames that turn its hardware details into the reasons to buy." data-zh="桌上的实物是系列设计的起点——耳机本身，作为参照原始图拍摄。围绕它，我完成了整套亚马逊卖点图系列：七张画面，把它的硬件细节变成购买的理由。">The object on the desk is where the campaign starts — the headphone itself, photographed as the reference original. Around it I built the full Amazon selling-point series: seven frames that turn its hardware details into the reasons to buy.</p>
@@ -245,7 +211,7 @@ body{
     </figure>
 
     <!-- selling points -->
-    <p class="mono-label reveal" style="margin:48px 0 12px;color:var(--accent)" data-en="Amazon selling-point series — 07 frames" data-zh="亚马逊卖点图系列 — 07 张">Amazon selling-point series — 07 frames</p>
+    <p class="mono-label reveal" style="margin:48px 0 12px;color:var(--accent)" data-en="Amazon selling-point series — 06 frames" data-zh="亚马逊卖点图系列 — 06 张">Amazon selling-point series — 06 frames</p>
     <div class="series-grid">
       <figure class="l-card reveal">
         <img src="assets/img/lenovo-hp-aplus-1.jpg" alt="Headphone YOGA PC Edition — Amazon selling point 01" loading="lazy">
@@ -271,9 +237,40 @@ body{
         <img src="assets/img/lenovo-hp-aplus-6.jpg" alt="Headphone YOGA PC Edition — Amazon selling point 06" loading="lazy">
         <figcaption class="l-cap" data-en="Selling point — A+ 06" data-zh="卖点图 — A+ 06">Selling point — A+ 06</figcaption>
       </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 · BACKPACK SERIES ============ -->
+<section class="sect" id="bag" aria-label="Lenovo 540 tote backpack series">
+  <div class="s-inner">
+    <div class="s-head reveal">
+      <span class="mono-label" data-en="02 — 540 Tote Backpack" data-zh="02 — 540 Tote 双肩包">02 — 540 Tote Backpack</span>
+      <h2 data-en="The &lt;em&gt;Backpack&lt;/em&gt; Series" data-zh="背包&lt;em&gt;系列&lt;/em&gt;">The <em>Backpack</em> Series</h2>
+    </div>
+    <p class="reveal" data-en="Every series starts with the object itself — the backpack photographed as the reference original. From it I built the Amazon selling-point frames that turn its details into the reasons to buy." data-zh="每个系列都从实物本身开始——以双肩包实拍图作为参照原始图。围绕它，我完成了亚马逊卖点图，把它的细节变成购买的理由。">Every series starts with the object itself — the backpack photographed as the reference original. From it I built the Amazon selling-point frames that turn its details into the reasons to buy.</p>
+
+    <!-- original object -->
+    <p class="mono-label reveal" style="margin:34px 0 12px;color:var(--accent)" data-en="The object — original" data-zh="设计对象 · 原始图">The object — original</p>
+    <figure class="proto-fig reveal">
+      <img src="assets/img/lenovo-bag-original.jpg" alt="Lenovo 540 tote backpack — original photograph" loading="lazy">
+      <figcaption><span data-en="540 Tote Backpack" data-zh="540 Tote 双肩包">540 Tote Backpack</span><b data-en="ORIGINAL" data-zh="原始图">ORIGINAL</b></figcaption>
+    </figure>
+
+    <!-- selling points -->
+    <p class="mono-label reveal" style="margin:48px 0 12px;color:var(--accent)" data-en="Amazon selling-point series — 03 frames" data-zh="亚马逊卖点图系列 — 03 张">Amazon selling-point series — 03 frames</p>
+    <div class="series-grid">
       <figure class="l-card reveal">
-        <img src="assets/img/lenovo-hp-aplus-7.jpg" alt="Headphone YOGA PC Edition — Amazon selling point 07" loading="lazy">
-        <figcaption class="l-cap" data-en="Selling point — A+ 07" data-zh="卖点图 — A+ 07">Selling point — A+ 07</figcaption>
+        <img src="assets/img/lenovo-bag-aplus-1.jpg" alt="Lenovo 540 tote backpack — Amazon selling point 01" loading="lazy">
+        <figcaption class="l-cap" data-en="Selling point — A+ 01" data-zh="卖点图 — A+ 01">Selling point — A+ 01</figcaption>
+      </figure>
+      <figure class="l-card reveal reveal-d1">
+        <img src="assets/img/lenovo-bag-aplus-2.jpg" alt="Lenovo 540 tote backpack — Amazon selling point 02" loading="lazy">
+        <figcaption class="l-cap" data-en="Selling point — A+ 02" data-zh="卖点图 — A+ 02">Selling point — A+ 02</figcaption>
+      </figure>
+      <figure class="l-card reveal reveal-d2">
+        <img src="assets/img/lenovo-bag-aplus-3.jpg" alt="Lenovo 540 tote backpack — Amazon selling point 03" loading="lazy">
+        <figcaption class="l-cap" data-en="Selling point — A+ 03" data-zh="卖点图 — A+ 03">Selling point — A+ 03</figcaption>
       </figure>
     </div>
   </div>
